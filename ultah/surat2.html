@@ -151,12 +151,12 @@
         visibility: hidden;
         animation: letterPopOut 0.7s cubic-bezier(0.34, 1.2, 0.64, 1) 0.8s forwards;
         pointer-events: auto;
-        overflow-y: auto; /* SCROLL VERTICAL jika konten kepanjangan */
+        overflow-y: auto; /* SCROLL VERTICAL */
         overflow-x: hidden;
         scrollbar-width: thin;
       }
 
-      /* Styling scrollbar biar cantik */
+      /* Styling scrollbar cantik */
       .letter::-webkit-scrollbar {
         width: 6px;
       }
@@ -204,7 +204,7 @@
         }
       }
 
-      /* ISI SURAT: AWALNYA TERTUTUP (TULISAN HILANG) */
+      /* ISI SURAT: AWALNYA TERTUTUP */
       .card-inner {
         padding: 1.8rem 1.8rem 2rem;
         opacity: 0;
@@ -265,7 +265,7 @@
         animation: slideUp 0.4s ease 1.3s forwards;
         opacity: 0;
       }
-      .letter.reveal-text .btn-back {
+      .letter.reveal-text .btn-group {
         animation: slideUp 0.4s ease 1.45s forwards;
         opacity: 0;
       }
@@ -373,7 +373,16 @@
         }
       }
 
-      .btn-back {
+      .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .btn-back, .btn-secondary {
         background: #fff0f2;
         border: none;
         font-family: inherit;
@@ -388,9 +397,8 @@
         align-items: center;
         gap: 6px;
         text-decoration: none;
-        margin-top: 0.5rem;
       }
-      .btn-back:hover {
+      .btn-back:hover, .btn-secondary:hover {
         background-color: #fde0e8;
         transform: scale(1.02);
       }
@@ -402,7 +410,7 @@
         color: #b88b9c;
       }
 
-      /* Responsif untuk layar kecil */
+      /* Responsif */
       @media (max-width: 550px) {
         body {
           padding: 0.8rem;
@@ -419,12 +427,17 @@
         .letter {
           max-height: 85vh;
         }
+        .btn-group {
+          flex-direction: column;
+          align-items: center;
+          gap: 0.75rem;
+        }
       }
     </style>
   </head>
   <body>
     <div class="envelope-stage">
-      <!-- Amplop -->
+      <!-- Amplop pembuka -->
       <div class="envelope">
         <div class="envelope-flap"></div>
         <div class="envelope-body">
@@ -437,7 +450,7 @@
         <div class="envelope-sticker">❤️</div>
       </div>
 
-      <!-- Kertas surat (bisa di-scroll) -->
+      <!-- Kertas surat dengan scroll -->
       <div class="letter" id="letterPaper">
         <div class="card-inner">
           <h1>💔 Maaf yang Lebih Dalam 💔</h1>
@@ -490,8 +503,10 @@
             <p style="margin-top: 1.5rem; font-weight: 600; text-align: center">✨ Terima kasih sudah membaca sampai sini. Aku tidak akan mengecewakanmu lagi. ✨</p>
           </div>
 
-          <div style="text-align: center; margin-top: 1rem">
-            <a href="index.html" class="btn-back">⬅️ Kembali ke surat pertama</a>
+          <!-- DUA TOMBOL TANPA SINDIRAN (sesuai permintaan) -->
+          <div class="btn-group">
+            <a href="https://refal45.github.io/ultah/project%20gabut/hadiah/index.html" class="btn-back">⬅️ Kembali ke surat pertama</a>
+            <a href="https://refal45.github.io/ultah/ultah%20nya%20si%20cengeng%20ngaduan/index.html" class="btn-secondary">🌸 Buka halaman spesial (tanpa sindiran)</a>
           </div>
 
           <footer>🕯️ Dengan sejuta penyesalan dan tekad baja — Refal, 16 Juli 2026</footer>
