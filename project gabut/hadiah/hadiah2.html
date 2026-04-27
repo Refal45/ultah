@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>Hadiah Kedua - Permainan Ulang Tahun 🎂</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none; /* mencegah highlight teks saat klik cepat */
+      }
+
+      body {
+        background: linear-gradient(145deg, #f9e3b3 0%, #ffcc88 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 24px 16px;
+        margin: 0;
+        position: relative;
+        cursor: default;
+      }
+
+      /* Kartu utama */
+      .birthday-card {
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(1px);
+        border-radius: 56px;
+        max-width: 780px;
+        width: 100%;
+        padding: 30px 24px 40px;
+        box-shadow:
+          0 25px 45px rgba(0, 0, 0, 0.2),
+          0 0 0 1px rgba(255, 215, 150, 0.5);
+        text-align: center;
+        transition: all 0.2s ease;
+        animation: glowPulse 2s infinite alternate;
+      }
+
+      @keyframes glowPulse {
+        0% {
+          box-shadow:
+            0 20px 40px rgba(0, 0, 0, 0.15),
+            0 0 0 2px #ffe0a3;
+        }
+        100% {
+          box-shadow:
+            0 28px 50px rgba(0, 0, 0, 0.25),
+            0 0 0 4px #ffbc6e;
+        }
+      }
+
+      /* Judul dengan dekorasi */
+      .title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #e85d04, #ff9100);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .title span {
+        font-size: 2.4rem;
+      }
+
+      .sub {
+        font-size: 1rem;
+        color: #bd7f2e;
+        background: #fff0db;
+        display: inline-block;
+        padding: 6px 18px;
+        border-radius: 60px;
+        margin-bottom: 20px;
+        font-weight: 500;
+        backdrop-filter: blur(2px);
+      }
+
+      /* Pesan manis */
+      .birthday-message {
+        background: #fff8ed;
+        padding: 16px 18px;
+        border-radius: 48px;
+        margin: 16px 0 20px;
+        font-size: 0.95rem;
+        font-weight: 400;
+        color: #b45f1b;
+        border-left: 6px solid #ffb347;
+        border-right: 6px solid #ffb347;
+        line-height: 1.45;
+      }
+
+      .counter-box {
+        background: #fce5c1;
+        border-radius: 100px;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 20px;
+        margin: 10px 0 20px;
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: #a44e02;
+        box-shadow:
+          inset 0 1px 3px rgba(0, 0, 0, 0.05),
+          0 4px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .counter-number {
+        background: #ffedd5;
+        padding: 4px 14px;
+        border-radius: 60px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #e85d04;
+        min-width: 70px;
+        display: inline-block;
+      }
+
+      /* wadah balon - gaya grid / flex */
+      .balloons-field {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+        margin: 28px 0 28px;
+        padding: 10px 5px;
+        min-height: 320px;
+        transition: all 0.2s;
+      }
+
+      /* Gaya balon (animasi mengambang + klik) */
+      .balloon {
+        width: 110px;
+        height: 135px;
+        background: radial-gradient(circle at 30% 30%, #ff8c69, #e6452c);
+        border-radius: 50% 50% 45% 45%;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        box-shadow:
+          0 12px 18px -6px rgba(0, 0, 0, 0.2),
+          inset 0 -3px 0 rgba(0, 0, 0, 0.1);
+        animation: floatBalloon 2.5s infinite ease-in-out;
+        will-change: transform;
+      }
+
+      /* animasi melayang berbeda tiap balon (variasi via nth-child) tapi nanti di style dynamic & random */
+      @keyframes floatBalloon {
+        0% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-8px) rotate(2deg);
+        }
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+      }
+
+      /* efek hover & klik */
+      .balloon:hover {
+        transform: scale(1.03);
+        filter: brightness(1.02);
+        transition: 0.08s linear;
+      }
+
+      .balloon:active {
+        transform: scale(0.92);
+        filter: brightness(0.9);
+      }
+
+      /* ekor balon (tali) */
+      .balloon::after {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 27px;
+        background: linear-gradient(135deg, #7c5e3a, #b87c3a);
+        border-radius: 1px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      /* simpul kecil */
+      .balloon::before {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 8px;
+        background: #b3622e;
+        border-radius: 50%;
+        z-index: 2;
+      }
+
+      /* emoji di dalam balon */
+      .balloon-emoji {
+        font-size: 3.6rem;
+        filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.2));
+        transform: rotate(5deg);
+        transition: 0.1s;
+        pointer-events: none;
+      }
+
+      /* pesan selesai */
+      .completion-area {
+        margin: 12px auto 20px;
+        padding: 12px;
+        border-radius: 48px;
+        background: #e9f5e9;
+        transition: all 0.3s;
+      }
+
+      .congrats {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #bb5e00;
+        background: #fff2df;
+        padding: 12px 16px;
+        border-radius: 60px;
+        display: inline-block;
+        margin-bottom: 20px;
+        gap: 8px;
+        flex-wrap: wrap;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      /* Tombol lanjut (semula disembunyikan) */
+      .next-btn-wrapper {
+        text-align: center;
+        margin-top: 12px;
+      }
+
+      .btn-next {
+        display: inline-block;
+        background: linear-gradient(95deg, #6c63ff, #8a7eff);
+        padding: 14px 36px;
+        border-radius: 60px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: white;
+        text-decoration: none;
+        letter-spacing: 1px;
+        transition: 0.2s;
+        box-shadow: 0 8px 18px rgba(108, 99, 255, 0.3);
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-next:hover {
+        background: linear-gradient(95deg, #5b52e0, #776bff);
+        transform: scale(1.02);
+        box-shadow: 0 12px 22px rgba(108, 99, 255, 0.4);
+      }
+
+      .btn-next:active {
+        transform: scale(0.97);
+      }
+
+      /* aneka warna balon random via js tambahan style background variasi biar ceria */
+      /* responsif */
+      @media (max-width: 620px) {
+        .birthday-card {
+          padding: 20px 16px 30px;
+        }
+        .balloon {
+          width: 85px;
+          height: 105px;
+        }
+        .balloon-emoji {
+          font-size: 2.6rem;
+        }
+        .balloon::after {
+          height: 22px;
+          bottom: -18px;
+        }
+        .title {
+          font-size: 1.8rem;
+        }
+        .counter-number {
+          font-size: 1.4rem;
+          min-width: 55px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .balloon {
+          width: 75px;
+          height: 92px;
+        }
+        .balloon-emoji {
+          font-size: 2.2rem;
+        }
+        .balloons-field {
+          gap: 14px;
+        }
+      }
+
+      /* efek pop lezat */
+      .pop-effect {
+        transition: 0.05s linear;
+      }
+
+      /* sentuhan confetti sederhana dari canvas */
+      canvas.confetti-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 999;
+      }
+
+      footer {
+        font-size: 0.7rem;
+        color: #ffba7a;
+        margin-top: 28px;
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="birthday-card">
+      <div class="title"><span>🎂</span> Hadiah Kedua <span>🎈</span></div>
+      <div class="sub">✨ Permainan Ulang Tahun Spesial ✨</div>
+
+      <div class="birthday-message">
+        🥳 HAPPY BIRTHDAY! 🥳<br />
+        Pop semua balon untuk mendapatkan kado manis! Klik balonnya satu per satu, rasakan keajaiban ulang tahunmu. Setiap balon meletus membawa kebahagiaan ✨
+      </div>
+
+      <!-- Statistik balon tersisa -->
+      <div class="counter-box">
+        🎈 Balon tersisa :
+        <span class="counter-number" id="balloonsLeftCount">0</span>
+      </div>
+
+      <!-- Tempat balon-balon -->
+      <div id="balloonsContainer" class="balloons-field"></div>
+
+      <!-- Zona pesan saat permainan selesai -->
+      <div id="completionMessage" class="completion-area"></div>
+
+      <!-- Tempat tombol lanjut akan muncul setelah game menang -->
+      <div id="nextButtonArea" class="next-btn-wrapper"></div>
+      <footer>🎁 klik balonnya sampai habis, dapatkan surprise selanjutnya!</footer>
+    </div>
+
+    <script>
+      (function () {
+        // ---------- KONFIGURASI PERMAINAN ULANG TAHUN ----------
+        const TOTAL_BALLOONS = 10; // 10 balon warna-warni untuk dipop
+        let balloonsLeft = TOTAL_BALLOONS;
+        let gameCompleted = false;
+
+        // Elemen DOM
+        const balloonsContainer = document.getElementById('balloonsContainer');
+        const balloonsLeftSpan = document.getElementById('balloonsLeftCount');
+        const completionMessageDiv = document.getElementById('completionMessage');
+        const nextButtonArea = document.getElementById('nextButtonArea');
+
+        // Data array untuk menyimpan elemen balon (optional)
+        let activeBalloons = [];
+
+        // Warna-warna cerah untuk balon (gradient dan solid)
+        const colorPalette = [
+          'radial-gradient(circle at 30% 30%, #FF6B6B, #D64545)', // merah
+          'radial-gradient(circle at 30% 30%, #F9C74F, #F9844A)', // kuning-oranye
+          'radial-gradient(circle at 30% 30%, #90BE6D, #43AA8B)', // hijau segar
+          'radial-gradient(circle at 30% 30%, #577590, #4D6DB4)', // biru
+          'radial-gradient(circle at 30% 30%, #F94144, #C1292E)', // merah marun
+          'radial-gradient(circle at 30% 30%, #F9C74F, #F8961E)', // jeruk
+          'radial-gradient(circle at 30% 30%, #9C89B8, #B8A9E8)', // ungu lembut
+          'radial-gradient(circle at 30% 30%, #F9844A, #F3722C)', // salmon
+          'radial-gradient(circle at 30% 30%, #4D908E, #2D6A4F)', // tosca
+          'radial-gradient(circle at 30% 30%, #E9C46A, #E76F51)', // peach
+        ];
+
+        // Variasi emoji lucu di dalam balon (tema ulang tahun)
+        const balloonEmojis = ['🎈', '🎉', '🎂', '🥳', '🎁', '✨', '🎊', '🧁', '🍰', '🎈'];
+
+        // Helper: update tampilan jumlah balon tersisa
+        function updateCounterUI() {
+          balloonsLeftSpan.innerText = balloonsLeft;
+        }
+
+        // Efek konfeti sederhana (native, tanpa library)
+        function burstConfetti() {
+          // Buat canvas konfeti sederhana dengan partikel
+          const canvas = document.createElement('canvas');
+          canvas.className = 'confetti-canvas';
+          document.body.appendChild(canvas);
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          const ctx = canvas.getContext('2d');
+
+          let particles = [];
+          const colors = ['#FFD166', '#EF476F', '#06D6A0', '#118AB2', '#FFB347', '#F9C74F'];
+
+          for (let i = 0; i < 130; i++) {
+            particles.push({
+              x: Math.random() * canvas.width,
+              y: Math.random() * canvas.height - canvas.height,
+              size: Math.random() * 7 + 3,
+              color: colors[Math.floor(Math.random() * colors.length)],
+              speedY: Math.random() * 4 + 3,
+              speedX: (Math.random() - 0.5) * 1.5,
+              rotation: Math.random() * 360,
+              rotSpeed: (Math.random() - 0.5) * 5,
+            });
+          }
+
+          let animationId;
+          let startTime = performance.now();
+
+          function drawConfetti(now) {
+            if (!canvas.parentNode) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let stillActive = false;
+            for (let p of particles) {
+              if (p.y < canvas.height + 50) stillActive = true;
+              p.y += p.speedY;
+              p.x += p.speedX;
+              p.rotation += p.rotSpeed;
+              ctx.save();
+              ctx.translate(p.x, p.y);
+              ctx.rotate((p.rotation * Math.PI) / 180);
+              ctx.fillStyle = p.color;
+              ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size / 1.5);
+              ctx.restore();
+            }
+            if (stillActive && performance.now() - startTime < 3500) {
+              animationId = requestAnimationFrame(drawConfetti);
+            } else {
+              cancelAnimationFrame(animationId);
+              canvas.remove();
+            }
+          }
+
+          animationId = requestAnimationFrame(drawConfetti);
+          // Hapus canvas setelah 3.5 detik max
+          setTimeout(() => {
+            if (canvas && canvas.parentNode) canvas.remove();
+            if (animationId) cancelAnimationFrame(animationId);
+          }, 3500);
+        }
+
+        // Fungsi saat permainan berhasil diselesaikan (semua balon meletus)
+        function completeGame() {
+          if (gameCompleted) return;
+          gameCompleted = true;
+
+          // Tampilkan pesan spesial ulang tahun
+          completionMessageDiv.innerHTML = `
+                <div class="congrats">
+                    🎉🎂 SELAMAT ULANG TAHUN! 🎂🎉<br>
+                    ✨ Kamu berhasil mem-pop semua balon! ✨<br>
+                    💖 Semoga harimu dipenuhi cinta, tawa, dan kejutan manis 💖
+                </div>
+            `;
+
+          // Buat tombol lanjut ke hadiah ketiga
+          const nextBtn = document.createElement('a');
+          nextBtn.href = 'hadiah3.html';
+          nextBtn.className = 'btn-next';
+          nextBtn.innerHTML = '🎁 Lanjut ke Hadiah Ketiga 🎁';
+          nextButtonArea.innerHTML = ''; // bersihkan kalau ada
+          nextButtonArea.appendChild(nextBtn);
+
+          // Efek konfeti meriah!
+          burstConfetti();
+
+          // Animasi keren: ubah sedikit background card gemerlap
+          const card = document.querySelector('.birthday-card');
+          if (card) {
+            card.style.transition = '0.4s';
+            card.style.boxShadow = '0 0 0 6px #ffcd94, 0 25px 45px rgba(0,0,0,0.2)';
+            setTimeout(() => {
+              card.style.boxShadow = '0 20px 40px rgba(0,0,0,0.2), 0 0 0 3px #ffe0a3';
+            }, 800);
+          }
+        }
+
+        // Fungsi untuk memproses pop balon (event klik)
+        function popBalloon(balloonElement, index) {
+          if (gameCompleted) return;
+          if (!balloonElement || !balloonElement.parentNode) return;
+
+          // Efek "pop" cepat: kita hilangkan dengan animasi micro
+          balloonElement.style.transform = 'scale(0)';
+          balloonElement.style.opacity = '0';
+          balloonElement.style.transition = '0.08s cubic-bezier(0.2, 0.9, 0.6, 1.2)';
+
+          // Hapus dari DOM setelah animasi kecil (supaya terasa seperti meletus)
+          setTimeout(() => {
+            if (balloonElement && balloonElement.parentNode) {
+              balloonElement.remove();
+            }
+          }, 70);
+
+          // Kurangi jumlah balon tersisa
+          balloonsLeft--;
+          updateCounterUI();
+
+          // (Opsional) efek suara hanya imajinasi tapi ngga perlu audio, cukup animasi dan getar kecil?
+          // Hapus dari array aktif (tidak terlalu diperlukan)
+          const findIdx = activeBalloons.indexOf(balloonElement);
+          if (findIdx !== -1) activeBalloons.splice(findIdx, 1);
+
+          // Jika tidak ada balon tersisa -> permainan selesai
+          if (balloonsLeft === 0 && !gameCompleted) {
+            completeGame();
+          }
+        }
+
+        // Membuat balon baru dengan warna & emoji acak yang cantik
+        function createBalloon(balloonIdNum) {
+          const balloonDiv = document.createElement('div');
+          balloonDiv.classList.add('balloon');
+
+          // pilih warna berdasarkan indeks atau random meriah agar variatif
+          const colorIdx = balloonIdNum % colorPalette.length;
+          balloonDiv.style.background = colorPalette[colorIdx];
+          // tambah sedikit variasi rotate animasi agar unik (float berbeda)
+          const randomDelay = (Math.random() * 1.5).toFixed(2) + 's';
+          balloonDiv.style.animationDelay = randomDelay;
+
+          // Emoji di dalamnya (tema ulang tahun)
+          const emojiIdx = balloonIdNum % balloonEmojis.length;
+          const emojiSpan = document.createElement('span');
+          emojiSpan.classList.add('balloon-emoji');
+          emojiSpan.innerText = balloonEmojis[emojiIdx];
+          balloonDiv.appendChild(emojiSpan);
+
+          // tambahan efek shadow
+          return balloonDiv;
+        }
+
+        // Generate semua balon dan pasang event listener
+        function buildGame() {
+          balloonsContainer.innerHTML = '';
+          activeBalloons = [];
+          balloonsLeft = TOTAL_BALLOONS;
+          gameCompleted = false;
+          updateCounterUI();
+
+          // Kosongkan area pesan & tombol next jika ada sisa dari sebelumnya
+          completionMessageDiv.innerHTML = '';
+          nextButtonArea.innerHTML = '';
+
+          // Buat balon-balon baru
+          for (let i = 0; i < TOTAL_BALLOONS; i++) {
+            const balloon = createBalloon(i);
+            // tambahkan data atribut sederhana
+            balloon.setAttribute('data-id', i);
+
+            // Event listener pop (klik)
+            balloon.addEventListener('click', (e) => {
+              e.stopPropagation();
+              // cegah multiple pop pada balon yang sama
+              if (balloon.style.opacity === '0' || balloon.style.transform === 'scale(0)') return;
+              if (gameCompleted) return;
+              if (!balloonsContainer.contains(balloon)) return;
+
+              // Panggil fungsi pop
+              popBalloon(balloon, i);
+            });
+
+            balloonsContainer.appendChild(balloon);
+            activeBalloons.push(balloon);
+          }
+
+          // Mengacak urutan tampilan (tidak mempengaruhi gameplay, hanya estetika)
+          const items = Array.from(balloonsContainer.children);
+          while (items.length) {
+            balloonsContainer.appendChild(items.splice(Math.floor(Math.random() * items.length), 1)[0]);
+          }
+        }
+
+        // Inisialisasi permainan
+        buildGame();
+
+        // Tambahan animasi kedip-kedip untuk judul
+        const titleElem = document.querySelector('.title');
+        if (titleElem) {
+          setInterval(() => {
+            if (!gameCompleted) return;
+            // efek ketika sudah menang tidak penting, biarkan
+          }, 500);
+        }
+
+        // Opsional: Untuk balon yang bergerak lebih dinamis, tambahkan variasi durasi animasi setiap balon
+        // sudah diberikan animation delay saat create, sehingga unik.
+        // Jika jendela diresize, tidak perlu rebuild (biarkan layout fleksibel)
+
+        // Mencegah error navigasi jika double klik tombol lanjut secara cepat tidak masalah
+        // Handler untuk tombol href sudah bekerja natural
+
+        // sedikit hiasan: balon sisa diperbarui awalnya
+        // total balon = TOTAL_BALLOONS
+
+        // Guard untuk situasi jika ada klik membingungkan saat pop meletus dan sisa menjadi 0,
+        // sukses trigger completeGame hanya sekali.
+        // bonus: tambahkan efek sedikit getaran unik pada balon saat diklik tapi sudah ada scale
+      })();
+    </script>
+  </body>
+</html>

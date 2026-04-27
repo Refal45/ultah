@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hadiah Ketiga</title>
+    <script src="/_sdk/element_sdk.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&amp;display=swap" rel="stylesheet" />
+    <style>
+      body {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Poppins, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      h2 {
+        margin-bottom: 15px;
+        color: #fff;
+        font-weight: 600;
+        text-align: center;
+        z-index: 10;
+        font-size: 32px;
+        padding: 0 20px;
+      }
+
+      p {
+        color: #fff;
+        margin-bottom: 50px;
+        z-index: 10;
+        font-size: 18px;
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      .gift-container {
+        position: relative;
+        z-index: 10;
+        margin: 20px 0;
+      }
+
+      .gift-box {
+        position: relative;
+        width: 250px;
+        height: 250px;
+        background: #ff4b5c;
+        border-radius: 20px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s;
+      }
+
+      .gift-box:hover {
+        transform: scale(1.05) rotate(-2deg);
+      }
+
+      .gift-box.opening {
+        animation: shake 0.5s ease-in-out;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(-10deg);
+        }
+        75% {
+          transform: rotate(10deg);
+        }
+      }
+
+      /* Tutup kotak */
+      .gift-lid {
+        position: absolute;
+        width: 270px;
+        height: 100px;
+        background: #ff4b5c;
+        border-radius: 20px 20px 5px 5px;
+        top: -10px;
+        left: -10px;
+        z-index: 5;
+        transition: all 0.8s ease-out;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .gift-box.opened .gift-lid {
+        transform: translateY(-150px) rotateX(-45deg);
+        opacity: 0;
+      }
+
+      /* Pita horizontal */
+      .ribbon-horizontal {
+        position: absolute;
+        width: 100%;
+        height: 30px;
+        background: #ffe66d;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 5px;
+        z-index: 2;
+      }
+
+      /* Pita vertical */
+      .ribbon-vertical {
+        position: absolute;
+        width: 30px;
+        height: 100%;
+        background: #ffe66d;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 5px;
+        z-index: 2;
+      }
+
+      /* Pita simpul */
+      .bow {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: #ffe66d;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        border-radius: 12px;
+        z-index: 6;
+        transition: all 0.8s ease-out;
+      }
+
+      .gift-box.opened .bow {
+        transform: translate(-50%, -200px) rotate(405deg) scale(0);
+        opacity: 0;
+      }
+
+      .bow::before,
+      .bow::after {
+        content: '';
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: #ffe66d;
+        border-radius: 12px;
+      }
+
+      .bow::before {
+        transform: rotate(90deg);
+      }
+
+      .bow::after {
+        transform: rotate(45deg);
+      }
+
+      /* Confetti */
+      .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #ff4b5c;
+        opacity: 0;
+        z-index: 100;
+      }
+
+      .confetti.active {
+        animation: confetti-fall 2s ease-out forwards;
+      }
+
+      @keyframes confetti-fall {
+        0% {
+          opacity: 1;
+          transform: translateY(0) rotate(0deg);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(600px) rotate(720deg);
+        }
+      }
+
+      /* Pesan sukses */
+      .success-message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: white;
+        padding: 50px 80px;
+        border-radius: 25px;
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+        text-align: center;
+        z-index: 1000;
+        opacity: 0;
+        transition: all 0.5s ease-out;
+        max-width: 90%;
+      }
+
+      .success-message.show {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+
+      .success-message h3 {
+        color: #667eea;
+        font-size: 36px;
+        margin: 0 0 20px 0;
+        font-weight: 600;
+      }
+
+      .success-message p {
+        color: #666;
+        font-size: 18px;
+        margin: 0 0 35px 0;
+        line-height: 1.6;
+      }
+
+      .success-message .emoji {
+        font-size: 80px;
+        margin-bottom: 25px;
+        animation: bounce 0.6s ease-in-out infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .continue-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 16px 45px;
+        border-radius: 30px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        font-family: Poppins, sans-serif;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .continue-btn:hover {
+        transform: scale(1.08);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+      }
+
+      /* Overlay */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+
+      .overlay.show {
+        opacity: 1;
+        pointer-events: all;
+      }
+    </style>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+  </head>
+  <body>
+    <h2>Kejutan Kotak Ulang Tahun!</h2>
+    <p>Klik kotaknya untuk membuka hadiah 🎁</p>
+    <div class="gift-container">
+      <div class="gift-box" id="giftBox" onclick="openGift()">
+        <div class="gift-lid">
+          <div class="ribbon-horizontal"></div>
+          <div class="bow"></div>
+        </div>
+        <div class="ribbon-horizontal"></div>
+        <div class="ribbon-vertical"></div>
+      </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+    <div class="success-message" id="successMessage">
+      <div class="emoji">🎉</div>
+      <h3>Selamat!</h3>
+      <p>Kamu berhasil membuka hadiah berikutnya!</p>
+      <button class="continue-btn" onclick="goToNextGift()">Lanjut ke Hadiah 4</button>
+    </div>
+    <script>
+      const defaultConfig = {
+        title: 'Kejutan Kotak Ulang Tahun!',
+        subtitle: 'Klik kotaknya untuk membuka hadiah 🎁',
+        success_title: 'Selamat!',
+        success_message: 'Kamu berhasil membuka hadiah berikutnya!',
+        button_text: 'Lanjut ke Hadiah 4',
+      };
+
+      let config = { ...defaultConfig };
+
+      async function onConfigChange(newConfig) {
+        config = { ...newConfig };
+        document.querySelector('h2').textContent = config.title || defaultConfig.title;
+        document.querySelector('p').textContent = config.subtitle || defaultConfig.subtitle;
+        document.querySelector('.success-message h3').textContent = config.success_title || defaultConfig.success_title;
+        document.querySelector('.success-message p').textContent = config.success_message || defaultConfig.success_message;
+        document.querySelector('.continue-btn').textContent = config.button_text || defaultConfig.button_text;
+      }
+
+      function mapToCapabilities(config) {
+        return {
+          recolorables: [],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined,
+        };
+      }
+
+      function mapToEditPanelValues(config) {
+        return new Map([
+          ['title', config.title || defaultConfig.title],
+          ['subtitle', config.subtitle || defaultConfig.subtitle],
+          ['success_title', config.success_title || defaultConfig.success_title],
+          ['success_message', config.success_message || defaultConfig.success_message],
+          ['button_text', config.button_text || defaultConfig.button_text],
+        ]);
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities,
+          mapToEditPanelValues,
+        });
+      }
+
+      function createConfetti() {
+        const colors = ['#ff4b5c', '#ffe66d', '#4ecdc4', '#95e1d3', '#f38181'];
+        const container = document.body;
+
+        for (let i = 0; i < 50; i++) {
+          setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.width = Math.random() * 10 + 5 + 'px';
+            confetti.style.height = Math.random() * 10 + 5 + 'px';
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            container.appendChild(confetti);
+
+            setTimeout(() => confetti.classList.add('active'), 10);
+
+            setTimeout(() => confetti.remove(), 2000);
+          }, i * 30);
+        }
+      }
+
+      function openGift() {
+        const giftBox = document.getElementById('giftBox');
+        const overlay = document.getElementById('overlay');
+        const successMessage = document.getElementById('successMessage');
+
+        giftBox.classList.add('opening');
+
+        setTimeout(() => {
+          giftBox.classList.add('opened');
+          createConfetti();
+        }, 500);
+
+        setTimeout(() => {
+          overlay.classList.add('show');
+          successMessage.classList.add('show');
+        }, 1500);
+      }
+
+      function goToNextGift() {
+        window.open('hadiah4.html', '_blank', 'noopener,noreferrer');
+      }
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement('script');
+            d.innerHTML =
+              "window.__CF$cv$params={r:'99ce27c6f4937373',t:'MTc2Mjg2Nzk0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName('head')[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement('iframe');
+          a.height = 1;
+          a.width = 1;
+          a.style.position = 'absolute';
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = 'none';
+          a.style.visibility = 'hidden';
+          document.body.appendChild(a);
+          if ('loading' !== document.readyState) c();
+          else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              'loading' !== document.readyState && ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>

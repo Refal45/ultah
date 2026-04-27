@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>🎂 Dewi Sinta · 16 Juli 2025 · Maafkan Aku 🎈</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none;
+      }
+
+      body {
+        min-height: 100vh;
+        background: linear-gradient(145deg, #f9ecec 0%, #ffe0e7 100%);
+        font-family:
+          'Poppins',
+          'Inter',
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          sans-serif;
+        overflow-x: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 24px;
+        position: relative;
+      }
+
+      .main-card {
+        max-width: 960px;
+        width: 100%;
+        background: rgba(255, 252, 245, 0.98);
+        backdrop-filter: blur(4px);
+        border-radius: 64px;
+        box-shadow:
+          0 30px 50px rgba(0, 0, 0, 0.12),
+          0 0 0 8px #fff7e8,
+          0 0 0 14px #ffb7c7;
+        padding: 32px 28px 48px;
+        text-align: center;
+        transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        z-index: 10;
+      }
+
+      .start-area {
+        transition: 0.2s;
+      }
+
+      .btn-start {
+        background: radial-gradient(circle at 30% 30%, #ff8a66, #e34d2c);
+        border: none;
+        padding: 18px 36px;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: white;
+        text-shadow: 0 2px 0 #aa2e1a;
+        border-radius: 80px;
+        cursor: pointer;
+        box-shadow: 0 12px 0 #882818;
+        transition: 0.07s linear;
+        font-family: inherit;
+        letter-spacing: 1px;
+        width: 320px;
+        margin: 24px auto;
+      }
+
+      .btn-start:active {
+        transform: translateY(4px);
+        box-shadow: 0 6px 0 #882818;
+      }
+
+      .gift-reveal {
+        margin-top: 12px;
+        animation: fadeInUp 0.7s ease;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .photo-frame {
+        margin: 8px auto 24px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .profile-photo {
+        width: 220px;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 48% 52% 42% 58% / 55% 42% 58% 45%;
+        box-shadow:
+          0 25px 35px rgba(0, 0, 0, 0.2),
+          0 0 0 8px #fff5e6,
+          0 0 0 12px #ffa5c0;
+        transition: transform 0.3s;
+        background: #fce9db;
+      }
+
+      .cake-canvas-wrapper {
+        margin: 15px auto 10px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        cursor: grab;
+      }
+      .cake-canvas-wrapper:active {
+        cursor: grabbing;
+      }
+
+      canvas {
+        border-radius: 48px;
+        box-shadow: 0 24px 40px rgba(0, 0, 0, 0.18);
+        background: #fef3e4;
+        display: block;
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        cursor: grab;
+        transition: transform 0.2s;
+      }
+      canvas:active {
+        cursor: grabbing;
+      }
+
+      .cake-message {
+        font-size: 0.85rem;
+        margin-top: 12px;
+        color: #c2643a;
+        font-weight: 500;
+        background: #fff2e2;
+        display: inline-block;
+        padding: 6px 20px;
+        border-radius: 60px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(2px);
+      }
+
+      .slice-instruction {
+        margin-top: 12px;
+        font-size: 0.9rem;
+        background: #ffe8d4;
+        display: inline-block;
+        padding: 6px 18px;
+        border-radius: 40px;
+        color: #b9562e;
+        font-weight: 500;
+      }
+
+      .forgiveness-message {
+        background: #fff8f0;
+        padding: 24px 20px;
+        border-radius: 56px;
+        margin: 28px 0 18px;
+        box-shadow:
+          inset 0 0 0 2px white,
+          0 12px 24px rgba(0, 0, 0, 0.08);
+      }
+
+      .forgiveness-message h2 {
+        font-size: 2rem;
+        color: #d44c2c;
+        letter-spacing: -0.3px;
+        margin-bottom: 12px;
+        font-weight: 700;
+      }
+
+      .forgiveness-message p {
+        font-size: 1.2rem;
+        color: #aa5e3e;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      .heart-icon {
+        font-size: 2rem;
+        animation: gentlePulse 1.6s infinite;
+      }
+
+      .balloon-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+        overflow: hidden;
+      }
+
+      .flying-balloon {
+        position: absolute;
+        bottom: -100px;
+        width: 80px;
+        height: auto;
+        pointer-events: none;
+        filter: drop-shadow(2px 8px 12px rgba(0, 0, 0, 0.15));
+        will-change: transform;
+      }
+
+      @keyframes flyUpBalloon {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+        }
+        80% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-130vh) rotate(10deg);
+          opacity: 0;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes gentlePulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes knifeSwipeAnim {
+        0% {
+          transform: translateX(-80px) rotate(-40deg);
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        80% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateX(200px) rotate(40deg);
+          opacity: 0;
+        }
+      }
+
+      .knife-animation {
+        position: fixed;
+        font-size: 48px;
+        pointer-events: none;
+        z-index: 10010;
+        animation: knifeSwipeAnim 0.5s ease-in-out forwards;
+        filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+      }
+
+      .greeting-title {
+        font-size: 2.2rem;
+        background: linear-gradient(135deg, #dd552e, #f8ac6a);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+
+      .btn-reset {
+        background: #f8bc6c;
+        border: none;
+        padding: 10px 28px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 48px;
+        color: #4f2a1a;
+        cursor: pointer;
+        margin-top: 18px;
+        transition: 0.2s;
+        box-shadow: 0 5px 0 #bf711f;
+      }
+
+      .btn-reset:active {
+        transform: translateY(3px);
+        box-shadow: 0 2px 0 #bf711f;
+      }
+
+      @media (max-width: 550px) {
+        .main-card {
+          padding: 22px 18px 36px;
+        }
+        .profile-photo {
+          width: 160px;
+          height: 160px;
+        }
+        .btn-start {
+          width: 260px;
+          font-size: 1.5rem;
+        }
+        .forgiveness-message h2 {
+          font-size: 1.6rem;
+        }
+        .forgiveness-message p {
+          font-size: 1rem;
+        }
+        .flying-balloon {
+          width: 58px;
+        }
+        canvas {
+          max-width: 320px;
+        }
+        .slice-instruction {
+          font-size: 0.75rem;
+        }
+      }
+
+      .smoke-particle {
+        position: fixed;
+        pointer-events: none;
+        z-index: 10001;
+        border-radius: 50%;
+        filter: blur(7px);
+        background: rgba(95, 75, 60, 0.55);
+        animation: smokeRise 0.9s ease-out forwards;
+      }
+
+      .crumb-particle {
+        position: fixed;
+        pointer-events: none;
+        z-index: 10002;
+        border-radius: 50%;
+        background: #e0aa7a;
+        animation: crumbFall 0.8s ease-out forwards;
+      }
+
+      @keyframes smokeRise {
+        0% {
+          transform: translateY(0) scale(0.3);
+          opacity: 0.7;
+        }
+        100% {
+          transform: translateY(-80px) scale(1.7);
+          opacity: 0;
+        }
+      }
+
+      @keyframes crumbFall {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 0.9;
+        }
+        100% {
+          transform: translateY(70px) scale(0.5);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-card">
+      <!-- AWAL: tombol balon -->
+      <div id="startArea" class="start-area">
+        <div class="greeting-title">🎈 16 Juli 2025 · Untuk Dewi Sinta 🎈</div>
+        <div style="font-size: 1.2rem; margin: 8px 0 12px; color: #c1613a">✨ maafkan aku yang telah membully mu CENGENG SI LU NYA MAINNYA NGADUAN ✨</div>
+        <button id="triggerBalloonBtn" class="btn-start">🎈 Terbangkan Balon 🎈</button>
+        <div style="margin-top: 22px; font-size: 0.9rem; color: #c07550; max-width: 280px; margin-left: auto; margin-right: auto">Klik tombol, balon warna-warni terbang, lalu kejutan manis untukmu</div>
+      </div>
+
+      <!-- AREA KEJUTAN setelah balon habis -->
+      <div id="giftArea" class="gift-reveal hidden">
+        <div class="photo-frame">
+          <img class="profile-photo" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=280&h=280&fit=crop" alt="Dewi Sinta" loading="lazy" />
+        </div>
+
+        <!-- Canvas kue modern & interaktif -->
+        <div class="cake-canvas-wrapper">
+          <canvas id="birthdayCakeCanvas" width="600" height="480" style="width: 100%; height: auto; max-width: 600px; cursor: grab"></canvas>
+        </div>
+        <div id="cakeStatusMsg" class="cake-message">✨ Klik lilin untuk menyalakan / memadamkan ✨</div>
+
+        <!-- Instruksi potong kue dengan swipe -->
+        <div id="sliceInstruction" class="slice-instruction">🍰 Geser jari/mouse di atas kue untuk memotong (seperti mengiris) 🍰</div>
+
+        <!-- Kata maaf dan ucapan (SESUAI PERMINTAAN USER) -->
+        <div class="forgiveness-message">
+          <div class="heart-icon">💖🌸💖</div>
+          <h2>Maafkan aku, Dewi Sinta</h2>
+          <p>
+            🌷 <strong>Selamat ulang tahun, 16 Juli 2025, Dewi Sinta</strong> 🌷<br />
+            Maafkan aku yang telah membully mu LU NYA CENGENG NGADUAN. <strong style="font-size: 1.3rem">maafffffffffffffffffffff ya plissssssssssssssss</strong><br />
+            Setiap balon yang terbang membawa sesalku yang terdalam. Kini lilin kue ini bisa kau nyalakan dan padamkan. Geser kue untuk memotongnya seperti di dunia nyata.<br />
+            Aku benar-benar minta maaf atas segala perbuatan menyakitkan. Semoga hari spesialmu tetap indah dan kau selalu bahagia.<br />
+            <strong>Happy Sweet 16 Juli 2025, Sinta yang baik hati 💐</strong><br />
+            🙏 <strong>PLISSSSSS MAAFKAN AKU YA, SINTAAAA 🙏</strong>
+          </p>
+        </div>
+        <button id="repeatBalloonBtn" class="btn-reset">🎈 Ulang Kejutan (Balon Lagi) 🎈</button>
+      </div>
+    </div>
+
+    <div id="balloonContainer" class="balloon-canvas"></div>
+
+    <script>
+      (function () {
+        // DOM elements
+        const startArea = document.getElementById('startArea');
+        const giftArea = document.getElementById('giftArea');
+        const triggerBtn = document.getElementById('triggerBalloonBtn');
+        const repeatBtn = document.getElementById('repeatBalloonBtn');
+        const balloonContainer = document.getElementById('balloonContainer');
+        const cakeCanvas = document.getElementById('birthdayCakeCanvas');
+        const cakeStatusMsg = document.getElementById('cakeStatusMsg');
+        const sliceInstructionDiv = document.getElementById('sliceInstruction');
+
+        const CANVAS_W = 600;
+        const CANVAS_H = 480;
+        cakeCanvas.width = CANVAS_W;
+        cakeCanvas.height = CANVAS_H;
+        let ctx = cakeCanvas.getContext('2d');
+
+        // State
+        let candles = [
+          { x: 260, y: 215, lit: true },
+          { x: 300, y: 205, lit: true },
+          { x: 340, y: 215, lit: true },
+        ];
+        let isSliced = false;
+        let isRevealed = false;
+        let activeBalloons = 0;
+        let animationTimeout = null;
+        let animFrame = null;
+
+        // Gesture swipe
+        let swipeStart = null;
+        let isSwiping = false;
+        let sliceTriggered = false;
+
+        // =============== GAMBAR KUE UTUH ===============
+        function drawWholeCake() {
+          ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+          ctx.shadowBlur = 0;
+          ctx.shadowColor = 'rgba(0,0,0,0.08)';
+
+          ctx.fillStyle = '#FEEFCF';
+          ctx.beginPath();
+          ctx.ellipse(300, 415, 210, 65, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#F7E5C2';
+          ctx.beginPath();
+          ctx.ellipse(300, 410, 195, 58, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#EBC6A5';
+          ctx.fillRect(170, 275, 260, 125);
+          ctx.fillStyle = '#F3D2B3';
+          ctx.fillRect(192, 215, 216, 80);
+          ctx.fillStyle = '#CFA07A';
+          ctx.fillRect(170, 273, 260, 6);
+          ctx.fillRect(192, 213, 216, 5);
+
+          ctx.fillStyle = '#FFF2E2';
+          for (let i = 0; i < 24; i++) {
+            let x = 180 + i * 22;
+            ctx.beginPath();
+            ctx.ellipse(x, 215, 11, 7, 0, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.fillStyle = '#FFF5EA';
+          for (let i = 0; i < 26; i++) {
+            let x = 174 + i * 20;
+            ctx.beginPath();
+            ctx.ellipse(x, 275, 12, 7, 0, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.fillStyle = '#FFE1C4';
+          for (let d = 0; d < 10; d++) {
+            let xOff = 190 + d * 32;
+            ctx.beginPath();
+            ctx.ellipse(xOff, 293, 7, 5, 0, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.fillStyle = '#D9B48B';
+          ctx.fillRect(170, 325, 260, 3);
+          ctx.fillRect(190, 255, 220, 3);
+
+          for (let i = 0; i < candles.length; i++) {
+            const c = candles[i];
+            ctx.shadowBlur = 2;
+            ctx.fillStyle = '#FDE2C0';
+            ctx.fillRect(c.x - 8, c.y - 40, 16, 48);
+            ctx.fillStyle = '#F9D6A8';
+            ctx.fillRect(c.x - 6, c.y - 37, 12, 44);
+            ctx.fillStyle = '#EBBF94';
+            ctx.fillRect(c.x - 4, c.y - 18, 8, 4);
+            ctx.beginPath();
+            ctx.moveTo(c.x, c.y - 42);
+            ctx.lineTo(c.x, c.y - 35);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#69452C';
+            ctx.stroke();
+            if (c.lit) {
+              const flameGrad = ctx.createRadialGradient(c.x, c.y - 46, 3, c.x, c.y - 52, 10);
+              flameGrad.addColorStop(0, '#FFD966');
+              flameGrad.addColorStop(0.7, '#FF8C42');
+              ctx.fillStyle = flameGrad;
+              ctx.beginPath();
+              ctx.moveTo(c.x, c.y - 52);
+              ctx.quadraticCurveTo(c.x - 5, c.y - 60, c.x, c.y - 68);
+              ctx.quadraticCurveTo(c.x + 5, c.y - 60, c.x, c.y - 52);
+              ctx.fill();
+              ctx.fillStyle = '#FFE484';
+              ctx.beginPath();
+              ctx.moveTo(c.x, c.y - 54);
+              ctx.quadraticCurveTo(c.x - 2.5, c.y - 60, c.x, c.y - 64);
+              ctx.quadraticCurveTo(c.x + 2.5, c.y - 60, c.x, c.y - 54);
+              ctx.fill();
+            }
+          }
+
+          ctx.font = "600 28px 'Poppins', 'Inter', system-ui";
+          ctx.fillStyle = '#AD6940';
+          ctx.fillText('🎂 Happy Birthday 🎂', 170, 445);
+          ctx.font = "500 18px 'Poppins'";
+          ctx.fillStyle = '#D98258';
+          ctx.fillText('16 Juli 2025 · Dewi Sinta', 195, 475);
+          ctx.shadowBlur = 0;
+        }
+
+        // =============== GAMBAR KUE TERPOTONG 6 BAGIAN ===============
+        function drawSlicedCake() {
+          ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+          ctx.shadowBlur = 0;
+          ctx.fillStyle = '#FEEFCF';
+          ctx.beginPath();
+          ctx.ellipse(300, 415, 210, 65, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#F7E5C2';
+          ctx.beginPath();
+          ctx.ellipse(300, 410, 195, 58, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          const pieceWidth = 76;
+          const pieceHeightTop = 78;
+          const pieceHeightBottom = 123;
+          const startX = 180;
+          const startY_top = 215;
+          const startY_bottom = 275;
+          const gapX = 6;
+          const gapY = 5;
+          const colors = ['#EBC6A5', '#E8C2A0', '#ECCAAC', '#E5BE9A', '#EAC4A4', '#E7C09E'];
+
+          let pieceIndex = 0;
+          for (let row = 0; row < 2; row++) {
+            let yBase = row === 0 ? startY_top : startY_bottom;
+            let pieceH = row === 0 ? pieceHeightTop : pieceHeightBottom;
+            for (let col = 0; col < 3; col++) {
+              let xOff = startX + col * (pieceWidth + gapX);
+              let yOff = yBase + (row === 0 ? 0 : gapY);
+              let shiftX = (Math.random() - 0.5) * 3;
+              let shiftY = (Math.random() - 0.5) * 2;
+              let finalX = xOff + shiftX;
+              let finalY = yOff + shiftY;
+
+              ctx.save();
+              ctx.beginPath();
+              ctx.rect(finalX, finalY, pieceWidth, pieceH);
+              ctx.clip();
+              ctx.fillStyle = colors[pieceIndex % colors.length];
+              ctx.fillRect(finalX, finalY, pieceWidth, pieceH);
+              if (row === 0) {
+                ctx.fillStyle = '#F3D2B3';
+                ctx.fillRect(finalX, finalY, pieceWidth, 42);
+                ctx.fillStyle = '#CFA07A';
+                ctx.fillRect(finalX, finalY + 40, pieceWidth, 5);
+              } else {
+                ctx.fillStyle = '#FFF5EA';
+                for (let i = 0; i < 4; i++) {
+                  let fx = finalX + 10 + i * 18;
+                  ctx.beginPath();
+                  ctx.ellipse(fx, finalY + 5, 8, 5, 0, 0, Math.PI * 2);
+                  ctx.fill();
+                }
+              }
+              if (row === 0) {
+                ctx.fillStyle = '#D9B48B';
+                ctx.fillRect(finalX, finalY + 63, pieceWidth, 3);
+              } else {
+                ctx.fillStyle = '#D9B48B';
+                ctx.fillRect(finalX, finalY + 53, pieceWidth, 3);
+              }
+              ctx.fillStyle = '#E0AA7A';
+              for (let s = 0; s < 7; s++) {
+                let rx = finalX + 10 + Math.random() * (pieceWidth - 20);
+                let ry = finalY + 8 + Math.random() * (pieceH - 15);
+                ctx.beginPath();
+                ctx.arc(rx, ry, 1.5 + Math.random() * 2.5, 0, Math.PI * 2);
+                ctx.fill();
+              }
+              ctx.restore();
+
+              ctx.beginPath();
+              ctx.strokeStyle = '#C88E62';
+              ctx.lineWidth = 1.2;
+              ctx.rect(finalX, finalY, pieceWidth, pieceH);
+              ctx.stroke();
+              pieceIndex++;
+            }
+          }
+
+          for (let r = 0; r < 40; r++) {
+            let angle = Math.random() * Math.PI * 2;
+            let rad = 140 + Math.random() * 60;
+            let xCrum = 300 + Math.cos(angle) * rad;
+            let yCrum = 380 + Math.sin(angle) * 30 + Math.random() * 40;
+            ctx.fillStyle = `rgba(188, 112, 66, ${0.5 + Math.random() * 0.4})`;
+            ctx.beginPath();
+            ctx.arc(xCrum, yCrum, 2 + Math.random() * 4, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          ctx.font = "600 28px 'Poppins', 'Inter', system-ui";
+          ctx.fillStyle = '#AD6940';
+          ctx.fillText('🎂 Happy Birthday 🎂', 170, 445);
+          ctx.font = "500 18px 'Poppins'";
+          ctx.fillStyle = '#D98258';
+          ctx.fillText('16 Juli 2025 · Dewi Sinta', 195, 475);
+        }
+
+        function animateFlames() {
+          if (!isRevealed || giftArea.classList.contains('hidden') || isSliced) {
+            if (animFrame) cancelAnimationFrame(animFrame);
+            animFrame = null;
+            return;
+          }
+          drawWholeCake();
+          const anyLit = candles.some((c) => c.lit);
+          if (anyLit && !isSliced) {
+            for (let i = 0; i < candles.length; i++) {
+              if (candles[i].lit) {
+                ctx.save();
+                let flicker = 0.5 + Math.random() * 0.5;
+                ctx.fillStyle = `rgba(255, 160, 60, ${flicker * 0.55})`;
+                let offX = candles[i].x + (Math.random() - 0.5) * 4;
+                let offY = candles[i].y - 52 + (Math.random() - 0.5) * 3;
+                ctx.beginPath();
+                ctx.moveTo(offX, offY - 4);
+                ctx.quadraticCurveTo(offX - 3.5, offY - 10, offX, offY - 15);
+                ctx.quadraticCurveTo(offX + 3.5, offY - 10, offX, offY - 4);
+                ctx.fill();
+                ctx.restore();
+              }
+            }
+          }
+          animFrame = requestAnimationFrame(animateFlames);
+        }
+
+        function createSoftSmoke(candleX, candleY) {
+          const rect = cakeCanvas.getBoundingClientRect();
+          const scaleX = cakeCanvas.width / rect.width;
+          const scaleY = cakeCanvas.height / rect.height;
+          const absX = rect.left + candleX / scaleX;
+          const absY = rect.top + (candleY - 38) / scaleY;
+          for (let i = 0; i < 10; i++) {
+            const smoke = document.createElement('div');
+            smoke.className = 'smoke-particle';
+            const size = 6 + Math.random() * 12;
+            smoke.style.width = size + 'px';
+            smoke.style.height = size + 'px';
+            smoke.style.left = absX + (Math.random() - 0.5) * 18 + 'px';
+            smoke.style.top = absY + (Math.random() - 0.5) * 10 + 'px';
+            smoke.style.backgroundColor = `rgba(110, 85, 70, ${0.35 + Math.random() * 0.35})`;
+            smoke.style.animation = `smokeRise 0.85s ease-out forwards`;
+            document.body.appendChild(smoke);
+            setTimeout(() => smoke.remove(), 1000);
+          }
+        }
+
+        function performSliceEffect() {
+          const rect = cakeCanvas.getBoundingClientRect();
+          for (let i = 0; i < 70; i++) {
+            const crumb = document.createElement('div');
+            crumb.className = 'crumb-particle';
+            const size = 4 + Math.random() * 10;
+            crumb.style.width = size + 'px';
+            crumb.style.height = size + 'px';
+            crumb.style.left = rect.left + rect.width / 2 + (Math.random() - 0.5) * 140 + 'px';
+            crumb.style.top = rect.top + rect.height / 2 + (Math.random() - 0.5) * 100 + 'px';
+            crumb.style.backgroundColor = `#cd8b62`;
+            document.body.appendChild(crumb);
+            setTimeout(() => crumb.remove(), 800);
+          }
+          const knife = document.createElement('div');
+          knife.innerText = '🔪';
+          knife.className = 'knife-animation';
+          knife.style.top = rect.top + rect.height / 2 - 30 + 'px';
+          knife.style.left = rect.left - 40 + 'px';
+          document.body.appendChild(knife);
+          setTimeout(() => knife.remove(), 600);
+        }
+
+        function sliceCakeBySwipe() {
+          if (isSliced) return;
+          isSliced = true;
+          if (animFrame) cancelAnimationFrame(animFrame);
+          animFrame = null;
+          drawSlicedCake();
+          performSliceEffect();
+          cakeStatusMsg.innerText = '🎉 6 potongan kue! Selamat menikmati 🎉';
+          if (sliceInstructionDiv) {
+            sliceInstructionDiv.style.opacity = '0.5';
+            sliceInstructionDiv.innerText = '🍰 Kue sudah dipotong! Selamat menikmati 🍰';
+          }
+        }
+
+        // Swipe detection
+        function getCanvasCoords(e) {
+          const rect = cakeCanvas.getBoundingClientRect();
+          const scaleX = cakeCanvas.width / rect.width;
+          const scaleY = cakeCanvas.height / rect.height;
+          let clientX, clientY;
+          if (e.touches) {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+          } else {
+            clientX = e.clientX;
+            clientY = e.clientY;
+          }
+          return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
+        }
+
+        function onPointerStart(e) {
+          if (isSliced) return;
+          if (!giftArea.classList.contains('hidden') && !isSliced) {
+            e.preventDefault();
+            swipeStart = getCanvasCoords(e);
+            isSwiping = true;
+            sliceTriggered = false;
+            cakeCanvas.style.cursor = 'grabbing';
+          }
+        }
+
+        function onPointerMove(e) {
+          if (!isSwiping || isSliced || !swipeStart) return;
+          if (!giftArea.classList.contains('hidden') && !isSliced && !sliceTriggered) {
+            e.preventDefault();
+            const current = getCanvasCoords(e);
+            const distance = Math.hypot(current.x - swipeStart.x, current.y - swipeStart.y);
+            if (distance > 30 && !sliceTriggered) {
+              sliceTriggered = true;
+              sliceCakeBySwipe();
+              isSwiping = false;
+              cakeCanvas.style.cursor = 'grab';
+            }
+          }
+        }
+
+        function onPointerEnd(e) {
+          isSwiping = false;
+          swipeStart = null;
+          cakeCanvas.style.cursor = 'grab';
+        }
+
+        // Toggle lilin
+        function toggleCandle(index) {
+          if (isSliced) return;
+          const candle = candles[index];
+          if (candle.lit) {
+            candle.lit = false;
+            createSoftSmoke(candle.x, candle.y);
+          } else {
+            candle.lit = true;
+          }
+          const anyLit = candles.some((c) => c.lit);
+          cakeStatusMsg.innerText = anyLit ? '🎂 Klik lilin untuk menyalakan / memadamkan 🎂' : '🕯️ Semua lilin padam. Klik lilin untuk menyalakan lagi 🕯️';
+          drawWholeCake();
+        }
+
+        function resetCandlesLit() {
+          candles.forEach((c) => (c.lit = true));
+          cakeStatusMsg.innerText = '✨ Klik lilin untuk menyalakan / memadamkan ✨';
+          drawWholeCake();
+        }
+
+        // Balloons & reveal
+        const balloonSvgs = ['img/ballon1.svg', 'img/ballon2.svg', 'img/ballon3.svg'];
+        function createBalloon() {
+          const rand = Math.floor(Math.random() * balloonSvgs.length);
+          const balloonImg = document.createElement('img');
+          balloonImg.src = balloonSvgs[rand];
+          balloonImg.className = 'flying-balloon';
+          balloonImg.style.left = Math.random() * 80 + 10 + '%';
+          const size = 65 + Math.random() * 35;
+          balloonImg.style.width = size + 'px';
+          const duration = 3 + Math.random() * 3;
+          balloonImg.style.animation = `flyUpBalloon ${duration}s linear forwards`;
+          balloonImg.style.transform = `rotate(${(Math.random() - 0.5) * 12}deg)`;
+          balloonImg.addEventListener('animationend', () => {
+            if (balloonImg.parentNode) balloonImg.remove();
+            activeBalloons--;
+            if (activeBalloons <= 0 && !isRevealed) {
+              setTimeout(() => {
+                if (!isRevealed && activeBalloons === 0) revealGiftNow();
+              }, 150);
+            }
+          });
+          balloonContainer.appendChild(balloonImg);
+          activeBalloons++;
+        }
+
+        function clearAllBalloons() {
+          while (balloonContainer.firstChild) balloonContainer.removeChild(balloonContainer.firstChild);
+          activeBalloons = 0;
+          if (animationTimeout) clearTimeout(animationTimeout);
+        }
+
+        function launchBalloons(total = 32) {
+          clearAllBalloons();
+          isRevealed = false;
+          startArea.classList.remove('hidden');
+          giftArea.classList.add('hidden');
+          if (animationTimeout) clearTimeout(animationTimeout);
+          let launched = 0;
+          function next() {
+            if (launched < total) {
+              createBalloon();
+              launched++;
+              setTimeout(next, 60 + Math.random() * 80);
+            } else {
+              animationTimeout = setTimeout(() => {
+                if (!isRevealed) {
+                  clearAllBalloons();
+                  if (!isRevealed) revealGiftNow();
+                }
+              }, 6500);
+            }
+          }
+          next();
+        }
+
+        function revealGiftNow() {
+          if (isRevealed) return;
+          isRevealed = true;
+          startArea.classList.add('hidden');
+          giftArea.classList.remove('hidden');
+          isSliced = false;
+          sliceTriggered = false;
+          if (sliceInstructionDiv) {
+            sliceInstructionDiv.style.opacity = '1';
+            sliceInstructionDiv.innerText = '🍰 Geser jari/mouse di atas kue untuk memotong (seperti mengiris) 🍰';
+          }
+          resetCandlesLit();
+          drawWholeCake();
+          if (animFrame) cancelAnimationFrame(animFrame);
+          animFrame = requestAnimationFrame(animateFlames);
+          giftArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Event listeners
+        cakeCanvas.addEventListener('mousedown', onPointerStart);
+        window.addEventListener('mousemove', onPointerMove);
+        window.addEventListener('mouseup', onPointerEnd);
+        cakeCanvas.addEventListener('touchstart', onPointerStart, { passive: false });
+        window.addEventListener('touchmove', onPointerMove, { passive: false });
+        window.addEventListener('touchend', onPointerEnd);
+
+        cakeCanvas.addEventListener('click', (e) => {
+          if (!giftArea.classList.contains('hidden') && !isSliced && !sliceTriggered) {
+            const rect = cakeCanvas.getBoundingClientRect();
+            const scaleX = cakeCanvas.width / rect.width;
+            const scaleY = cakeCanvas.height / rect.height;
+            let clientX, clientY;
+            if (e.touches) {
+              clientX = e.touches[0].clientX;
+              clientY = e.touches[0].clientY;
+            } else {
+              clientX = e.clientX;
+              clientY = e.clientY;
+            }
+            const mouseX = (clientX - rect.left) * scaleX;
+            const mouseY = (clientY - rect.top) * scaleY;
+            for (let i = 0; i < candles.length; i++) {
+              const c = candles[i];
+              const centerX = c.x;
+              const centerY = c.y - 30;
+              const dx = mouseX - centerX;
+              const dy = mouseY - centerY;
+              if (Math.hypot(dx, dy) < 28) {
+                toggleCandle(i);
+                break;
+              }
+            }
+          }
+        });
+
+        triggerBtn.addEventListener('click', () => {
+          if (animationTimeout) clearTimeout(animationTimeout);
+          clearAllBalloons();
+          isRevealed = false;
+          startArea.classList.remove('hidden');
+          giftArea.classList.add('hidden');
+          if (animFrame) cancelAnimationFrame(animFrame);
+          launchBalloons(34);
+        });
+
+        repeatBtn.addEventListener('click', () => {
+          clearAllBalloons();
+          giftArea.classList.add('hidden');
+          startArea.classList.remove('hidden');
+          isRevealed = false;
+          if (animFrame) cancelAnimationFrame(animFrame);
+          launchBalloons(34);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        balloonSvgs.forEach((src) => {
+          const img = new Image();
+          img.src = src;
+        });
+        drawWholeCake();
+        clearAllBalloons();
+      })();
+    </script>
+  </body>
+</html>

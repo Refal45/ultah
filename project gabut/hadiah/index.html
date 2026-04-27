@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>🌸 Khusus Dewi Sinta • Kejutan Manis 🌸</title>
+    <style>
+      * {
+        user-select: none;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family:
+          'Poppins',
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          sans-serif;
+        background: linear-gradient(145deg, #fff5f7 0%, #ffe9f0 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* background decorative */
+      body::before {
+        content: '✨';
+        font-size: 180px;
+        position: absolute;
+        bottom: -30px;
+        left: -40px;
+        opacity: 0.1;
+        pointer-events: none;
+        transform: rotate(-15deg);
+      }
+      body::after {
+        content: '🎈';
+        font-size: 200px;
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        opacity: 0.1;
+        pointer-events: none;
+        transform: rotate(10deg);
+      }
+
+      #wrap {
+        text-align: center;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+      }
+
+      h1 {
+        font-size: 2rem;
+        color: #b13e5c;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 10px rgba(255, 200, 210, 0.6);
+        letter-spacing: -0.3px;
+        font-weight: 600;
+      }
+
+      /* Teks tengah dengan kartu */
+      .quote-container {
+        max-width: 620px;
+        margin: 0 auto 30px;
+        padding: 24px 20px;
+        background: rgba(255, 250, 245, 0.9);
+        backdrop-filter: blur(2px);
+        border-radius: 48px;
+        box-shadow: 0 20px 35px rgba(255, 80, 110, 0.15);
+        border: 1px solid rgba(255, 200, 210, 0.6);
+      }
+
+      .quote {
+        font-size: 1.55rem;
+        font-weight: 700;
+        color: #ff4d6d;
+        margin-bottom: 12px;
+        line-height: 1.3;
+      }
+
+      .sub-quote {
+        font-size: 1rem;
+        color: #9b6b7c;
+        font-style: italic;
+        font-weight: 500;
+      }
+
+      /* Tombol kabur (versi lebih jinak) */
+      #btn {
+        padding: 14px 32px;
+        background: #ff4d6d;
+        border: none;
+        color: white;
+        border-radius: 60px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        position: absolute;
+        display: none;
+        box-shadow: 0 12px 20px rgba(255, 60, 100, 0.4);
+        transition: all 0.18s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        letter-spacing: 0.5px;
+        z-index: 99;
+        white-space: nowrap;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+
+      #btn:hover {
+        background: #ff2a55;
+        transform: scale(1.02);
+        box-shadow: 0 15px 25px rgba(255, 60, 100, 0.5);
+      }
+
+      /* Input nama dan tombol mulai - kartu manis */
+      #nameBox {
+        background: rgba(255, 245, 240, 0.8);
+        backdrop-filter: blur(8px);
+        padding: 24px 32px;
+        border-radius: 56px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(255, 180, 180, 0.5);
+        transition: all 0.2s;
+      }
+
+      #nameBox input {
+        padding: 12px 20px;
+        font-size: 1rem;
+        border-radius: 60px;
+        border: 2px solid #ffbfcc;
+        background: white;
+        width: 260px;
+        font-family: inherit;
+        text-align: center;
+        outline: none;
+        transition: 0.2s;
+      }
+
+      #nameBox input:focus {
+        border-color: #ff4d6d;
+        box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.2);
+      }
+
+      #start {
+        margin-top: 18px;
+        padding: 10px 26px;
+        background: #ff8aa8;
+        color: white;
+        border: none;
+        border-radius: 60px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: 0.2s;
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      #start:hover {
+        background: #ff6b8f;
+        transform: scale(0.97);
+      }
+
+      /* Notifikasi lucu di bawah */
+      #notif {
+        margin-top: 28px;
+        color: #b34e6b;
+        font-size: 1.05rem;
+        font-weight: 500;
+        background: rgba(255, 240, 235, 0.7);
+        backdrop-filter: blur(4px);
+        padding: 8px 22px;
+        border-radius: 60px;
+        display: inline-block;
+        max-width: 80%;
+        transition: 0.1s;
+      }
+
+      .dewispark {
+        font-weight: 600;
+        color: #e8436e;
+      }
+
+      /* animasi warning */
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        75% {
+          transform: translateX(5px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      .warning-shake {
+        animation: shake 0.3s ease-in-out 0s 2;
+        background-color: #ffe0e0 !important;
+        border-color: #ff4d6d !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <h1>🌸 Hanya untuk <span class="dewispark">Dewi Sinta</span> 🌸</h1>
+
+      <!-- Teks motivasi dengan nama Dewi & Sinta -->
+      <div class="quote-container">
+        <div class="quote">✨ "Senandung manis untuk <span class="dewispark">Dewi</span> & <span class="dewispark">Sinta</span>" ✨</div>
+        <div class="sub-quote">💖 Hanya dirimu yang paling spesial hari ini CENGENG NGADUAN 💖</div>
+      </div>
+
+      <!-- Area input nama (hanya Dewi Sinta yang diterima) -->
+      <div id="nameBox">
+        <input type="text" id="nama" placeholder="Tulis namamu (Dewi / Sinta)..." autocomplete="off" />
+        <br />
+        <button id="start">🎈 Mulai petualangan 🎈</button>
+      </div>
+
+      <p id="notif">🌟 Masukkan nama <strong>Dewi Sinta</strong> (atau Dewi / Sinta) untuk melanjutkan 🌟</p>
+
+      <!-- Tombol yang akan "kabur" dengan santai -->
+      <button id="btn">🎂 Pencet Aku! 🎂</button>
+    </div>
+
+    <script>
+      (function () {
+        // ========== ELEMENTS ==========
+        const btn = document.getElementById('btn');
+        const startBtn = document.getElementById('start');
+        const namaInput = document.getElementById('nama');
+        const notifDiv = document.getElementById('notif');
+        const nameBoxDiv = document.getElementById('nameBox');
+
+        // state permainan
+        let clickCount = 0;
+        let userName = '';
+        let isMovingScheduled = false;
+        let moveTimeoutId = null;
+
+        // ========== VALIDASI NAMA : HARUS DEWI ATAU SINTA (atau keduanya) ==========
+        function isNamaDewiSinta(nama) {
+          if (!nama) return false;
+          const lowerName = nama.toLowerCase().trim();
+          // Daftar kata kunci yang mewakili "Dewi Sinta"
+          // Biar fleksibel tapi tetap eksklusif: mengandung "dewi" ATAU "sinta"
+          // Namun lebih baik mengandung minimal salah satu dari ["dewi", "sinta"]
+          // dan tidak mengandung kata lain yang jelas bukan? Tapi biar sederhana:
+          // Jika mengandung "dewi" atau "sinta", dianggap sah.
+          // (Karena bisa saja "Dewi", "Sinta", "Dewi Sinta", "Sinta Dewi", "mbak Dewi", "kak Sinta")
+          // Tapi sesuai permintaan "namanya selain dia nama tidak sesuai" -> "dia" adalah Dewi Sinta.
+          // Jadi harus memastikan panggilan mengacu ke Dewi Sinta.
+          // Gunakan aturan: nama harus mengandung SETIDAKNYA SATU dari ["dewi", "sinta"].
+          // Namun jika nama kosong atau hanya "budi", "ayu", dll => tidak sesuai.
+          const hasDewi = lowerName.includes('dewi');
+          const hasSinta = lowerName.includes('sinta');
+          if (hasDewi || hasSinta) {
+            return true;
+          }
+          // Kecuali jika nama persis "dewinta" atau "sintadewi" mungkin? sudah include.
+          return false;
+        }
+
+        // Efek getar pada input jika nama tidak sesuai
+        function shakeInput() {
+          namaInput.classList.add('warning-shake');
+          setTimeout(() => {
+            namaInput.classList.remove('warning-shake');
+          }, 600);
+        }
+
+        // ========== GENTLE EVADE (KABUR LEMBUT) ==========
+        const EVADE_RADIUS = 75;
+        const MOVE_DELAY_OPTIONS = [480, 580, 680, 780, 520, 620, 720];
+
+        function getRandomDelay() {
+          return MOVE_DELAY_OPTIONS[Math.floor(Math.random() * MOVE_DELAY_OPTIONS.length)];
+        }
+
+        function getRandomPositionWithinBounds() {
+          const btnWidth = btn.offsetWidth;
+          const btnHeight = btn.offsetHeight;
+          const maxLeft = Math.max(0, window.innerWidth - btnWidth - 15);
+          const maxTop = Math.max(0, window.innerHeight - btnHeight - 15);
+          const minLeft = 15;
+          const minTop = 15;
+          let randX = Math.random() * (maxLeft - minLeft + 1) + minLeft;
+          let randY = Math.random() * (maxTop - minTop + 1) + minTop;
+          randX = Math.min(maxLeft, Math.max(minLeft, randX));
+          randY = Math.min(maxTop, Math.max(minTop, randY));
+          return { x: randX, y: randY };
+        }
+
+        function moveButtonRandomly() {
+          if (!btn || btn.style.display !== 'inline-block') return;
+          const { x, y } = getRandomPositionWithinBounds();
+          btn.style.left = x + 'px';
+          btn.style.top = y + 'px';
+        }
+
+        function gentleEvade(e) {
+          if (btn.style.display !== 'inline-block') return;
+          if (isMovingScheduled) return;
+
+          const rect = btn.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const mouseX = e.clientX;
+          const mouseY = e.clientY;
+          const distance = Math.sqrt((mouseX - centerX) ** 2 + (mouseY - centerY) ** 2);
+
+          if (distance < EVADE_RADIUS) {
+            isMovingScheduled = true;
+            const delayTime = getRandomDelay();
+            if (moveTimeoutId) clearTimeout(moveTimeoutId);
+
+            if (clickCount < 19) {
+              notifDiv.innerHTML = `😉 ${userName ? userName : 'Dewi Sinta'} hampir kena! Tombol pindah sebentar... santai aja 😄`;
+              setTimeout(() => {
+                if (clickCount < 20 && btn.style.display === 'inline-block') {
+                  notifDiv.innerHTML = `✨ Ayo ${userName.split(' ')[0] || 'Sayang'}! tekan tombol pinknya ✨ (${clickCount}/20)`;
+                }
+              }, 800);
+            }
+
+            moveTimeoutId = setTimeout(() => {
+              moveButtonRandomly();
+              isMovingScheduled = false;
+              moveTimeoutId = null;
+              if (clickCount < 20 && btn.style.display === 'inline-block') {
+                notifDiv.innerHTML = `🌀 Tombol pindah pelan, kejar lagi ya ${userName.split(' ')[0] || 'Sinta'}! 🌀`;
+                setTimeout(() => {
+                  if (clickCount < 20 && btn.style.display === 'inline-block') {
+                    notifDiv.innerHTML = `🎯 ${userName} (${clickCount}/20) • semangat! 🎯`;
+                  }
+                }, 1200);
+              }
+            }, delayTime);
+          }
+        }
+
+        // ========== CLICK HANDLER (TEKAN TOMBOL) ==========
+        function onButtonClick() {
+          if (!userName) return;
+
+          clickCount++;
+          btn.style.transform = 'scale(0.96)';
+          setTimeout(() => {
+            if (btn) btn.style.transform = '';
+          }, 120);
+
+          if (clickCount < 20) {
+            notifDiv.innerHTML = `🎉 Klik ke-${clickCount}! ${userName} hebat! tinggal ${20 - clickCount} lagi 🎉`;
+          }
+
+          moveButtonRandomly();
+
+          if (moveTimeoutId) {
+            clearTimeout(moveTimeoutId);
+            moveTimeoutId = null;
+            isMovingScheduled = false;
+          }
+
+          // SAAT MENCAPAI 20 KLIK
+          if (clickCount === 20) {
+            btn.removeEventListener('mousemove', gentleEvade);
+            if (moveTimeoutId) clearTimeout(moveTimeoutId);
+            isMovingScheduled = false;
+
+            // Prompt tanya nama yang berulang tahun, default "Dewi Sinta"
+            const defaultCeleb = 'Dewi Sinta';
+            let celebrationName = prompt(`🎂🎉 Selamat! ${userName} berhasil 20 kali! 🎉🎂\nSiapa yang berulang tahun hari ini?`, defaultCeleb);
+            if (celebrationName && celebrationName.trim() !== '') {
+              celebrationName = celebrationName.trim();
+              alert(`✨✨✨ YEEY! Selamat Ulang Tahun, ${celebrationName}! 🎂🎈\nDari ${userName} dengan cinta untuk Dewi Sinta ✨✨✨`);
+            } else {
+              alert(`🎊🎈 Hore! Selamat merayakan hari spesial untuk DEWI SINTA! Kamu luar biasa, ${userName}! 🎈🎊`);
+            }
+
+            notifDiv.innerHTML = `💖 Berhasil! ${userName} merayakan untuk DEWI SINTA. Mengalihkan ke kejutan... 💖`;
+            setTimeout(() => {
+              window.location.href = 'ultah.html';
+            }, 800);
+          }
+        }
+
+        // ========== MEMULAI GAME (DENGAN VALIDASI NAMA) ==========
+        function startGame() {
+          let rawName = namaInput.value.trim();
+
+          // VALIDASI KETAT: nama harus mengandung "dewi" ATAU "sinta"
+          if (!isNamaDewiSinta(rawName)) {
+            // Nama tidak sesuai! Tampilkan peringatan
+            notifDiv.innerHTML = `⚠️ ${rawName ? `"${rawName}"` : 'Kosong'} bukan nama yang diizinkan. Hanya untuk Dewi / Sinta! ⚠️`;
+            shakeInput();
+            // Efek kedip merah pada notif
+            notifDiv.style.backgroundColor = '#ffe0e0';
+            setTimeout(() => {
+              notifDiv.style.backgroundColor = '';
+            }, 600);
+            alert(`🌸 Maaf, hanya Dewi Sinta (atau panggilan Dewi / Sinta) yang bisa melanjutkan.🌸\nSilakan masukkan nama yang sesuai.`);
+            return;
+          }
+
+          // Jika valid, ambil nama asli (biarkan sesuai input)
+          userName = rawName;
+
+          // Sembunyikan komponen awal
+          document.getElementById('nameBox').style.display = 'none';
+          document.querySelector('.quote-container').style.display = 'none';
+
+          // tampilkan tombol
+          btn.style.display = 'inline-block';
+          clickCount = 0;
+
+          // posisi awal tombol (tengah bawah)
+          const btnWidth = btn.offsetWidth;
+          const btnHeight = btn.offsetHeight;
+          let startX = (window.innerWidth - btnWidth) / 2;
+          let startY = window.innerHeight - btnHeight - 60;
+          btn.style.left = Math.max(15, startX) + 'px';
+          btn.style.top = Math.max(20, startY) + 'px';
+
+          const finalPos = getRandomPositionWithinBounds();
+          if (startY < 20 || startX < 10) {
+            btn.style.left = finalPos.x + 'px';
+            btn.style.top = finalPos.y + 'px';
+          }
+
+          // sapaan personal dengan nama valid
+          let panggilan = userName;
+          if (userName.toLowerCase().includes('dewi')) panggilan = 'Dewi yang manis';
+          else if (userName.toLowerCase().includes('sinta')) panggilan = 'Sinta cantik';
+          else panggilan = userName;
+
+          notifDiv.innerHTML = `🎈 Hai ${panggilan}! Tekan tombol pink 20 kali. Tenang, geraknya pelan kok! 🎈`;
+
+          if (moveTimeoutId) {
+            clearTimeout(moveTimeoutId);
+            moveTimeoutId = null;
+          }
+          isMovingScheduled = false;
+
+          btn.addEventListener('mousemove', gentleEvade);
+          btn.addEventListener('click', onButtonClick);
+        }
+
+        // Fungsi menjaga tombol tetap di layar saat resize
+        function keepButtonInsideWindow() {
+          if (btn.style.display !== 'inline-block') return;
+          const rect = btn.getBoundingClientRect();
+          const btnW = btn.offsetWidth;
+          const btnH = btn.offsetHeight;
+          let newLeft = rect.left;
+          let newTop = rect.top;
+          let needsUpdate = false;
+
+          const maxLeft = window.innerWidth - btnW - 10;
+          const maxTop = window.innerHeight - btnH - 10;
+          if (newLeft < 8) {
+            newLeft = 8;
+            needsUpdate = true;
+          }
+          if (newTop < 8) {
+            newTop = 8;
+            needsUpdate = true;
+          }
+          if (newLeft > maxLeft) {
+            newLeft = maxLeft;
+            needsUpdate = true;
+          }
+          if (newTop > maxTop) {
+            newTop = maxTop;
+            needsUpdate = true;
+          }
+
+          if (needsUpdate) {
+            btn.style.left = newLeft + 'px';
+            btn.style.top = newTop + 'px';
+          }
+        }
+
+        window.addEventListener('resize', () => {
+          if (btn.style.display === 'inline-block') keepButtonInsideWindow();
+        });
+
+        // Event listener start
+        startBtn.addEventListener('click', startGame);
+
+        // Enter pada input
+        namaInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            startGame();
+          }
+        });
+
+        // Tombol awalnya tersembunyi
+        btn.style.display = 'none';
+        btn.style.position = 'absolute';
+
+        // Pesan tambahan untuk mengingatkan aturan nama
+        notifDiv.innerHTML = '🌟 Masukkan nama <strong>Dewi / Sinta</strong> untuk membuka kejutan 🌟';
+
+        // Bonus: validasi live saat mengetik (hanya edukatif, tidak memblokir)
+        namaInput.addEventListener('input', function () {
+          const currentVal = this.value.trim();
+          if (currentVal !== '' && !isNamaDewiSinta(currentVal)) {
+            notifDiv.innerHTML = "⚠️ Nama tidak dikenali. Harus mengandung 'Dewi' atau 'Sinta' ⚠️";
+            notifDiv.style.opacity = '0.9';
+          } else if (currentVal !== '') {
+            notifDiv.innerHTML = `✅ Nama diterima! Klik "Mulai petualangan" ${currentVal} ✅`;
+          } else {
+            notifDiv.innerHTML = '🌟 Masukkan nama Dewi / Sinta untuk melanjutkan 🌟';
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
