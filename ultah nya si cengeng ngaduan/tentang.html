@@ -1,547 +1,671 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Tentang Dewi Sinta · Sisi yang nyata & manja</title>
-    <!-- Google Fonts: Plus Jakarta Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <title>Tentang Dewi Sinta · Sisi asli & penuh warna</title>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      body {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        background: radial-gradient(circle at 10% 30%, #0b0b0b, #000000);
-        color: #ffffff;
-        line-height: 1.5;
-        min-height: 100vh;
-        overflow-x: hidden;
-      }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: radial-gradient(circle at 20% 30%, #0e0c0b, #000000);
+      color: #fef7e8;
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
+    /* SMOOTH SCROLL */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .app-wrapper {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 1.2rem 1.8rem 2rem 1.8rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ========= HEADER + NAVIGASI MODERN ========= */
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(255, 235, 190, 0.25);
+    }
+
+    .judul-happy {
+      font-size: 2rem;
+      font-weight: 800;
+      font-style: italic;
+      background: linear-gradient(135deg, #fff3e0, #ffe2b5);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+      transition: all 0.2s ease;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .judul-happy:hover {
+      text-shadow: 0 0 6px rgba(255,225,150,0.7);
+    }
+
+    /* Desktop navbar */
+    .navbar-desktop {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(25, 22, 28, 0.65);
+      backdrop-filter: blur(14px);
+      padding: 0.4rem 0.8rem;
+      border-radius: 60px;
+      border: 0.5px solid rgba(255, 215, 150, 0.35);
+    }
+
+    .nav-link {
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      transition: all 0.25s;
+      color: #fcf3e4;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .nav-link i {
+      font-size: 0.9rem;
+      color: #ffdfb0;
+    }
+
+    .nav-link.active {
+      background: #fff4e2;
+      color: #1a130b;
+      box-shadow: 0 5px 12px -6px rgba(0,0,0,0.4);
+    }
+    .nav-link.active i {
+      color: #c97e2a;
+    }
+    .nav-link:not(.active):hover {
+      background: rgba(255, 225, 170, 0.2);
+      color: #ffefcf;
+      transform: translateY(-2px);
+    }
+
+    /* Mobile menu (hamburger) - hanya muncul di HP */
+    .mobile-menu-btn {
+      display: none;
+      background: rgba(30, 28, 35, 0.8);
+      backdrop-filter: blur(12px);
+      width: 48px;
+      height: 48px;
+      border-radius: 32px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 1px solid rgba(255, 210, 130, 0.5);
+      transition: 0.2s;
+    }
+    .mobile-menu-btn i {
+      font-size: 1.6rem;
+      color: #ffdfb8;
+    }
+    .mobile-menu-btn:active {
+      background: rgba(255, 200, 120, 0.3);
+      transform: scale(0.96);
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 85px;
+      right: 1.2rem;
+      background: rgba(12, 10, 16, 0.96);
+      backdrop-filter: blur(24px);
+      border-radius: 32px;
+      padding: 1rem 0.8rem;
+      flex-direction: column;
+      gap: 0.6rem;
+      width: 210px;
+      border: 1px solid rgba(255, 215, 150, 0.4);
+      box-shadow: 0 20px 35px -12px black;
+      z-index: 1100;
+      transition: opacity 0.2s, transform 0.2s;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+    }
+    .mobile-nav.open {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .mobile-nav .nav-link {
+      justify-content: flex-start;
+      padding: 0.7rem 1rem;
+      background: transparent;
+      border-radius: 28px;
+      font-size: 1rem;
+    }
+    .mobile-nav .nav-link.active {
+      background: #ffebd0;
+      color: #1e170e;
+    }
+    .mobile-nav .nav-link.active i {
+      color: #b45f1b;
+    }
+
+    /* ===== KONTEN TENTANG ===== */
+    .about-hero {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      align-items: center;
+      justify-content: center;
+      margin: 0.5rem 0 2rem;
+      animation: fadeUp 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+    }
+    .about-text {
+      flex: 1.2;
+      min-width: 270px;
+    }
+    .about-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      font-style: italic;
+      background: linear-gradient(115deg, #ffeac2, #ffdaa5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .subhead {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #fcdba0;
+      margin-bottom: 1.5rem;
+      border-left: 3px solid #fec27e;
+      padding-left: 1rem;
+    }
+    .description {
+      font-size: 1.02rem;
+      line-height: 1.7;
+      color: #fef2e2;
+      margin-bottom: 1rem;
+    }
+    .highlight {
+      color: #ffdeae;
+      font-weight: 700;
+    }
+    .personality-grid {
+      background: rgba(255, 245, 225, 0.05);
+      backdrop-filter: blur(4px);
+      border-radius: 32px;
+      padding: 1.4rem;
+      margin: 1.5rem 0;
+      border: 1px solid rgba(255, 210, 120, 0.3);
+    }
+    .personality-grid h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      font-style: italic;
+      margin-bottom: 1rem;
+      color: #ffdfb3;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .trait-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 0.75rem;
+    }
+    .trait-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 0.6rem 1rem;
+      border-radius: 60px;
+      font-style: normal;
+      font-weight: 500;
+    }
+    .trait-item i {
+      width: 28px;
+      color: #ffcb8a;
+      font-size: 1.1rem;
+    }
+    .quote-custom {
+      background: rgba(255, 230, 190, 0.08);
+      border-radius: 40px;
+      padding: 1rem 1.4rem;
+      text-align: center;
+      font-style: italic;
+      margin-top: 1.3rem;
+      border-left: 4px solid #ffcf8a;
+      border-right: 4px solid #ffcf8a;
+    }
+    .btn-rainbow {
+      background: rgba(255, 210, 135, 0.12);
+      border: 1px solid rgba(255, 207, 110, 0.7);
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-style: italic;
+      color: #fff3e0;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(4px);
+      margin-top: 1.2rem;
+    }
+    .btn-rainbow:hover {
+      background: #ffcd8a33;
+      transform: translateY(-3px);
+      border-color: #ffda99;
+    }
+
+    /* ILUSTRASI/PHOTO FRAME (tanpa external image rusak) */
+    .photo-frame {
+      flex: 0.9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .illustration-card {
+      width: 100%;
+      max-width: 330px;
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(145deg, #32281c, #1f1912);
+      border-radius: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 32px -10px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 200, 120, 0.5);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .illustration-card:hover {
+      transform: scale(1.01);
+    }
+    .illustration-card .illust-emoji {
+      font-size: 5rem;
+      filter: drop-shadow(2px 6px 12px rgba(0,0,0,0.4));
+      margin-bottom: 1rem;
+    }
+    .illustration-card .illust-text {
+      font-weight: 600;
+      font-size: 1.4rem;
+      background: linear-gradient(135deg, #ffeedd, #ffcf94);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .illustration-card .illust-caption {
+      font-size: 0.8rem;
+      margin-top: 0.6rem;
+      color: #ecd2a3;
+    }
+
+    .extra-wish {
+      text-align: center;
+      margin: 2rem 0 1rem;
+      padding: 1.2rem;
+      background: rgba(255, 240, 210, 0.04);
+      border-radius: 48px;
+      backdrop-filter: blur(4px);
+    }
+    footer {
+      margin-top: 2.2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #d6cfbc;
+      border-top: 1px solid rgba(255, 230, 170, 0.2);
+      padding: 2rem 0.5rem 1rem;
+      font-style: italic;
+    }
+    footer a {
+      color: #ffdead;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* BALON & ANIMASI */
+    .balloon {
+      position: fixed;
+      bottom: -80px;
+      z-index: 10000;
+      pointer-events: none;
+      border-radius: 50%;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+      will-change: transform;
+    }
+    .balloon::before {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      width: 2px;
+      height: 22px;
+      background: #b47c48;
+      transform: translateX(-50%);
+    }
+    .balloon::after {
+      content: '🎀';
+      position: absolute;
+      font-size: 12px;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #ffcf9a;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        bottom: -70px;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(6deg);
+        opacity: 0;
+        bottom: 100%;
+      }
+    }
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* RESPONSIVE MOBILE LANDSCAPE & HP */
+    @media (max-width: 780px) {
       .app-wrapper {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 1.5rem 2rem 2rem 2rem;
-        position: relative;
-        z-index: 2;
+        padding: 1rem 1.2rem;
       }
-
-      /* HEADER SAMA */
-      .header-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-bottom: 3rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-        position: relative;
-      }
-
       .judul-happy {
-        font-size: 2.2rem;
-        font-weight: 700;
-        font-style: italic;
-        background: linear-gradient(135deg, #fff5e6, #ffecd2);
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        transition: transform 0.2s ease;
+        font-size: 1.7rem;
       }
-      .judul-happy:hover {
-        transform: scale(1.01);
-        text-shadow: 0 0 8px rgba(255, 235, 180, 0.6);
-      }
-
-      .menu-icon {
+      .navbar-desktop {
         display: none;
-        font-size: 1.8rem;
-        cursor: pointer;
-        background: rgba(20, 20, 30, 0.7);
-        backdrop-filter: blur(12px);
-        border-radius: 50%;
-        width: 48px;
-        height: 48px;
-        align-items: center;
-        justify-content: center;
-        transition: 0.2s;
-        border: 1px solid rgba(255, 255, 255, 0.2);
       }
-      .menu-icon i {
-        color: #ffefcf;
-      }
-      .menu-icon:hover {
-        background: rgba(255, 215, 150, 0.3);
-      }
-
-      .navbar {
+      .mobile-menu-btn {
         display: flex;
-        gap: 0.75rem;
-        background: rgba(20, 20, 30, 0.55);
-        backdrop-filter: blur(12px);
-        padding: 0.5rem 1rem;
-        border-radius: 60px;
-        border: 0.5px solid rgba(255, 255, 255, 0.2);
       }
-
-      .nav-link {
-        text-decoration: none;
-        font-size: 1rem;
-        font-weight: 600;
-        padding: 0.5rem 1.2rem;
-        border-radius: 40px;
-        transition: all 0.25s;
-        color: #f0f0f0;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        white-space: nowrap;
-      }
-
-      .nav-link.active {
-        background: #ffffff;
-        color: #0a0a0a;
-        box-shadow: 0 6px 12px -8px rgba(0, 0, 0, 0.3);
-        font-weight: 700;
-      }
-      .nav-link.active i {
-        color: #0a0a0a;
-      }
-      .nav-link:not(.active):hover {
-        background: rgba(255, 255, 255, 0.2);
-        color: #fff2cf;
-        transform: translateY(-2px);
-      }
-
-      /* KONTEN TENTANG (versi lucu, jujur) */
       .about-hero {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 3rem;
-        align-items: center;
-        justify-content: center;
-        margin: 1rem 0 2rem;
-        animation: fadeUp 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        flex-direction: column-reverse;
+        gap: 1.8rem;
       }
-
-      .about-text {
-        flex: 1.2;
-        min-width: 280px;
-      }
-
       .about-title {
-        font-size: 2.6rem;
-        font-weight: 800;
-        font-style: italic;
-        background: linear-gradient(120deg, #fff8e7, #ffe3b5);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        margin-bottom: 0.75rem;
+        font-size: 2rem;
       }
-
-      .subhead {
-        font-size: 1.2rem;
-        font-style: italic;
-        color: #ffdfb3;
-        margin-bottom: 1.8rem;
-        border-left: 3px solid #ffcd94;
-        padding-left: 1rem;
-      }
-
-      .description {
-        font-size: 1.05rem;
-        line-height: 1.75;
-        color: #fef9e6;
-        margin-bottom: 1rem;
-      }
-
-      .personality-grid {
-        background: rgba(255, 248, 235, 0.05);
-        backdrop-filter: blur(4px);
-        border-radius: 32px;
-        padding: 1.5rem;
-        margin: 1.5rem 0;
-        border: 1px solid rgba(255, 215, 150, 0.25);
-      }
-
-      .personality-grid h3 {
-        font-size: 1.4rem;
-        font-style: italic;
-        margin-bottom: 1rem;
-        color: #ffdeb3;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
       .trait-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 0.8rem;
+        grid-template-columns: 1fr;
       }
-
-      .trait-item {
+      .illustration-card {
+        max-width: 280px;
+      }
+      .mobile-nav.open {
         display: flex;
-        align-items: center;
-        gap: 12px;
-        background: rgba(0, 0, 0, 0.3);
-        padding: 0.6rem 1rem;
-        border-radius: 60px;
-        font-style: italic;
       }
-      .trait-item i {
-        width: 28px;
-        color: #ffcd94;
-        font-size: 1.1rem;
+    }
+    @media (max-width: 480px) {
+      .about-title {
+        font-size: 1.7rem;
       }
-
-      .quote-custom {
-        background: rgba(255, 235, 200, 0.1);
-        border-radius: 48px;
-        padding: 1.2rem;
-        text-align: center;
-        font-style: italic;
-        margin-top: 1.5rem;
-        border-left: 4px solid #ffcd94;
-        border-right: 4px solid #ffcd94;
+      .description {
+        font-size: 0.94rem;
       }
-
       .btn-rainbow {
-        background: rgba(255, 215, 150, 0.12);
-        border: 1px solid rgba(255, 215, 150, 0.6);
-        padding: 0.7rem 1.5rem;
-        border-radius: 50px;
-        font-weight: 600;
-        font-style: italic;
-        color: #fff3df;
-        cursor: pointer;
-        transition: 0.2s;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.9rem;
-        backdrop-filter: blur(4px);
-        margin-top: 1rem;
-      }
-      .btn-rainbow:hover {
-        background: #ffcd9455;
-        transform: translateY(-3px);
-        border-color: #ffda99;
-      }
-
-      .photo-frame {
-        flex: 0.9;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .potret-tentang {
-        width: 100%;
-        max-width: 360px;
-        height: auto;
-        aspect-ratio: 1 / 1;
-        object-fit: cover;
-        border-radius: 2rem;
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-        transition: transform 0.2s;
-        border: none;
-      }
-      .potret-tentang:hover {
-        transform: scale(1.02);
-      }
-
-      .extra-wish {
-        text-align: center;
-        margin: 2rem 0 1rem;
-        padding: 1.2rem;
-        background: rgba(255, 245, 220, 0.05);
-        border-radius: 48px;
-        backdrop-filter: blur(5px);
-      }
-
-      footer {
-        margin-top: 2.5rem;
-        text-align: center;
+        padding: 0.6rem 1.2rem;
         font-size: 0.8rem;
-        color: #cbcbcb;
-        border-top: 1px solid rgba(255, 245, 200, 0.2);
-        padding: 2rem 0.5rem 1rem;
-        font-style: italic;
       }
-      footer a {
-        color: #ffdaaa;
-        text-decoration: none;
+    }
+    @media (min-width: 781px) {
+      .mobile-nav {
+        display: none !important;
       }
+    }
+  </style>
+</head>
+<body>
+<div class="app-wrapper">
+  <!-- HEADER dengan navigasi dual mode -->
+  <div class="header-bar">
+    <div class="judul-happy">✨ Happy Birthday ✨</div>
+    <!-- DESKTOP NAVIGATION -->
+    <div class="navbar-desktop">
+      <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Beranda</a>
+      <a href="ucapan.html" class="nav-link"><i class="fas fa-comment-dots"></i> Ucapan</a>
+      <a href="tentang.html" class="nav-link active"><i class="fas fa-user-astronaut"></i> Tentang Dirinya</a>
+    </div>
+    <!-- MOBILE HAMBURGER BUTTON -->
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars" id="menuIcon"></i>
+    </div>
+  </div>
 
-      /* BALLOON */
-      .balloon {
-        position: fixed;
-        bottom: -80px;
-        z-index: 10000;
-        pointer-events: none;
-        border-radius: 50%;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        will-change: transform;
-      }
-      .balloon::before {
-        content: '';
-        position: absolute;
-        bottom: -14px;
-        left: 50%;
-        width: 2px;
-        height: 20px;
-        background: #aa8c64;
-        transform: translateX(-50%);
-      }
-      .balloon::after {
-        content: '🎀';
-        position: absolute;
-        font-size: 11px;
-        bottom: -28px;
-        left: 50%;
-        transform: translateX(-50%);
-        color: #ffcf9a;
-      }
-      @keyframes floatUp {
-        0% {
-          transform: translateY(0) rotate(0deg);
-          opacity: 1;
-          bottom: -70px;
-        }
-        100% {
-          transform: translateY(-120vh) rotate(8deg);
-          opacity: 0;
-          bottom: 100%;
-        }
-      }
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(40px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+  <!-- MOBILE DROPDOWN NAV (hidden by default) -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Beranda</a>
+    <a href="ucapan.html" class="nav-link"><i class="fas fa-comment-dots"></i> Ucapan</a>
+    <a href="tentang.html" class="nav-link active"><i class="fas fa-user-astronaut"></i> Tentang Dirinya</a>
+  </div>
 
-      @media (max-width: 780px) {
-        .app-wrapper {
-          padding: 1rem 1.2rem;
-        }
-        .judul-happy {
-          font-size: 1.7rem;
-        }
-        .navbar {
-          display: none;
-          position: absolute;
-          top: 100%;
-          right: 0;
-          background: rgba(10, 10, 15, 0.96);
-          backdrop-filter: blur(16px);
-          flex-direction: column;
-          width: 220px;
-          border-radius: 28px;
-          padding: 1rem;
-          gap: 0.6rem;
-          z-index: 1000;
-        }
-        .navbar.open {
-          display: flex;
-        }
-        .menu-icon {
-          display: flex;
-        }
-        .about-hero {
-          flex-direction: column-reverse;
-          gap: 2rem;
-        }
-        .about-title {
-          font-size: 2rem;
-        }
-        .trait-list {
-          grid-template-columns: 1fr;
-        }
-      }
-      @media (max-width: 480px) {
-        .about-title {
-          font-size: 1.7rem;
-        }
-        .description {
-          font-size: 0.95rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="app-wrapper">
-      <div class="header-bar">
-        <div class="judul-happy">Happy Birthday</div>
-        <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
-        <div class="navbar" id="navbarLinks">
-          <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Beranda</a>
-          <a href="ucapan.html" class="nav-link"><i class="fas fa-comment-dots"></i> Ucapan</a>
-          <a href="tentang.html" class="nav-link active"><i class="fas fa-user-astronaut"></i> Tentang Dirinya</a>
+  <!-- KONTEN UTAMA TENTANG -->
+  <div class="about-hero">
+    <div class="about-text">
+      <div class="about-title">🌸 Dewi Sinta (versi paling autentik) 🌸</div>
+      <div class="subhead"><i class="fas fa-face-grin-tongue-squint"></i> Manja, sensitif, penuh cerita & berhak dicintai bulat-bulat</div>
+      <div class="description">
+        Dewi Sinta itu <strong class="highlight">satu-satunya di dunia</strong>. Dia bisa ketawa lepas karena TikTok lucu, lalu tiba-tiba merenung dalam diam. Jujur? Dia 
+        <i class="fas fa-heart-broken"></i> <strong>gampang tersinggung</strong> bahkan sama nada chat yang beda sedikit. Air matanya cepat tumpah kalau nonton anime sedih atau merasa nggak dimengerti.<br><br>
+        Kalau lagi bete, dia bakal <strong>ngaduuuuan panjang</strong> ke bestie atau mamahnya — karena pegangannya sederhana: “ngadu biar lega”. Emosinya bergerak kayak ombak: dari enthusiastic banget jadi pengen sendirian. Tapi di situlah letak <strong>kejujurannya</strong>. 
+        Dia nggak pura-pura baik kalau hatinya luka. Dia percaya: <strong>"Ga semua orang harus dimengerti, Dew."</strong> Itu mantra yang dia bisikkan ke dirinya sendiri.
+      </div>
+
+      <div class="personality-grid">
+        <h3><i class="fas fa-face-smile-wink"></i> Sifat-sifat yang bikin gemas sekaligus deg-degan</h3>
+        <div class="trait-list">
+          <div class="trait-item"><i class="fas fa-cloud-rain"></i> Ngambek tanpa alasan logis ✨</div>
+          <div class="trait-item"><i class="fas fa-hand-fist"></i> Gampang tersinggung (dikit aja sakit hati)</div>
+          <div class="trait-item"><i class="fas fa-frown"></i> Cengeng nomor satu — air mata siap tumpah</div>
+          <div class="trait-item"><i class="fas fa-comment-dots"></i> Hobi ngadu / curhat biar lega</div>
+          <div class="trait-item"><i class="fas fa-sun-cloud"></i> Mood kayang roller coaster dalam 1 jam</div>
+          <div class="trait-item"><i class="fas fa-heart"></i> Hati paling lembut, looyal sama yang dia sayang</div>
         </div>
       </div>
 
-      <div class="about-hero">
-        <div class="about-text">
-          <div class="about-title">🌸 Tentang Dewi Sinta (versi asli) 🌸</div>
-          <div class="subhead"><i class="fas fa-face-grin-tongue-squint"></i> Manja, sensitif, tapi tetap layak dicintai seutuhnya</div>
-          <div class="description">
-            Dewi Sinta itu <strong class="highlight">unik</strong>. Dia bisa tersenyum cerah di pagi hari, lalu tiba-tiba ngambek tanpa alasan yang jelas di sore hari. <br /><br />
-            Dia tipe orang yang <i class="fas fa-heart-broken"></i> <strong>gampang tersinggung</strong> — bahkan kata “kamu baik” kadang bisa disalahartikan. Perasaannya sedalam samudra, dan seringkala <strong>cengeng</strong> kalau nonton
-            film sedih atau dimarahi sedikit. <br /><br />
-            Kalau lagi kesal, hobinya <strong>ngaduuuuan</strong> ke sahabat atau keluarganya. Mood-nya bisa berubah drastis dalam hitungan menit: dari ceria jadi melamung, dari semangat jadi pengen dipeluk. <br /><br />
-            Tapi justru di situlah pesonanya. Dia nggak pernah berpura-pura jadi orang lain. Dia <strong>minta dimengerti</strong> meskipun kadang sulit, dan dia tahu bahwa tak semua orang harus memahaminya. Seperti kata hatinya:
-            <strong>“Ga semua orang harus dimengerti, Dew.”</strong> — kalimat yang jadi tameng lembutnya.
-          </div>
-
-          <div class="personality-grid">
-            <h3><i class="fas fa-face-smile-wink"></i> Sifat yang bikin deg-degan</h3>
-            <div class="trait-list">
-              <div class="trait-item"><i class="fas fa-cloud-rain"></i> Ngambek ga jelas</div>
-              <div class="trait-item"><i class="fas fa-hand-fist"></i> Gampang ke singgung dibawa ke hati</div>
-              <div class="trait-item"><i class="fas fa-frown"></i> Cengeng (air mata gampang tumpah)</div>
-              <div class="trait-item"><i class="fas fa-comment-dots"></i> Suka ngaduan (biar lega)</div>
-              <div class="trait-item"><i class="fas fa-sun-cloud"></i> Mood berubah kayak cuaca April</div>
-              <div class="trait-item"><i class="fas fa-heart"></i> Tapi di balik itu, hatinya paling lembut</div>
-            </div>
-          </div>
-
-          <div class="quote-custom">
-            <i class="fas fa-quote-left" style="margin-right: 8px; opacity: 0.7"></i>
-            “Aku mungkin susah ditebak, tapi yang aku butuh cuma kamu yang tetap bertahan. <strong>Ga semua orang harus dimengerti, Dew</strong> — tapi kamu, tolong jangan pergi.” <br />
-          </div>
-
-          <button id="surpriseBtnAbout" class="btn-rainbow"><i class="fas fa-sparkles"></i> Hibur Hatinya dengan Balon 🎈</button>
-        </div>
-
-        <div class="photo-frame">
-          <img class="potret-tentang" src="cengeng.png" alt="Dewi Sinta - manja & cengeng" title="Dewi Sinta, sosok asli yang penuh warna" />
-        </div>
+      <div class="quote-custom">
+        <i class="fas fa-quote-left" style="margin-right: 6px; opacity: 0.8"></i>
+        “Mungkin aku susah ditebak, tapi yang aku butuh cuma orang yang tetap bertahan. <strong>Ga semua orang harus dimengerti, Dew</strong> — tapi kamu, tolong jangan pergi begitu saja.” 
+        <div style="margin-top: 8px;">💬 — Sinta, panggilan sayangnya</div>
       </div>
 
-      <div class="extra-wish">
-        <p>
-          <i class="fas fa-feather-alt"></i> Memahami Dewi Sinta itu perjalanan — terkadang berliku, tapi selalu indah. Selamat ulang tahun untukmu yang paling apa adanya. <strong>#DewiSintaAsli</strong> <i class="fas fa-feather-alt"></i>
-        </p>
-        <div><i class="fas fa-balloon"></i> <i class="fas fa-gift"></i> <i class="fas fa-cake-candles"></i></div>
-      </div>
-
-      <footer>
-        <i class="fas fa-birthday-cake"></i> 16 Juli 2025/2026 — untuk Dewi Sinta yang merangkul semua sisi dirinya <i class="fas fa-star-of-life"></i><br />
-        <span>✨ <a href="index.html">Beranda</a> | <a href="ucapan.html">Ucapan</a> — cerita tentang dirinya yang sesungguhnya ✨</span>
-        <div style="margin-top: 0.5rem; font-size: 0.7rem">💬 "Meski suka ngambek, kita tetap sayang selamanya"</div>
-      </footer>
+      <button id="surpriseBtnAbout" class="btn-rainbow"><i class="fas fa-sparkles"></i> 🎈 Hiasi harinya dengan balon & konfeti 🎉</button>
     </div>
 
-    <script>
-      (function () {
-        // BALON
-        function createFloatingBalloon() {
-          const balloon = document.createElement('div');
-          balloon.classList.add('balloon');
-          const colors = ['#FFB7B2', '#FFB347', '#FADADD', '#C9E4DE', '#FFD966', '#B5EAD7', '#FBC8B5', '#E0BBE4', '#FFC8A2', '#A0E7E5'];
-          const randomColor = colors[Math.floor(Math.random() * colors.length)];
-          balloon.style.background = `radial-gradient(circle at 30% 35%, ${randomColor}, ${randomColor}cc)`;
-          const size = 38 + Math.random() * 34;
-          balloon.style.width = `${size}px`;
-          balloon.style.height = `${size * 1.2}px`;
-          balloon.style.borderRadius = '50%';
-          const maxLeft = window.innerWidth - size - 10;
-          let leftPos = Math.random() * maxLeft;
-          leftPos = Math.min(Math.max(leftPos, 8), window.innerWidth - size - 8);
-          balloon.style.left = `${leftPos}px`;
-          const duration = 3.5 + Math.random() * 3.5;
-          balloon.style.animation = `floatUp ${duration}s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`;
-          document.body.appendChild(balloon);
-          balloon.addEventListener('animationend', () => balloon.remove());
-          setTimeout(() => balloon.remove(), duration * 1000);
-        }
+    <div class="photo-frame">
+      <!-- Ilustrasi lucu tanpa gambar eksternal -->
+      <div class="illustration-card">
+        <div class="illust-emoji">🌸🥺💖</div>
+        <div class="illust-text">Dewi Sinta</div>
+        <div class="illust-caption">“manja + cengeng + berharga”</div>
+        <div style="font-size: 2rem; margin-top: 8px;">🎭✨</div>
+      </div>
+    </div>
+  </div>
 
-        function burstConfettiJoy() {
-          canvasConfetti({ particleCount: 200, spread: 100, origin: { y: 0.6 }, colors: ['#FFD966', '#FFB347', '#FFE5B4', '#FFFFFF'] });
-          canvasConfetti({ particleCount: 130, spread: 130, origin: { y: 0.4, x: 0.2 }, colors: ['#FCE5A8', '#fff5cc'] });
-          canvasConfetti({ particleCount: 130, spread: 130, origin: { y: 0.4, x: 0.8 }, colors: ['#FFDCA8', '#fff2e0'] });
-          setTimeout(() => canvasConfetti({ particleCount: 280, spread: 65, origin: { y: 0.7 }, startVelocity: 12 }), 120);
-        }
+  <div class="extra-wish">
+    <p>
+      <i class="fas fa-feather-alt"></i> Memahami Sinta itu proses yang indah & lucu. Hari ini, rayakan semua sisi dirinya yang kadang campur aduk. 
+      <strong>#DewiSintaAsli #NgambekTapiDicintai</strong> <i class="fas fa-feather-alt"></i>
+    </p>
+    <div style="margin-top: 12px;"><i class="fas fa-balloon"></i> <i class="fas fa-gift"></i> <i class="fas fa-cake-candles"></i> <i class="fas fa-heart"></i></div>
+  </div>
 
-        const surpriseBtn = document.getElementById('surpriseBtnAbout');
-        if (surpriseBtn) {
-          surpriseBtn.addEventListener('click', () => {
-            for (let i = 0; i < 24; i++) setTimeout(() => createFloatingBalloon(), i * 70);
-            burstConfettiJoy();
-            const original = surpriseBtn.innerHTML;
-            surpriseBtn.innerHTML = '<i class="fas fa-balloon"></i> Balon Peluk Dewi Sinta! 🎈💕';
-            surpriseBtn.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-              surpriseBtn.innerHTML = original;
-              surpriseBtn.style.transform = '';
-            }, 1800);
-            if (navigator.vibrate) navigator.vibrate(80);
-          });
-        }
+  <footer>
+    <i class="fas fa-birthday-cake"></i> 16 Juli — Selamat ulang tahun untuk Dewi Sinta yang apa adanya ❤️<br>
+    <span>✨ <a href="index.html">Beranda</a> | <a href="ucapan.html">Ucapan Spesial</a> | kisah tentang dirimu yang tak tergantikan ✨</span>
+    <div style="margin-top: 0.5rem; font-size: 0.7rem">💬 "Meski suka ngambek dan sensitif, kamu pantas untuk selalu dirayakan."</div>
+  </footer>
+</div>
 
-        // Balon pembuka
-        setTimeout(() => {
-          for (let i = 0; i < 3; i++) setTimeout(() => createFloatingBalloon(), i * 250);
-        }, 600);
-
-        // Burger menu
-        const menuToggle = document.getElementById('menuToggle');
-        const navbarLinks = document.getElementById('navbarLinks');
-        if (menuToggle && navbarLinks) {
-          menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navbarLinks.classList.toggle('open');
-            const icon = menuToggle.querySelector('i');
-            if (navbarLinks.classList.contains('open')) {
-              icon.classList.remove('fa-bars');
-              icon.classList.add('fa-times');
-            } else {
-              icon.classList.remove('fa-times');
-              icon.classList.add('fa-bars');
-            }
-          });
-          document.addEventListener('click', function (event) {
-            if (!navbarLinks.contains(event.target) && !menuToggle.contains(event.target) && navbarLinks.classList.contains('open')) {
-              navbarLinks.classList.remove('open');
-              const icon = menuToggle.querySelector('i');
-              if (icon) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-              }
-            }
-          });
+<script>
+  (function() {
+    // ========== MOBILE NAVIGASI YANG SMOOTH (seperti umumnya web) ==========
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const menuIcon = document.getElementById('menuIcon');
+    
+    function closeMobileMenu() {
+      if (mobileNav && mobileNav.classList.contains('open')) {
+        mobileNav.classList.remove('open');
+        if (menuIcon) {
+          menuIcon.classList.remove('fa-times');
+          menuIcon.classList.add('fa-bars');
         }
-        window.addEventListener('resize', () => {
-          if (window.innerWidth > 780 && navbarLinks?.classList.contains('open')) {
-            navbarLinks.classList.remove('open');
-            const icon = menuToggle?.querySelector('i');
-            if (icon) {
-              icon.classList.remove('fa-times');
-              icon.classList.add('fa-bars');
-            }
-          }
+      }
+    }
+    
+    function toggleMobileMenu(e) {
+      e.stopPropagation();
+      if (mobileNav.classList.contains('open')) {
+        mobileNav.classList.remove('open');
+        if (menuIcon) {
+          menuIcon.classList.remove('fa-times');
+          menuIcon.classList.add('fa-bars');
+        }
+      } else {
+        mobileNav.classList.add('open');
+        if (menuIcon) {
+          menuIcon.classList.remove('fa-bars');
+          menuIcon.classList.add('fa-times');
+        }
+      }
+    }
+    
+    if (mobileBtn && mobileNav) {
+      mobileBtn.addEventListener('click', toggleMobileMenu);
+      // Tutup menu jika klik di luar (klik document)
+      document.addEventListener('click', function(event) {
+        const isClickInsideNav = mobileNav.contains(event.target);
+        const isClickOnBtn = mobileBtn.contains(event.target);
+        if (!isClickInsideNav && !isClickOnBtn && mobileNav.classList.contains('open')) {
+          closeMobileMenu();
+        }
+      });
+      // Saat link di mobile diklik, tutup otomatis
+      const mobileLinks = mobileNav.querySelectorAll('.nav-link');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          closeMobileMenu();
         });
-
-        const judul = document.querySelector('.judul-happy');
-        if (judul) {
-          judul.addEventListener('mouseenter', () => (judul.style.textShadow = '0 0 12px rgba(255,235,170,0.8)'));
-          judul.addEventListener('mouseleave', () => (judul.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.2)'));
-        }
-      })();
-    </script>
-  </body>
-</html> 
+      });
+    }
+    
+    // Resize window: jika lebar > 780px & mobile nav kebuka, tutup
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 780 && mobileNav && mobileNav.classList.contains('open')) {
+        closeMobileMenu();
+      }
+    });
+    
+    // ========== BALON + CONFETTI YANG SERU ==========
+    function createFloatingBalloon() {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      const palette = ['#FFB7B2', '#FFB347', '#FADADD', '#C9E4DE', '#FFD966', '#B5EAD7', '#FBC8B5', '#E0BBE4', '#FFC8A2', '#A0E5E0', '#FFD0B0'];
+      const randomColor = palette[Math.floor(Math.random() * palette.length)];
+      balloon.style.background = `radial-gradient(circle at 30% 35%, ${randomColor}, ${randomColor}dd)`;
+      const size = 40 + Math.random() * 38;
+      balloon.style.width = `${size}px`;
+      balloon.style.height = `${size * 1.15}px`;
+      balloon.style.borderRadius = '50%';
+      let leftPos = Math.random() * (window.innerWidth - size - 15);
+      leftPos = Math.min(Math.max(leftPos, 10), window.innerWidth - size - 10);
+      balloon.style.left = `${leftPos}px`;
+      const duration = 3.2 + Math.random() * 3.8;
+      balloon.style.animation = `floatUp ${duration}s cubic-bezier(0.2, 0.8, 0.4, 1) forwards`;
+      document.body.appendChild(balloon);
+      balloon.addEventListener('animationend', () => balloon.remove());
+      setTimeout(() => balloon.remove(), duration * 1000);
+    }
+    
+    function burstConfettiJoy() {
+      canvasConfetti({ particleCount: 220, spread: 100, origin: { y: 0.6 }, colors: ['#FFD966', '#FFB347', '#FFE3B0', '#FFFFFF'] });
+      canvasConfetti({ particleCount: 130, spread: 140, origin: { y: 0.45, x: 0.2 }, colors: ['#FCE5A8', '#fff0cd'] });
+      canvasConfetti({ particleCount: 130, spread: 140, origin: { y: 0.45, x: 0.8 }, colors: ['#FFDCA8', '#fff5df'] });
+      setTimeout(() => canvasConfetti({ particleCount: 280, spread: 75, origin: { y: 0.7 }, startVelocity: 14 }), 100);
+    }
+    
+    const surpriseBtn = document.getElementById('surpriseBtnAbout');
+    if (surpriseBtn) {
+      surpriseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        // ledakan balon
+        for (let i = 0; i < 28; i++) setTimeout(() => createFloatingBalloon(), i * 65);
+        burstConfettiJoy();
+        const originalHTML = surpriseBtn.innerHTML;
+        surpriseBtn.innerHTML = '<i class="fas fa-balloon"></i> 🎈 Balon cinta untuk Sinta! 💖✨';
+        surpriseBtn.style.transform = 'scale(0.96)';
+        setTimeout(() => {
+          surpriseBtn.innerHTML = originalHTML;
+          surpriseBtn.style.transform = '';
+        }, 1800);
+        if (navigator.vibrate) navigator.vibrate(70);
+      });
+    }
+    
+    // Efek balon kecil saat halaman dimuat (3 balon pembuka)
+    setTimeout(() => {
+      for (let i = 0; i < 3; i++) setTimeout(() => createFloatingBalloon(), i * 220);
+    }, 500);
+    
+    // Animasi ekstra: efek glow pada judul
+    const judul = document.querySelector('.judul-happy');
+    if (judul) {
+      judul.addEventListener('mouseenter', () => judul.style.textShadow = '0 0 11px rgba(255,225,160,0.8)');
+      judul.addEventListener('mouseleave', () => judul.style.textShadow = '0 1px 2px rgba(0,0,0,0.1)');
+    }
+    
+    // tambahkan sentuhan interaksi kecil di trait items
+    const traits = document.querySelectorAll('.trait-item');
+    traits.forEach(item => {
+      item.addEventListener('click', () => {
+        // efek kecil tanpa mengganggu, hanya getar (optional)
+        if (navigator.vibrate) navigator.vibrate(25);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
