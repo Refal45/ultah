@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Ucapan Istimewa · Dewi Sinta (Real-time Semua Perangkat)</title>
-  <!-- Google Fonts -->
+  <!-- Google Fonts & Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
-  <!-- Gun.js : database P2P real-time, lintas perangkat, tanpa server pribadi -->
+  <!-- Gun.js library untuk real-time P2P -->
   <script src="https://cdn.jsdelivr.net/npm/gun@0.2020.1239/gun.js"></script>
   <style>
     * {
@@ -138,6 +138,17 @@
     }
     .sub-wrap {
       text-align: center;
+    }
+    .online-badge {
+      background: #4caf5070;
+      border-radius: 40px;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.7rem;
+      margin-left: 1rem;
+      backdrop-filter: blur(4px);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
     .wishes-grid {
       display: grid;
@@ -291,17 +302,6 @@
       background: rgba(255, 245, 220, 0.05);
       border-radius: 48px;
     }
-    .online-badge {
-      background: #4caf5070;
-      border-radius: 40px;
-      padding: 0.2rem 0.8rem;
-      font-size: 0.7rem;
-      margin-left: 1rem;
-      backdrop-filter: blur(4px);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
     footer {
       margin-top: 2.5rem;
       text-align: center;
@@ -315,14 +315,7 @@
       color: #ffdaaa;
       text-decoration: none;
     }
-    @keyframes floatUp {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; bottom: -70px; }
-      100% { transform: translateY(-120vh) rotate(8deg); opacity: 0; bottom: 100%; }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* Balon terbang */
     .balloon {
       position: fixed;
       bottom: -80px;
@@ -351,6 +344,14 @@
       transform: translateX(-50%);
       color: #ffcf9a;
     }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; bottom: -70px; }
+      100% { transform: translateY(-120vh) rotate(8deg); opacity: 0; bottom: 100%; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     @media (max-width: 780px) {
       .app-wrapper { padding: 1rem 1.2rem; }
       .judul-happy { font-size: 1.7rem; }
@@ -378,7 +379,7 @@
 <body>
 <div class="app-wrapper">
   <div class="header-bar">
-    <div class="judul-happy">Happy Birthday</div>
+    <div class="judul-happy">✨ Happy Birthday ✨</div>
     <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
     <div class="navbar" id="navbarLinks">
       <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Beranda</a>
@@ -394,13 +395,11 @@
       <div class="online-badge"><i class="fas fa-globe"></i> Real-time · Multi device (GunDB P2P)</div>
     </div>
 
-    <!-- Kumpulan ucapan default yang juga tersimpan di jaringan (sinkron) -->
-    <div class="wishes-grid" id="defaultWishesGrid"></div>
-
+    <!-- Form kirim ucapan dengan field dari dan pesan -->
     <div class="send-wish-area">
       <div class="input-group">
         <label><i class="fas fa-user-pen"></i> Dari / From (bebas):</label>
-        <input type="text" id="fromNameInput" class="input-from" placeholder="Contoh: Sahabat, Mama, Keluarga, Kakak, ..." maxlength="60" autocomplete="off" />
+        <input type="text" id="fromNameInput" class="input-from" placeholder="Contoh: Sahabat, Mama, Keluarga, Kakak..." maxlength="60" autocomplete="off" />
       </div>
       <div class="input-group" style="flex: 3">
         <label><i class="fas fa-comment"></i> Ucapan manismu:</label>
@@ -411,6 +410,7 @@
     </div>
     <div style="font-size:0.7rem; text-align:center; margin-top:-1rem; margin-bottom:1rem; opacity:0.7"><i class="fas fa-info-circle"></i> Nama pengirim akan muncul di kartu — semua orang di berbagai device langsung lihat pesanmu!</div>
 
+    <!-- Guestbook pesan real-time -->
     <div class="guestbook-section">
       <div class="guestbook-title">
         <i class="fas fa-comments"></i>
@@ -435,17 +435,19 @@
 
 <script>
   (function() {
-    // =============== GUN.JS (P2P REAL-TIME LINTAS PERANGKAT) ===============
-    // Inisialisasi Gun dengan peer default (relay gratis dari Gun) agar semua perangkat terhubung
+    // ==================== INISIALISASI GUN.JS (P2P DATABASE) ====================
+    // Menggunakan peer publik gratis agar koneksi lintas perangkat lebih stabil.
+    // Semua data akan tersinkron secara real-time antar browser.
     const gun = Gun({
-      peers: ['https://gun-manhattan.herokuapp.com/gun'] // relay publik opsional, peer discovery via DHT
+      peers: ['https://gun-manhattan.herokuapp.com/gun']
     });
-    const wishesNode = gun.get('dewi_sinta_wishes_p2p'); // node utama untuk semua ucapan
+    const wishesNode = gun.get('dewi_sinta_wishes_realtime'); // root node untuk semua ucapan
     
-    // Gun menggunakan set (daftar item unik), setiap wish memiliki ID unik
-    let localWishesMap = new Map(); // id -> objek lengkap
+    // Penyimpanan lokal sementara & mapping key gun untuk keperluan hapus
+    let localWishesMap = new Map();         // id -> object wish
+    let wishKeyMap = new Map();             // id -> gun key (digunakan saat hapus)
     
-    // Fungsi menambah ucapan baru (langsung ke jaringan)
+    // -------------------- FUNGSI TAMBAH UCAPAN --------------------
     function addWishToNetwork(text, fromName) {
       if (!text.trim()) return false;
       const sender = fromName.trim() === '' ? '🌼 Sahabat Istimewa' : fromName.trim();
@@ -457,71 +459,34 @@
         timestamp: Date.now(),
         dateStr: new Date().toLocaleString('id-ID', { hour12: false })
       };
-      // Simpan ke Gun (set: setiap wish adalah node dengan properti)
-      const wishRef = wishesNode.set(wishObj);
-      // tambahkan properti tersier jika perlu
-      wishRef.put(wishObj);
+      // Simpan ke Gun (set otomatis akan menyebar ke peer lain)
+      const itemRef = wishesNode.set(wishObj);
+      itemRef.put(wishObj);
       return true;
     }
     
-    // Hapus ucapan dari jaringan (permanen langsung untuk semua)
+    // -------------------- FUNGSI HAPUS UCAPAN (SEMUA PERANGKAT) --------------------
     function deleteWishFromNetwork(id) {
-      // Kita perlu mencari referensi dari wish yang memiliki id tersebut di dalam set
-      // Gun tidak memiliki query "cari id", tapi kita bisa iterasi semua wish yang ada lalu menghapus yang match
-      wishesNode.map().once((data, key) => {
-        if (data && data.id === id) {
-          // Dapatkan referensi node dari key itu, lalu hapus dari set
-          const nodeToRemove = wishesNode.set({}); // tidak tepat, cara benar: gun.get(key)
-          // Alternatif: kita bisa melacak berdasarkan key dari `map`. Pada gun, setiap item di set memiliki "key" unik
-          // Lebih mudah: kita simpan mapping id -> gun key di memory? Tapi karena realtime, kita bisa cari dengan iterasi
-          // Solusi robust: setelah kita render, kita simpan juga "gunKey" sementara.
-          // Tapi untuk demo, kita dapat melakukan `wishesNode.set(null)` tidak hapus item individual.
-          // Pendekatan: kita dapat menghapus node properti dengan .put(null) pada referensi wish.
-          const soul = wishesNode.get(key);
-          soul.put(null); // menghapus data di node itu dari set
-        }
-      });
+      const gunKey = wishKeyMap.get(id);
+      if (gunKey) {
+        const nodeToDelete = wishesNode.get(gunKey);
+        nodeToDelete.put(null);  // menghapus data dari jaringan
+      } else {
+        // Fallback: cari berdasarkan id dalam data (jika mapping tidak ada)
+        wishesNode.map().once((data, key) => {
+          if (data && data.id === id) {
+            wishesNode.get(key).put(null);
+          }
+        });
+      }
     }
     
-    // Menyimpan mapping internal untuk keperluan delete (agar bisa hapus berdasarkan id tanpa iterasi berat)
-    // Kita juga akan menyimpan ref per wish berdasarkan id di map localWishesMap
-    function attachDeleteHandlerOnCard(id, gunRefKey) {
-      // nanti di render, dynamic, dipanggil setelah data diambil
-      // lebih baik simpan mapping id -> keyGun, lalu delete gunKey dengan put(null)
-      window._gunWishKeyMap = window._gunWishKeyMap || new Map();
-      if (gunRefKey) window._gunWishKeyMap.set(id, gunRefKey);
-    }
-    
-    // Render ulang kedua grid (default tidak diperlukan karena default akan ditambahkan via seed)
-    let isSeedDone = false;
-    
-    // Fungsi untuk menambahkan beberapa pesan default jika belum ada data di jaringan
-    function seedDefaultWishesIfEmpty() {
-      // Cek apakah sudah ada data di wishesNode dengan count?
-      let hasData = false;
-      let count = 0;
-      wishesNode.map().once((data, key) => {
-        if (data && data.id) count++;
-      });
-      setTimeout(() => {
-        if (count === 0) {
-          const defaultMessages = [
-            { text: "Dewi Sinta, di hari istimewa ini, semoga setiap detik dipenuhi kebahagiaan yang meluap. Kamu adalah alasan senyum banyak orang.", from: "Keluarga & Sahabat" },
-            { text: "Untuk sang Dewi hati: semoga usiamu yang baru membawa keberkahan, cinta yang tulus, dan mimpi-mimpi indah yang nyata.", from: "Orang yang menyayangimu" },
-            { text: "Tak ada hadiah yang lebih indah selain melihatmu bahagia. Setiap tawamu adalah doa yang menguatkan. Jadilah berkilau, Dewi Sinta.", from: "Teman seperjalanan" }
-          ];
-          defaultMessages.forEach(msg => {
-            addWishToNetwork(msg.text, msg.from);
-          });
-        }
-      }, 800);
-    }
-    
-    // Variabel untuk container
-    const container = document.getElementById('userWishesContainer');
-    const emptyDiv = document.getElementById('emptyUserWishes');
+    // -------------------- RENDER ULANG SEMUA UCAPAN KE UI --------------------
     function renderAllWishes() {
+      const container = document.getElementById('userWishesContainer');
+      const emptyDiv = document.getElementById('emptyUserWishes');
       if (!container) return;
+      
       const wishesArray = Array.from(localWishesMap.values()).sort((a,b) => b.timestamp - a.timestamp);
       if (wishesArray.length === 0) {
         container.innerHTML = '';
@@ -548,105 +513,136 @@
         `;
       });
       container.innerHTML = html;
-      // Pasang event delete
+      
+      // Pasang event listener untuk tombol hapus
       document.querySelectorAll('.delete-wish-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const wishId = btn.getAttribute('data-id');
           if (confirm('Hapus ucapan ini dari semua perangkat? Akan hilang untuk semua orang.')) {
             deleteWishFromNetwork(wishId);
-            canvasConfetti({ particleCount: 25, spread: 40, origin: { y: 0.7 }, colors: ['#FFC299'] });
+            canvasConfetti({ particleCount: 30, spread: 45, origin: { y: 0.7 }, colors: ['#FFC299'] });
           }
         });
       });
     }
     
+    // Helper escape HTML
     function escapeHtml(str) {
+      if (!str) return '';
       return str.replace(/[&<>]/g, function(m) {
         if (m === '&') return '&amp;';
         if (m === '<') return '&lt;';
         if (m === '>') return '&gt;';
         return m;
-      }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-        return c;
-      });
+      }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) { return c; });
     }
     
-    // Mendengarkan perubahan dari Gun: semua data yang ditambahkan, dihapus, atau diubah akan realtime
+    // -------------------- SINKRONISASI DATA DARI GUN (REAL-TIME) --------------------
+    // Mendengarkan setiap perubahan (tambah, hapus, update) pada node
     wishesNode.map().on((data, key) => {
       if (!data) {
-        // data dihapus (put null)
-        // cari id yang mungkin terhapus: dari localWishesMap cari key yang tidak ada di data
-        // tapi lebih mudah: kita hapus wish yang id terdata menghilang? kita refreshMap
-        refreshWishesMapFromGun();
+        // Data dihapus (put null) => kita hapus dari map lokal
+        let idToRemove = null;
+        for (let [id, wish] of localWishesMap.entries()) {
+          if (wishKeyMap.get(id) === key) {
+            idToRemove = id;
+            break;
+          }
+        }
+        if (idToRemove) {
+          localWishesMap.delete(idToRemove);
+          wishKeyMap.delete(idToRemove);
+        } else {
+          // fallback: refresh ulang semua data
+          refreshAllWishesFromGun();
+        }
+        renderAllWishes();
         return;
       }
+      
       if (data && data.id) {
-        // Simpan atau perbarui local map
+        // Simpan atau perbarui data
         localWishesMap.set(data.id, data);
-        // Simpan juga relasi key gun agar bisa delete; simpan referensi key untuk kemudahan delete nanti
-        if (!window._gunWishKeyRef) window._gunWishKeyRef = new Map();
-        window._gunWishKeyRef.set(data.id, key);
+        wishKeyMap.set(data.id, key);
         renderAllWishes();
       }
     });
     
-    function refreshWishesMapFromGun() {
-      // Ambil ulang semua data dari gun dengan iterasi
+    // Fungsi untuk mengambil ulang semua data dari gun (saat diperlukan)
+    function refreshAllWishesFromGun() {
       const tempMap = new Map();
+      const tempKeyMap = new Map();
       wishesNode.map().once((data, key) => {
         if (data && data.id) {
           tempMap.set(data.id, data);
-          if (!window._gunWishKeyRef) window._gunWishKeyRef = new Map();
-          window._gunWishKeyRef.set(data.id, key);
+          tempKeyMap.set(data.id, key);
         }
       });
-      // Setelah semua, bandingkan ?
       setTimeout(() => {
-        localWishesMap.clear();
-        for (let [id, val] of tempMap.entries()) {
-          localWishesMap.set(id, val);
+        if (tempMap.size > 0) {
+          localWishesMap.clear();
+          wishKeyMap.clear();
+          for (let [id, val] of tempMap.entries()) {
+            localWishesMap.set(id, val);
+            wishKeyMap.set(id, tempKeyMap.get(id));
+          }
         }
         renderAllWishes();
-      }, 100);
+      }, 200);
     }
     
-    // Override deleteWishFromNetwork menggunakan mapping key untuk penghapusan akurat
-    window.deleteWishFromNetwork = function(id) {
-      const gunKey = window._gunWishKeyRef ? window._gunWishKeyRef.get(id) : null;
-      if (gunKey) {
-        const nodeToKill = wishesNode.get(gunKey);
-        nodeToKill.put(null);
-      } else {
-        // fallback: cari secara map lalu hapus berdasarkan id (lambat tapi backup)
-        wishesNode.map().once((data, key) => {
-          if (data && data.id === id) {
-            wishesNode.get(key).put(null);
-          }
+    // -------------------- MENAMBAHKAN PESAN DEFAULT (SEED) JIKA KOSONG --------------------
+    function seedDefaultWishesIfEmpty() {
+      setTimeout(() => {
+        // Cek apakah sudah ada data di jaringan
+        let count = 0;
+        wishesNode.map().once((data) => {
+          if (data && data.id) count++;
         });
-      }
-    };
+        setTimeout(() => {
+          if (count === 0) {
+            const defaults = [
+              { text: "Dewi Sinta, di hari istimewa ini, semoga setiap detik dipenuhi kebahagiaan yang meluap. Kamu adalah alasan senyum banyak orang.", from: "Keluarga & Sahabat" },
+              { text: "Untuk sang Dewi hati: semoga usiamu yang baru membawa keberkahan, cinta yang tulus, dan mimpi-mimpi indah yang nyata.", from: "Orang yang menyayangimu" },
+              { text: "Tak ada hadiah yang lebih indah selain melihatmu bahagia. Setiap tawamu adalah doa yang menguatkan. Jadilah berkilau, Dewi Sinta.", from: "Teman seperjalanan" }
+            ];
+            defaults.forEach(msg => addWishToNetwork(msg.text, msg.from));
+          }
+        }, 500);
+      }, 600);
+    }
     
-    deleteWishFromNetwork = window.deleteWishFromNetwork;
+    // -------------------- EVENT UNTUK TOMBOL KIRIM & SURPRISE --------------------
+    const sendBtn = document.getElementById('sendWishBtn');
+    const wishInput = document.getElementById('instantWishInput');
+    const fromInput = document.getElementById('fromNameInput');
     
-    // tambahan: fungsi add dari UI
     function handleSendWish() {
-      const msg = document.getElementById('instantWishInput').value.trim();
-      const fromVal = document.getElementById('fromNameInput').value.trim();
+      const msg = wishInput.value.trim();
+      const fromVal = fromInput.value.trim();
       if (msg === '') {
         showToast('✨ Tulis dulu ucapan manismu, ya ✨');
         return;
       }
       addWishToNetwork(msg, fromVal);
-      document.getElementById('instantWishInput').value = '';
-      document.getElementById('fromNameInput').value = '';
-      // efek balon & konfeti
-      for (let i=0;i<8;i++) setTimeout(() => createFloatingBalloon(), i*60);
-      canvasConfetti({ particleCount: 88, spread: 55, origin: { y: 0.6 }, colors: ['#FFDCA8','#FFEFBF'] });
+      wishInput.value = '';
+      fromInput.value = '';
+      // Efek balon & konfeti
+      for (let i = 0; i < 8; i++) setTimeout(() => createFloatingBalloon(), i * 60);
+      canvasConfetti({ particleCount: 90, spread: 60, origin: { y: 0.6 }, colors: ['#FFDCA8', '#FFEFBF', '#FFD966'] });
       showToast(`<i class="fas fa-check-circle"></i> Ucapan dari "${fromVal || 'Sahabat Istimewa'}" tersebar ke semua perangkat!`);
     }
     
-    // Balon & confetti
+    function showToast(msgHtml) {
+      const toast = document.createElement('div');
+      toast.innerHTML = msgHtml;
+      toast.style.cssText = 'position:fixed; bottom:20px; left:20px; background:#000000aa; backdrop-filter:blur(12px); color:#ffefcf; padding:0.7rem 1.3rem; border-radius:40px; font-size:0.85rem; z-index:10001; border-left: 4px solid #ffcd94; font-weight:500;';
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2700);
+    }
+    
+    // Balon terbang
     function createFloatingBalloon() {
       const balloon = document.createElement('div');
       balloon.classList.add('balloon');
@@ -657,7 +653,7 @@
       balloon.style.width = `${size}px`;
       balloon.style.height = `${size*1.2}px`;
       balloon.style.borderRadius = '50%';
-      let leftPos = Math.random() * (window.innerWidth - size - 10);
+      let leftPos = Math.random() * (window.innerWidth - size - 15);
       leftPos = Math.min(Math.max(leftPos, 8), window.innerWidth - size - 8);
       balloon.style.left = `${leftPos}px`;
       const duration = 3.5 + Math.random()*3.5;
@@ -667,51 +663,48 @@
     }
     
     function burstConfettiJoy() {
-      canvasConfetti({ particleCount: 250, spread: 100, origin: { y: 0.6 }, colors: ['#FFD966','#FFB347','#FFE5B4'] });
-      canvasConfetti({ particleCount: 130, spread: 130, origin: { y: 0.4, x: 0.2 }, colors: ['#FCE5A8'] });
-      canvasConfetti({ particleCount: 130, spread: 130, origin: { y: 0.4, x: 0.8 }, colors: ['#FFDCA8'] });
+      canvasConfetti({ particleCount: 220, spread: 100, origin: { y: 0.6 }, colors: ['#FFD966','#FFB347','#FFE5B4'] });
+      canvasConfetti({ particleCount: 120, spread: 130, origin: { y: 0.4, x: 0.2 }, colors: ['#FCE5A8'] });
+      canvasConfetti({ particleCount: 120, spread: 130, origin: { y: 0.4, x: 0.8 }, colors: ['#FFDCA8'] });
     }
     
-    function showToast(msgHtml) {
-      const toast = document.createElement('div');
-      toast.innerHTML = msgHtml;
-      toast.style.cssText = 'position:fixed; bottom:20px; left:20px; background:#000000aa; backdrop-filter:blur(12px); color:#ffefcf; padding:0.6rem 1.2rem; border-radius:40px; font-size:0.85rem; z-index:10001; border-left: 4px solid #ffcd94;';
-      document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 2800);
-    }
-    
-    // surprise button
+    // Surprise button
     const surpriseBtn = document.getElementById('surpriseWishesBtn');
     if (surpriseBtn) {
       surpriseBtn.addEventListener('click', () => {
-        for (let i=0;i<26;i++) setTimeout(() => createFloatingBalloon(), i*70);
+        for (let i = 0; i < 26; i++) setTimeout(() => createFloatingBalloon(), i * 70);
         burstConfettiJoy();
-        const orig = surpriseBtn.innerHTML;
+        const origHTML = surpriseBtn.innerHTML;
         surpriseBtn.innerHTML = '<i class="fas fa-balloon"></i> Balon & Senyum Melayang! ✨';
-        setTimeout(() => { surpriseBtn.innerHTML = orig; }, 1500);
+        setTimeout(() => { surpriseBtn.innerHTML = origHTML; }, 1600);
         if (navigator.vibrate) navigator.vibrate(70);
         showToast('🎉 Sukacita menyebar ke semua device! 🎉');
       });
     }
     
-    // Event binding send
-    document.getElementById('sendWishBtn').addEventListener('click', handleSendWish);
-    document.getElementById('instantWishInput').addEventListener('keypress', (e) => { if(e.key === 'Enter') handleSendWish(); });
+    // -------------------- INIT & EVENT LISTENER --------------------
+    if (sendBtn) sendBtn.addEventListener('click', handleSendWish);
+    if (wishInput) wishInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleSendWish(); });
     
-    // seeding awal & render
+    // Memulai seed default dan render awal
+    seedDefaultWishesIfEmpty();
+    // Tampilkan data yang sudah ada (jika ada)
+    refreshAllWishesFromGun();
+    
+    // Balon pembuka (efek meriah)
     setTimeout(() => {
-      seedDefaultWishesIfEmpty();
-    }, 400);
+      for (let i = 0; i < 5; i++) setTimeout(() => createFloatingBalloon(), i * 180);
+    }, 800);
     
-    // menu burger
+    // -------------------- BURGER MENU (RESPONSIVE) --------------------
     const menuToggle = document.getElementById('menuToggle');
     const navbarLinks = document.getElementById('navbarLinks');
-    if(menuToggle && navbarLinks) {
+    if (menuToggle && navbarLinks) {
       menuToggle.addEventListener('click', (e) => {
         e.stopPropagation();
         navbarLinks.classList.toggle('open');
         const icon = menuToggle.querySelector('i');
-        if(navbarLinks.classList.contains('open')) {
+        if (navbarLinks.classList.contains('open')) {
           icon.classList.remove('fa-bars');
           icon.classList.add('fa-times');
         } else {
@@ -720,28 +713,27 @@
         }
       });
       document.addEventListener('click', (event) => {
-        if(!navbarLinks.contains(event.target) && !menuToggle.contains(event.target) && navbarLinks.classList.contains('open')) {
+        if (!navbarLinks.contains(event.target) && !menuToggle.contains(event.target) && navbarLinks.classList.contains('open')) {
           navbarLinks.classList.remove('open');
           const icon = menuToggle.querySelector('i');
-          if(icon) { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
+          if (icon) { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
         }
       });
     }
     window.addEventListener('resize', () => {
-      if(window.innerWidth > 780 && navbarLinks?.classList.contains('open')) {
+      if (window.innerWidth > 780 && navbarLinks?.classList.contains('open')) {
         navbarLinks.classList.remove('open');
         const icon = menuToggle?.querySelector('i');
-        if(icon) { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
+        if (icon) { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
       }
     });
-    // efek kecil
+    
+    // Efek hover judul
     const judul = document.querySelector('.judul-happy');
-    if(judul) {
+    if (judul) {
       judul.addEventListener('mouseenter', () => judul.style.textShadow = '0 0 12px rgba(255,235,170,0.8)');
       judul.addEventListener('mouseleave', () => judul.style.textShadow = '0 2px 4px rgba(0,0,0,0.2)');
     }
-    // balon pembuka
-    setTimeout(() => { for(let i=0;i<4;i++) setTimeout(() => createFloatingBalloon(), i*150); }, 700);
   })();
 </script>
 </body>
