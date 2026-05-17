@@ -1,9 +1,10 @@
+kok gelap gini burger menu sidebar nya benarkan dan tuliskan kode lengkap index.html 
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Happy Birthday · Dewi Sinta | Ucapan Spesial</title>
+  <title>Happy Birthday · Dewi Sinta</title>
   <!-- Google Fonts: Plus Jakarta Sans (italic ekspresif) -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet" />
   <!-- Font Awesome 6 -->
@@ -26,6 +27,7 @@
       overflow-x: hidden;
     }
 
+    /* CONTAINER UTAMA */
     .app-wrapper {
       max-width: 1400px;
       margin: 0 auto;
@@ -34,7 +36,7 @@
       z-index: 2;
     }
 
-    /* header & navigasi */
+    /* === HEADER: judul kiri + navigasi dengan burger menu responsif === */
     .header-bar {
       display: flex;
       justify-content: space-between;
@@ -63,7 +65,7 @@
       text-shadow: 0 0 8px rgba(255, 235, 180, 0.6);
     }
 
-    /* burger icon */
+    /* Hamburger icon container (mobile only) */
     .menu-icon {
       display: none;
       font-size: 1.8rem;
@@ -77,7 +79,7 @@
       justify-content: center;
       transition: 0.2s;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      z-index: 10020;
+      z-index: 10020; /* lebih tinggi dari sidebar & overlay */
       position: relative;
     }
     .menu-icon i {
@@ -88,7 +90,7 @@
       transform: scale(1.02);
     }
 
-    /* navbar desktop (horizontal) */
+    /* Default Navigasi links (desktop horizontal) */
     .navbar {
       display: flex;
       gap: 0.75rem;
@@ -112,8 +114,8 @@
       align-items: center;
       gap: 8px;
       letter-spacing: 0.2px;
+      font-style: normal;
       white-space: nowrap;
-      cursor: pointer;
     }
 
     .nav-link i {
@@ -137,7 +139,7 @@
       transform: translateY(-2px);
     }
 
-    /* overlay sidebar (mobile) */
+    /* === OVERLAY (untuk sidebar mobile) === */
     .sidebar-overlay {
       position: fixed;
       top: 0;
@@ -156,16 +158,7 @@
       visibility: visible;
     }
 
-    /* konten dinamis (page) */
-    .page {
-      display: none;
-      animation: fadeUp 0.5s ease forwards;
-    }
-    .page.active-page {
-      display: block;
-    }
-
-    /* style beranda (seperti original) */
+    /* KONTEN UTAMA — putih & miring */
     .birthday-hero {
       display: flex;
       flex-wrap: wrap;
@@ -174,19 +167,24 @@
       justify-content: center;
       margin: 2rem 0 2rem;
     }
+
     .message-block {
       flex: 1.2;
       min-width: 280px;
+      animation: fadeUp 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     }
+
     .main-greeting {
       font-size: 3.4rem;
       font-weight: 800;
       font-style: italic;
+      color: #ffffff;
       margin-bottom: 1rem;
       line-height: 1.2;
       letter-spacing: -0.02em;
       text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
+
     .special-name {
       font-size: 2.6rem;
       font-weight: 700;
@@ -198,6 +196,7 @@
       margin: 0.5rem 0 0.75rem 0;
       display: inline-block;
     }
+
     .quote-white {
       font-size: 1.25rem;
       font-style: italic;
@@ -206,15 +205,23 @@
       line-height: 1.6;
       border-left: 4px solid #ffcd94;
       padding-left: 1.3rem;
+      font-weight: 400;
       background: rgba(255, 255, 245, 0.05);
       border-radius: 0 16px 16px 0;
     }
+
     .ucapan-spesial {
       font-size: 1.1rem;
       color: #f7f3e8;
       margin-top: 1.2rem;
       font-style: italic;
     }
+
+    .ucapan-spesial i {
+      margin-right: 8px;
+      color: #ffcd94;
+    }
+
     .tanggal-indah {
       font-style: italic;
       font-weight: 500;
@@ -225,6 +232,7 @@
       align-items: center;
       gap: 8px;
     }
+
     .btn-rainbow {
       background: rgba(255, 215, 150, 0.12);
       border: 1px solid rgba(255, 215, 150, 0.6);
@@ -239,23 +247,40 @@
       align-items: center;
       gap: 8px;
       font-size: 0.9rem;
+      margin-top: 1rem;
       backdrop-filter: blur(4px);
     }
+
     .btn-rainbow:hover {
       background: #ffcd9455;
+      color: white;
       transform: translateY(-3px);
       border-color: #ffda99;
     }
+
+    /* FOTO DI KANAN - transparan, tanpa caption */
     .photo-frame-modern {
       flex: 0.9;
       display: flex;
       justify-content: center;
       align-items: center;
+      animation: fadeRight 0.8s ease;
     }
+
     .polaroid-card {
       background: transparent;
+      backdrop-filter: none;
+      box-shadow: none;
+      border: none;
+      padding: 0;
+      transition: transform 0.2s ease;
       text-align: center;
     }
+
+    .polaroid-card:hover {
+      transform: scale(1.01);
+    }
+
     .potret-image {
       width: 100%;
       max-width: 360px;
@@ -265,72 +290,10 @@
       border-radius: 1.5rem;
       display: block;
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
-      transition: transform 0.2s;
-    }
-    .potret-image:hover {
-      transform: scale(1.02);
+      border: none;
+      transition: filter 0.2s;
     }
 
-    /* halaman ucapan & tentang */
-    .card-ucapan {
-      background: rgba(30, 30, 40, 0.6);
-      backdrop-filter: blur(10px);
-      border-radius: 2rem;
-      padding: 2rem;
-      margin: 1.5rem 0;
-      border: 1px solid rgba(255, 215, 150, 0.3);
-      transition: all 0.2s;
-    }
-    .judul-section {
-      font-size: 2rem;
-      font-weight: 700;
-      font-style: italic;
-      margin-bottom: 1.5rem;
-      color: #ffefcf;
-      border-left: 5px solid #ffcd94;
-      padding-left: 1rem;
-    }
-    .grid-cinta {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    .kata-manis {
-      font-size: 1.2rem;
-      font-style: italic;
-      padding: 1rem 1.5rem;
-      background: rgba(0,0,0,0.3);
-      border-radius: 2rem;
-      line-height: 1.6;
-      border: 1px solid rgba(255,205,148,0.2);
-    }
-    .kata-manis i {
-      color: #ffcd94;
-      margin-right: 8px;
-    }
-    .profil-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      margin-top: 1rem;
-    }
-    .profil-item {
-      background: rgba(255,245,220,0.07);
-      border-radius: 2rem;
-      padding: 1rem 1.5rem;
-      flex: 1 1 200px;
-      backdrop-filter: blur(8px);
-      text-align: center;
-      font-weight: 500;
-      font-style: italic;
-    }
-    .profil-item i {
-      font-size: 1.5rem;
-      color: #ffcd94;
-      margin-right: 10px;
-      display: block;
-      margin-bottom: 8px;
-    }
     .extra-wish {
       text-align: center;
       margin: 3rem 0 1rem;
@@ -339,6 +302,19 @@
       border-radius: 48px;
       backdrop-filter: blur(5px);
     }
+
+    .extra-wish p {
+      font-style: italic;
+      color: #ffffffd9;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .extra-wish i {
+      color: #ffcd94;
+      margin: 0 4px;
+    }
+
     footer {
       margin-top: 2.5rem;
       text-align: center;
@@ -348,22 +324,25 @@
       padding: 2rem 0.5rem 1rem;
       font-style: italic;
     }
+
     footer a {
       color: #ffdaaa;
       text-decoration: none;
+      font-style: italic;
     }
 
-    /* balon terbang */
+    /* ========= BALLOON FLYING (BALON TERBANG) ========= */
     .balloon {
       position: fixed;
       bottom: -80px;
       z-index: 10000;
       pointer-events: none;
       border-radius: 50%;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), inset -2px -2px 0px rgba(0, 0, 0, 0.05);
       backdrop-filter: blur(0.5px);
       will-change: transform;
     }
+
     .balloon::before {
       content: '';
       position: absolute;
@@ -376,6 +355,7 @@
       border-radius: 1px;
       opacity: 0.8;
     }
+
     .balloon::after {
       content: '🎀';
       position: absolute;
@@ -385,6 +365,7 @@
       transform: translateX(-50%);
       color: #ffcf9a;
       text-shadow: 0 0 2px #a55d35;
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
     }
 
     @keyframes floatUp {
@@ -393,18 +374,42 @@
         opacity: 1;
         bottom: -70px;
       }
+      30% {
+        transform: translateY(-30vh) rotate(5deg);
+      }
+      70% {
+        transform: translateY(-70vh) rotate(-3deg);
+      }
       100% {
         transform: translateY(-120vh) rotate(8deg);
         opacity: 0;
         bottom: 100%;
       }
     }
+
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    /* responsive + sidebar sliding */
+    @keyframes fadeRight {
+      from {
+        opacity: 0;
+        transform: translateX(45px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* ========= RESPONSIVE: SIDEBAR MODERN (MOBILE) ========= */
     @media (max-width: 780px) {
       .app-wrapper {
         padding: 1rem 1.2rem;
@@ -412,32 +417,38 @@
       .header-bar {
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
+        gap: 0.8rem;
       }
       .judul-happy {
         font-size: 1.7rem;
       }
+      /* Tampilkan ikon burger */
       .menu-icon {
         display: flex;
       }
+      /* Ubah navbar menjadi SIDEBAR (dari kanan) dengan efek sliding */
       .navbar {
         position: fixed;
         top: 0;
-        right: -320px;
+        right: -320px; /* tersembunyi di kanan luar layar */
         width: min(280px, 75%);
         height: 100%;
-        background: rgba(8, 8, 16, 0.97);
-        backdrop-filter: blur(28px);
+        background: rgba(10, 10, 18, 0.96);
+        backdrop-filter: blur(24px);
         flex-direction: column;
         justify-content: flex-start;
         gap: 0.5rem;
         padding: 6rem 1.5rem 2rem 1.5rem;
         border-radius: 0;
         border-left: 1px solid rgba(255, 215, 150, 0.5);
-        box-shadow: -8px 0 30px rgba(0, 0, 0, 0.7);
+        box-shadow: -8px 0 30px rgba(0, 0, 0, 0.6);
         transition: right 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         z-index: 10010;
-        display: flex !important;
+        display: flex !important; /* override hidden */
+        pointer-events: auto;
       }
+      /* Saat kelas open ditambahkan, sidebar muncul */
       .navbar.open {
         right: 0;
       }
@@ -449,109 +460,119 @@
         width: 100%;
         border-radius: 60px;
         background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(2px);
       }
       .nav-link i {
         width: 28px;
+        font-size: 1.1rem;
       }
-      .birthday-hero {
-        flex-direction: column-reverse;
-        gap: 2rem;
+      .nav-link.active {
+        background: #fff3e0;
+        color: #0a0a0a;
       }
+      .nav-link:not(.active):hover {
+        background: rgba(255, 215, 150, 0.25);
+        transform: translateX(5px);
+      }
+      /* Sesuaikan layout konten */
       .main-greeting {
         font-size: 2.4rem;
       }
       .special-name {
         font-size: 2rem;
       }
-      .judul-section {
-        font-size: 1.6rem;
+      .birthday-hero {
+        flex-direction: column-reverse;
+        gap: 2rem;
+      }
+      .message-block {
+        text-align: center;
+      }
+      .quote-white {
+        text-align: left;
+      }
+      .tanggal-indah {
+        justify-content: center;
+      }
+      .balloon::after {
+        font-size: 9px;
+        bottom: -24px;
+      }
+      .balloon::before {
+        height: 16px;
       }
     }
+
     @media (max-width: 480px) {
-      .main-greeting { font-size: 1.9rem; }
-      .special-name { font-size: 1.7rem; }
-      .menu-icon { width: 42px; height: 42px; font-size: 1.5rem; }
+      .nav-link {
+        font-size: 0.95rem;
+        padding: 0.7rem 1rem;
+      }
+      .main-greeting {
+        font-size: 1.9rem;
+      }
+      .special-name {
+        font-size: 1.7rem;
+      }
+      .menu-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.5rem;
+      }
+      .judul-happy {
+        font-size: 1.4rem;
+      }
+      .navbar {
+        width: min(260px, 80%);
+        padding: 5rem 1.2rem 2rem;
+      }
     }
   </style>
 </head>
 <body>
 <div class="app-wrapper">
+  <!-- HEADER : Judul kiri + navigasi dengan burger menu (sidebar modern) -->
   <div class="header-bar">
-    <div class="judul-happy">Happy Birthday, Sinta ✨</div>
+    <div class="judul-happy">Happy Birthday</div>
+    <!-- Tombol hamburger (mobile) -->
     <div class="menu-icon" id="menuToggle">
       <i class="fas fa-bars"></i>
     </div>
+    <!-- Navigasi links: di desktop tetap horizontal, di mobile menjadi SIDEBAR kanan -->
     <div class="navbar" id="navbarLinks">
-      <a class="nav-link" data-page="beranda"><i class="fas fa-home"></i> Beranda</a>
-      <a class="nav-link" data-page="ucapan"><i class="fas fa-comment-dots"></i> Ucapan</a>
-      <a class="nav-link" data-page="tentang"><i class="fas fa-user-astronaut"></i> Tentang Dirinya</a>
+      <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Beranda</a>
+      <a href="ucapan.html" class="nav-link"><i class="fas fa-comment-dots"></i> Ucapan</a>
+      <a href="tentang.html" class="nav-link"><i class="fas fa-user-astronaut"></i> Tentang Dirinya</a>
     </div>
   </div>
 
-  <!-- KONTEN DINAMIS: 3 PAGE -->
-  <main>
-    <!-- Beranda -->
-    <div id="page-beranda" class="page active-page">
-      <div class="birthday-hero">
-        <div class="message-block">
-          <div class="main-greeting">Selamat Ulang Tahun</div>
-          <div class="tanggal-indah"><i class="fas fa-calendar-alt"></i> 16 Juli — cahaya istimewa</div>
-          <div class="special-name">Dewi Sinta</div>
-          <div class="quote-white">
-            <i class="fas fa-quote-left" style="margin-right: 8px; opacity: 0.8"></i>
-            Di hari yang berkilau ini, semesta ikut tersenyum untukmu. Setiap tawa dan harapan yang kau tabur, kembali padamu sebagai kebahagiaan tiada batas. Jadilah selalu bintang yang terang, Dewi Sinta.
-          </div>
-          <div class="ucapan-spesial">
-            <i class="fas fa-heart" style="color: #ffb347"></i>
-            <span>“Semoga usiamu semerbak anugerah, penuh cinta dan tawa abadi. Selamat merayakan dirimu yang istimewa.”</span>
-          </div>
-          <button id="superSurpriseBtn" class="btn-rainbow"><i class="fas fa-sparkles"></i> Tebar Kejutan Ceria 🎈🎉</button>
-          <div style="margin-top: 1rem; font-size: 0.75rem; font-style: italic; color: #ddd"><i class="fas fa-music"></i> Doa terbaik mengiringi langkahmu · sentuh tombol, balon & bahagia!</div>
-        </div>
-        <div class="photo-frame-modern">
-          <div class="polaroid-card">
-            <img class="potret-image" src="cengeng.png" alt="Dewi Sinta - potret bahagia" title="Dewi Sinta, semangat yang menerangi" onerror="this.onerror=null;this.src='https://i.pravatar.cc/400?img=29';">
-          </div>
-        </div>
+  <!-- KONTEN UTAMA -->
+  <div class="birthday-hero">
+    <div class="message-block">
+      <div class="main-greeting">Selamat Ulang Tahun</div>
+      <div class="tanggal-indah"><i class="fas fa-calendar-alt"></i> 16 Juli 2025/2026</div>
+      <div class="special-name">Dewi Sinta</div>
+      <div class="quote-white">
+        <i class="fas fa-quote-left" style="margin-right: 8px; opacity: 0.8"></i>
+        Di hari yang berkilau ini, semesta ikut tersenyum untukmu. Setiap tawa dan harapan yang kau tabur, kembali padamu sebagai kebahagiaan tiada batas. Jadilah selalu bintang yang terang, Dewi Sinta.
       </div>
+      <div class="ucapan-spesial">
+        <i class="fas fa-heart" style="color: #ffb347"></i>
+        <span style="font-style: italic">“Semoga usiamu semerbak anugerah, penuh cinta dan tawa abadi. Selamat merayakan dirimu yang istimewa.”</span>
+      </div>
+      <button id="superSurpriseBtn" class="btn-rainbow"><i class="fas fa-sparkles"></i> Tebar Kejutan Ceria 🎈🎉</button>
+      <div style="margin-top: 1rem; font-size: 0.75rem; font-style: italic; color: #ddd"><i class="fas fa-music"></i> Doa terbaik mengiringi langkahmu · sentuh tombol, balon & bahagia!</div>
     </div>
 
-    <!-- Halaman Ucapan -->
-    <div id="page-ucapan" class="page">
-      <div class="card-ucapan">
-        <div class="judul-section"><i class="fas fa-feather-alt"></i> Untaian Doa & Ucapan</div>
-        <div class="grid-cinta">
-          <div class="kata-manis"><i class="fas fa-star"></i> “Semoga setiap langkahmu dipenuhi kebahagiaan, dan setiap mimpi yang kau genggam menjadi nyata. Kamu luar biasa, Dewi Sinta!”</div>
-          <div class="kata-manis"><i class="fas fa-crown"></i> “Kamu adalah mahakarya yang bersinar. Teruslah jadi versi terbaik dari dirimu. Selamat ulang tahun untuk ratu kecil kita 🌹”</div>
-          <div class="kata-manis"><i class="fas fa-cake-candles"></i> “Hari ini milikmu. Tertawalah lebar, karena dunia lebih indah dengan senyumanmu. Selamat bertambah usia, tetap ceria dan berkilau!”</div>
-          <div class="kata-manis"><i class="fas fa-heart"></i> “Terima kasih telah menjadi sumber kebahagiaan bagi sekitar. Doa terbaik menyertai setiap hembusan napasmu. Love you, Sinta 💖”</div>
-        </div>
-        <div class="extra-wish" style="margin-top: 1.2rem;">
-          <i class="fas fa-balloon"></i> 16 Juli, surgawi dan penuh harum cinta <i class="fas fa-gift"></i>
-        </div>
+    <!-- Foto tanpa caption -->
+    <div class="photo-frame-modern">
+      <div class="polaroid-card">
+        <img class="potret-image" src="cengeng.png" alt="Dewi Sinta - kebahagiaan bersinar" title="Dewi Sinta, semangat yang menerangi" />
       </div>
     </div>
+  </div>
 
-    <!-- Halaman Tentang Dirinya -->
-    <div id="page-tentang" class="page">
-      <div class="card-ucapan">
-        <div class="judul-section"><i class="fas fa-user-astronaut"></i> Tentang Dewi Sinta</div>
-        <div class="profil-list">
-          <div class="profil-item"><i class="fas fa-smile-wink"></i> Pribadi ceria & penuh empati</div>
-          <div class="profil-item"><i class="fas fa-palette"></i> Suka senja & melukis harapan</div>
-          <div class="profil-item"><i class="fas fa-book-open"></i> Penikmat puisi dan bintang</div>
-          <div class="profil-item"><i class="fas fa-music"></i> Musik jazz & nada-nada lembut</div>
-        </div>
-        <div class="kata-manis" style="margin-top: 1.5rem;">
-          <i class="fas fa-quote-right"></i> Ia adalah sosok yang mampu menenangkan badai dengan senyumnya. Hatinya seluas samudra, dan ketulusannya seperti embun pagi. Dewi Sinta, bunga terindah di taman kehidupan.
-        </div>
-        <div class="kata-manis" style="background: rgba(255,205,148,0.1);">
-          <i class="fas fa-cake"></i> 16 Juli — hari di mana bintang jatuh berbisik: hadirlah seorang malaikat kecil berkisah nyata.
-        </div>
-      </div>
-    </div>
-  </main>
-
+  <!-- Baris tambahan -->
   <div class="extra-wish">
     <p>
       <i class="fas fa-feather-alt"></i>
@@ -559,56 +580,108 @@
       <strong style="font-style: italic; color: #ffe3b5">#BirthdayOfDewiSinta</strong>
       <i class="fas fa-feather-alt"></i>
     </p>
-    <div><i class="fas fa-balloon"></i> <i class="fas fa-gift"></i> <i class="fas fa-cake-candles"></i></div>
+    <div style="margin-top: 10px"><i class="fas fa-balloon"></i> <i class="fas fa-gift"></i> <i class="fas fa-cake-candles"></i></div>
   </div>
+
   <footer>
     <i class="fas fa-birthday-cake"></i> 16 Juli 2025/2026 — untuk cahaya bernama Dewi Sinta <i class="fas fa-star-of-life"></i><br />
-    <span>✨ selami ucapan & kisahnya melalui menu di atas ✨</span>
+    <span>✨ navigasi ke <a href="ucapan.html">Ucapan</a> & <a href="tentang.html">Tentang Dirinya</a> — kirimkan doa terbaik ✨</span>
     <div style="margin-top: 0.5rem; font-size: 0.7rem">💬 setiap baris penuh cinta | foto menyatu dengan pesona langit malam</div>
   </footer>
 </div>
+
+<!-- Overlay untuk sidebar (hanya tampil di mobile) -->
 <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
 <script>
-  (function() {
-    // ----- BALON & KONFETI (same interactive) -----
+  (function () {
+    // -------------------------------
+    // BALON TERBANG (sama seperti sebelumnya)
+    // -------------------------------
     function createFloatingBalloon() {
       const balloon = document.createElement('div');
       balloon.classList.add('balloon');
-      const colorPalette = ['#FFB7B2', '#FFB347', '#FADADD', '#C9E4DE', '#FFD966', '#B5EAD7', '#FBC8B5', '#E0BBE4', '#FFC8A2', '#A0E7E5', '#F3B0C2', '#C7CEE6', '#FEE5B6', '#FFABAB', '#B4F0C0'];
+      const colorPalette = ['#FFB7B2', '#FFB347', '#FADADD', '#C9E4DE', '#FFD966', '#B5EAD7', '#FBC8B5', '#E0BBE4', '#FFC8A2', '#A0E7E5', '#F3B0C2', '#C7CEE6', '#FEE5B6', '#FFABAB', '#B4F0C0', '#FFC3A0', '#D4A5A5', '#9ED9CC'];
       const randomColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
       balloon.style.background = `radial-gradient(circle at 30% 35%, ${randomColor}, ${randomColor}cc)`;
       const size = 38 + Math.random() * 34;
       balloon.style.width = `${size}px`;
       balloon.style.height = `${size * 1.2}px`;
       balloon.style.borderRadius = '50%';
-      let leftPos = Math.random() * (window.innerWidth - size - 10);
+      const maxLeft = window.innerWidth - size - 10;
+      let leftPos = Math.random() * maxLeft;
       leftPos = Math.min(Math.max(leftPos, 8), window.innerWidth - size - 8);
       balloon.style.left = `${leftPos}px`;
       const duration = 3.5 + Math.random() * 3.5;
       balloon.style.animation = `floatUp ${duration}s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`;
-      balloon.style.animationDelay = `${Math.random() * 0.5}s`;
+      const delay = Math.random() * 0.5;
+      balloon.style.animationDelay = `${delay}s`;
+      balloon.style.boxShadow = '0 7px 14px rgba(0,0,0,0.2), inset -1px -1px 0px rgba(0,0,0,0.05)';
       document.body.appendChild(balloon);
-      balloon.addEventListener('animationend', () => balloon.remove());
-      setTimeout(() => balloon.remove(), duration * 1000 + 1000);
+      balloon.addEventListener('animationend', () => {
+        if (balloon && balloon.remove) balloon.remove();
+      });
+      setTimeout(() => {
+        if (balloon && balloon.remove) balloon.remove();
+      }, duration * 1000 + 1000);
     }
 
     function launchBalloonSwarm(count = 18) {
       for (let i = 0; i < count; i++) {
-        setTimeout(() => createFloatingBalloon(), i * 70);
+        setTimeout(() => {
+          createFloatingBalloon();
+        }, i * 70);
       }
     }
 
     function burstConfettiJoy() {
-      canvasConfetti({ particleCount: 220, spread: 100, origin: { y: 0.6 }, startVelocity: 22, colors: ['#FFD966', '#FFB347', '#FFE5B4', '#FFFFFF', '#FADADD'], decay: 0.9 });
-      canvasConfetti({ particleCount: 130, spread: 130, origin: { y: 0.4, x: 0.2 }, startVelocity: 24, colors: ['#FCE5A8', '#fff5cc', '#FFD59E'] });
-      canvasConfetti({ particleCount: 130, spread: 130, origin: { y: 0.4, x: 0.8 }, startVelocity: 24 });
-      setTimeout(() => canvasConfetti({ particleCount: 300, spread: 65, origin: { y: 0.7 }, startVelocity: 12, colors: ['#FFE0A3', '#FFCF9A', '#FFFFFF'] }), 120);
+      canvasConfetti({
+        particleCount: 220,
+        spread: 100,
+        origin: { y: 0.6 },
+        startVelocity: 22,
+        colors: ['#FFD966', '#FFB347', '#FFE5B4', '#FFFFFF', '#FADADD', '#C9E4DE'],
+        decay: 0.9,
+        ticks: 200,
+      });
+      canvasConfetti({
+        particleCount: 130,
+        spread: 130,
+        origin: { y: 0.4, x: 0.2 },
+        startVelocity: 24,
+        colors: ['#FCE5A8', '#fff5cc', '#FFD59E', '#FFBC7A'],
+      });
+      canvasConfetti({
+        particleCount: 130,
+        spread: 130,
+        origin: { y: 0.4, x: 0.8 },
+        startVelocity: 24,
+        colors: ['#FFDCA8', '#fff2e0', '#FFC8A2', '#E0BBE4'],
+      });
+      setTimeout(() => {
+        canvasConfetti({
+          particleCount: 320,
+          spread: 65,
+          origin: { y: 0.7 },
+          startVelocity: 12,
+          colors: ['#FFE0A3', '#FFCF9A', '#FFFFFF', '#FBC8B5'],
+        });
+      }, 120);
+      setTimeout(() => {
+        canvasConfetti({
+          particleCount: 180,
+          spread: 75,
+          origin: { y: 0.5, x: 0.5 },
+          startVelocity: 18,
+          colors: ['#FFDAB9', '#FFF0C4', '#FED7B0', '#FFB347'],
+        });
+      }, 280);
     }
 
+    // Tombol kejutan
     const surpriseBtn = document.getElementById('superSurpriseBtn');
     if (surpriseBtn) {
-      surpriseBtn.addEventListener('click', (e) => {
+      surpriseBtn.addEventListener('click', function (e) {
         e.preventDefault();
         launchBalloonSwarm(24);
         burstConfettiJoy();
@@ -620,65 +693,32 @@
           surpriseBtn.style.transform = '';
         }, 1800);
         if (navigator.vibrate) navigator.vibrate(80);
-        setTimeout(() => { for (let i=0;i<8;i++) setTimeout(() => createFloatingBalloon(), i*55); }, 400);
+        setTimeout(() => {
+          for (let i = 0; i < 10; i++) setTimeout(() => createFloatingBalloon(), i * 50);
+        }, 450);
       });
     }
-    setTimeout(() => { for (let i=0;i<3;i++) setTimeout(() => createFloatingBalloon(), i*200); }, 600);
 
-    // ----- NAVIGASI SPA (aktifkan page, update active class, tutup sidebar mobile) -----
-    const navLinks = document.querySelectorAll('.nav-link');
-    const pages = {
-      beranda: document.getElementById('page-beranda'),
-      ucapan: document.getElementById('page-ucapan'),
-      tentang: document.getElementById('page-tentang')
-    };
+    // Sambutan balon awal
+    setTimeout(() => {
+      for (let i = 0; i < 3; i++) setTimeout(() => createFloatingBalloon(), i * 220);
+    }, 800);
 
-    function switchPage(pageId) {
-      // sembunyikan semua page
-      Object.values(pages).forEach(page => {
-        if (page) page.classList.remove('active-page');
-      });
-      const activePage = pages[pageId];
-      if (activePage) activePage.classList.add('active-page');
-      // update active class pada nav-link
-      navLinks.forEach(link => {
-        const linkPage = link.getAttribute('data-page');
-        if (linkPage === pageId) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      });
-      // simpan state ke localStorage opsional
-      localStorage.setItem('currentPage', pageId);
-    }
-
-    // event click untuk setiap navigasi
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const pageId = link.getAttribute('data-page');
-        if (pageId && pages[pageId]) {
-          switchPage(pageId);
-          // jika sidebar mobile terbuka, tutup segera setelah navigasi
-          if (window.innerWidth <= 780 && isSidebarOpenLocal) {
-            closeSidebarLocal();
-          }
-        }
-      });
-    });
-
-    // ----- BURGER MENU + OVERLAY (modern, tanpa konflik) -----
+    // -------------------------------
+    // SIDEBAR MODERN + OVERLAY (responsif untuk HP)
+    // -------------------------------
     const menuToggle = document.getElementById('menuToggle');
     const navbar = document.getElementById('navbarLinks');
     const overlay = document.getElementById('sidebarOverlay');
-    let isSidebarOpenLocal = false;
+    let isSidebarOpen = false;
 
-    function closeSidebarLocal() {
+    // Fungsi menutup sidebar
+    function closeSidebar() {
       if (!navbar) return;
       navbar.classList.remove('open');
       if (overlay) overlay.classList.remove('active');
-      isSidebarOpenLocal = false;
+      isSidebarOpen = false;
+      // ubah ikon burger kembali ke bars
       if (menuToggle) {
         const icon = menuToggle.querySelector('i');
         if (icon) {
@@ -686,14 +726,17 @@
           icon.classList.add('fa-bars');
         }
       }
+      // body scroll bisa lagi
       document.body.style.overflow = '';
     }
 
-    function openSidebarLocal() {
+    // Fungsi membuka sidebar
+    function openSidebar() {
       if (!navbar) return;
       navbar.classList.add('open');
       if (overlay) overlay.classList.add('active');
-      isSidebarOpenLocal = true;
+      isSidebarOpen = true;
+      // ubah ikon menjadi times
       if (menuToggle) {
         const icon = menuToggle.querySelector('i');
         if (icon) {
@@ -701,25 +744,44 @@
           icon.classList.add('fa-times');
         }
       }
+      // cegah scroll body saat sidebar terbuka (opsional)
       document.body.style.overflow = 'hidden';
     }
 
+    // Toggle sidebar saat burger diklik
     if (menuToggle && navbar) {
       menuToggle.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (isSidebarOpenLocal) closeSidebarLocal();
-        else openSidebarLocal();
+        if (isSidebarOpen) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
       });
     }
 
+    // Tutup sidebar ketika overlay diklik
     if (overlay) {
       overlay.addEventListener('click', () => {
-        if (isSidebarOpenLocal) closeSidebarLocal();
+        if (isSidebarOpen) closeSidebar();
       });
     }
 
-    // saat resize >780, tutup paksa sidebar dan reset ikon
-    window.addEventListener('resize', () => {
+    // Tutup sidebar jika salah satu link navigasi diklik (UX biar langsung pindah halaman atau tutup)
+    const allNavLinks = document.querySelectorAll('.nav-link');
+    allNavLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        // Jika di mobile dan sidebar terbuka, tutup setelah klik (tapi tetap biarkan navigasi berjalan)
+        if (window.innerWidth <= 780 && isSidebarOpen) {
+          // kita tutup sidebar, navigasi tetap akan lanjut ke href
+          closeSidebar();
+          // sedikit delay opsional tidak mengganggu
+        }
+      });
+    });
+
+    // Saat resize: jika lebar > 780px, pastikan sidebar tertutup, hapus inline overflow, reset classes
+    window.addEventListener('resize', function () {
       if (window.innerWidth > 780) {
         if (navbar && navbar.classList.contains('open')) {
           navbar.classList.remove('open');
@@ -731,33 +793,38 @@
               icon.classList.add('fa-bars');
             }
           }
-          isSidebarOpenLocal = false;
+          isSidebarOpen = false;
           document.body.style.overflow = '';
         }
       } else {
-        // jika sudah terbuka dan resize, biarkan saja
+        // jika ukuran <=780 dan karena resize, pastikan tidak ada konflik scroll jika sidebar kebetulan terbuka saat resize? tidak perlu
+        if (isSidebarOpen && window.innerWidth <= 780) {
+          // tetap biarkan terbuka jika sebelumnya terbuka, jangan ganggu
+        } else {
+          // pastikan overlay tidak aktif tidak sinkron
+          if (overlay && !navbar?.classList.contains('open')) {
+            overlay.classList.remove('active');
+          }
+        }
       }
     });
 
-    // inisialisasi: baca page yang tersimpan atau default beranda
-    const savedPage = localStorage.getItem('currentPage');
-    if (savedPage && pages[savedPage]) {
-      switchPage(savedPage);
-    } else {
-      switchPage('beranda');
-    }
-
-    // Pastikan sidebar tertutup awal
-    closeSidebarLocal();
+    // Hindari body scroll saat sidebar terbuka, dan memastikan saat halaman dimuat, sidebar tertutup.
     document.body.style.overflow = '';
+    if (navbar) navbar.classList.remove('open');
+    if (overlay) overlay.classList.remove('active');
+    isSidebarOpen = false;
 
-    // small effect
+    // Efek hover untuk judul
     const judul = document.querySelector('.judul-happy');
     if (judul) {
       judul.addEventListener('mouseenter', () => judul.style.textShadow = '0 0 12px rgba(255,235,170,0.8)');
       judul.addEventListener('mouseleave', () => judul.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.2)');
     }
+
+    console.log('🎉 SIDEBAR MODERN READY — menu kanan sliding + overlay, balon dan konfeti siap! ✨');
   })();
 </script>
 </body>
 </html>
+ ga  bisa ke nav lain pas mode mobile atau burger menu , benarkan dan tuliskan kode lengkap index.html
