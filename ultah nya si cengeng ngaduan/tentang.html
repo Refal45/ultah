@@ -350,6 +350,12 @@
       border-right: 4px solid #ffcd94;
     }
 
+    /* Perbaikan: tombol center */
+    .button-center-wrapper {
+      text-align: center;
+      margin: 1.5rem 0 0.5rem;
+    }
+
     .btn-rainbow {
       background: rgba(255, 215, 150, 0.12);
       border: 1px solid rgba(255, 215, 150, 0.6);
@@ -365,7 +371,6 @@
       gap: 8px;
       font-size: 0.9rem;
       backdrop-filter: blur(4px);
-      margin-top: 1rem;
     }
 
     .btn-rainbow:hover {
@@ -585,7 +590,10 @@
         “Aku mungkin susah ditebak, tapi yang aku butuh cuma kamu yang tetap bertahan. <strong>Ga semua orang harus dimengerti, Dew</strong> — tapi kamu, tolong jangan pergi.” <br />
       </div>
 
-      <button id="surpriseBtnAbout" class="btn-rainbow"><i class="fas fa-sparkles"></i> Hibur Hatinya dengan Balon 🎈</button>
+      <!-- Tombol dengan wrapper center -->
+      <div class="button-center-wrapper">
+        <button id="surpriseBtnAbout" class="btn-rainbow"><i class="fas fa-sparkles"></i> Hibur Hatinya dengan Balon 🎈</button>
+      </div>
     </div>
 
     <div class="photo-frame">
@@ -721,7 +729,7 @@
       judul.addEventListener('mouseleave', () => judul.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.2)');
     }
 
-    console.log('🎈✨ Halaman tentang Dewi Sinta · sidebar ala Google & balon siap ✨🎈');
+    console.log('🎈✨ Halaman tentang Dewi Sinta · tombol sudah center, sidebar ala Google & balon siap ✨🎈');
   })();
 </script>
 </body>
