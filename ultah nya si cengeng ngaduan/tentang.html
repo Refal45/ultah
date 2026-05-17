@@ -379,6 +379,49 @@
       border-color: #ffda99;
     }
 
+    /* Elemen khusus: permintaan ketemu ibu */
+    .meet-mom-request {
+      background: linear-gradient(145deg, rgba(255, 215, 160, 0.12), rgba(255, 200, 130, 0.05));
+      backdrop-filter: blur(8px);
+      border-radius: 48px;
+      padding: 1.1rem 1.5rem;
+      margin: 1.8rem 0 0.8rem;
+      text-align: center;
+      border: 1px solid rgba(255, 210, 128, 0.5);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .meet-mom-request:hover {
+      transform: scale(1.01);
+      background: rgba(255, 215, 150, 0.22);
+      border-color: #ffcf8a;
+      box-shadow: 0 0 12px rgba(255, 200, 100, 0.3);
+    }
+
+    .meet-mom-request p {
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #fff3e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .meet-mom-request i {
+      font-size: 1.5rem;
+      color: #ffcd94;
+      animation: gentleWobble 2s infinite ease;
+    }
+
+    @keyframes gentleWobble {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(5deg); }
+    }
+
     .photo-frame {
       flex: 0.9;
       display: flex;
@@ -506,6 +549,9 @@
       .trait-list {
         grid-template-columns: 1fr;
       }
+      .meet-mom-request p {
+        font-size: 1rem;
+      }
     }
 
     @media (min-width: 781px) {
@@ -594,6 +640,16 @@
       <div class="button-center-wrapper">
         <button id="surpriseBtnAbout" class="btn-rainbow"><i class="fas fa-sparkles"></i> Hibur Hatinya dengan Balon 🎈</button>
       </div>
+
+      <!-- PERMINTAAN MANIS: KETEMU IBU LAGI -->
+      <div id="meetMomRequest" class="meet-mom-request">
+        <p>
+          <i class="fas fa-mom"></i>
+          <span><strong>AKU PENGEN KETEMU SAMA IBU KAMU LAGI</strong> · BOLEH GA? 🥺</span>
+          <i class="fas fa-heart" style="color:#ffab6f;"></i>
+        </p>
+        <div style="font-size:0.8rem; margin-top: 6px; opacity:0.7;">✨ klik untuk jawaban manis ✨</div>
+      </div>
     </div>
 
     <div class="photo-frame">
@@ -650,7 +706,7 @@
       for (let i = 0; i < count; i++) setTimeout(() => createFloatingBalloon(), i * 70);
     }
 
-    // Tombol surprise
+    // Tombol surprise balon
     const surpriseBtn = document.getElementById('surpriseBtnAbout');
     if (surpriseBtn) {
       surpriseBtn.addEventListener('click', () => {
@@ -664,6 +720,32 @@
           surpriseBtn.style.transform = '';
         }, 1800);
         if (navigator.vibrate) navigator.vibrate(80);
+      });
+    }
+
+    // ======================= PERMINTAAN KETEMU IBU =======================
+    const meetMomDiv = document.getElementById('meetMomRequest');
+    if (meetMomDiv) {
+      meetMomDiv.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Efek manis: balon kecil + confetti tipis + alert gemes
+        launchBalloonSwarm(12);
+        canvasConfetti({ particleCount: 80, spread: 45, origin: { y: 0.5 }, startVelocity: 10, colors: ['#FFCCAA', '#FFB37C'] });
+        // Jawaban manis dalam alert (bisa juga pakai modal tapi biar simple)
+        const jawaban = [
+          "🥹 Tentu saja BOLEH banget! Ibu kamu juga kangen katanya..",
+          "😭 Izin? Iya dong! Sekalian kita masak bareng ya 🍲",
+          "🤗 Pasti boleh! Ibu kamu selalu happy kalau kamu datang. Kapan?",
+          "💖 BOLEH! Malah ibu kamu nanyain kamu terus lho.."
+        ];
+        const randomJawaban = jawaban[Math.floor(Math.random() * jawaban.length)];
+        // Tampilkan alert modern pakai notif? Tapi alert simpel dan jelas
+        alert(`💬 “${randomJawaban}”\n\n❤️ Dari hati yang paling tulus. Yuk atur waktu ketemuan lagi!`);
+        // getar kecil jika support
+        if (navigator.vibrate) navigator.vibrate(50);
+        // tambah efek hover semangat
+        meetMomDiv.style.transform = 'scale(0.99)';
+        setTimeout(() => { if(meetMomDiv) meetMomDiv.style.transform = ''; }, 200);
       });
     }
 
@@ -708,7 +790,6 @@
     if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeSidebar);
     if (overlay) overlay.addEventListener('click', closeSidebar);
 
-    // Tutup sidebar ketika link di dalamnya diklik
     const sidebarLinks = document.querySelectorAll('.sidebar-nav .nav-link');
     sidebarLinks.forEach(link => {
       link.addEventListener('click', closeSidebar);
@@ -722,14 +803,13 @@
       }
     });
 
-    // Efek hover judul
     const judul = document.querySelector('.judul-happy');
     if (judul) {
       judul.addEventListener('mouseenter', () => judul.style.textShadow = '0 0 12px rgba(255,235,170,0.8)');
       judul.addEventListener('mouseleave', () => judul.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.2)');
     }
 
-    console.log('🎈✨ Halaman tentang Dewi Sinta · tombol sudah center, sidebar ala Google & balon siap ✨🎈');
+    console.log('🎈✨ Halaman tentang Dewi Sinta + permintaan ketemu ibu ✨🎈');
   })();
 </script>
 </body>
