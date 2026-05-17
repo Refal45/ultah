@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Happy Birthday · Dewi Sinta</title>
-  <!-- Google Fonts: Plus Jakarta Sans -->
+  <title>Happy Birthday · Dewi Sinta | Ucapan Spesial</title>
+  <!-- Google Fonts: Plus Jakarta Sans (italic ekspresif) -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet" />
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <!-- Canvas Confetti -->
+  <!-- Canvas Confetti library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
   <style>
     * {
@@ -19,8 +19,8 @@
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: radial-gradient(circle at 10% 30%, #0f0f1a, #010101);
-      color: #fef9ef;
+      background: radial-gradient(circle at 10% 30%, #0b0b0b, #000000);
+      color: #ffffff;
       line-height: 1.5;
       min-height: 100vh;
       overflow-x: hidden;
@@ -34,80 +34,86 @@
       z-index: 2;
     }
 
-    /* ===== HEADER & BURGER ===== */
+    /* header & navigasi */
     .header-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
       gap: 1rem;
-      margin-bottom: 2.5rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid rgba(255, 215, 150, 0.3);
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
       position: relative;
     }
 
     .judul-happy {
-      font-size: 2rem;
-      font-weight: 800;
+      font-size: 2.2rem;
+      font-weight: 700;
       font-style: italic;
-      background: linear-gradient(135deg, #fff3e0, #ffdfb3);
+      background: linear-gradient(135deg, #fff5e6, #ffecd2);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      letter-spacing: -0.3px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease;
+    }
+    .judul-happy:hover {
+      transform: scale(1.01);
+      text-shadow: 0 0 8px rgba(255, 235, 180, 0.6);
     }
 
-    /* Tombol burger - jelas dan kontras */
+    /* burger icon */
     .menu-icon {
       display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      background: rgba(20, 20, 30, 0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 50%;
       width: 48px;
       height: 48px;
-      background: rgba(30, 30, 45, 0.9);
-      backdrop-filter: blur(16px);
-      border-radius: 30px;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      border: 1px solid rgba(255, 215, 150, 0.7);
-      transition: all 0.2s;
+      transition: 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.2);
       z-index: 10020;
+      position: relative;
     }
     .menu-icon i {
-      font-size: 1.7rem;
-      color: #ffdfb3;
-      transition: 0.2s;
+      color: #ffefcf;
     }
     .menu-icon:hover {
-      background: #ffcd9466;
+      background: rgba(255, 215, 150, 0.3);
       transform: scale(1.02);
-      border-color: #ffda99;
     }
 
-    /* Navigasi desktop (horizontal) */
+    /* navbar desktop (horizontal) */
     .navbar {
       display: flex;
-      gap: 0.8rem;
-      background: rgba(20, 20, 32, 0.7);
-      backdrop-filter: blur(20px);
-      padding: 0.45rem 1rem;
+      gap: 0.75rem;
+      background: rgba(20, 20, 30, 0.55);
+      backdrop-filter: blur(12px);
+      padding: 0.5rem 1rem;
       border-radius: 60px;
-      border: 1px solid rgba(255, 215, 150, 0.35);
+      border: 0.5px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
     }
 
     .nav-link {
       text-decoration: none;
       font-size: 1rem;
       font-weight: 600;
-      padding: 0.5rem 1.3rem;
+      padding: 0.5rem 1.2rem;
       border-radius: 40px;
-      transition: 0.2s;
-      color: #f0e9db;
+      transition: all 0.25s;
+      color: #f0f0f0;
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      letter-spacing: 0.2px;
       white-space: nowrap;
       cursor: pointer;
-      background: transparent;
     }
 
     .nav-link i {
@@ -115,31 +121,31 @@
     }
 
     .nav-link.active {
-      background: #fff2e2;
-      color: #0a0a0f;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      background: #ffffff;
+      color: #0a0a0a;
+      box-shadow: 0 6px 12px -8px rgba(0, 0, 0, 0.3);
       font-weight: 700;
     }
 
     .nav-link.active i {
-      color: #0a0a0f;
+      color: #0a0a0a;
     }
 
     .nav-link:not(.active):hover {
-      background: rgba(255, 215, 150, 0.25);
-      color: #fff1cf;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff2cf;
       transform: translateY(-2px);
     }
 
-    /* Overlay gelap untuk sidebar */
+    /* overlay sidebar (mobile) */
     .sidebar-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
       z-index: 10005;
       opacity: 0;
       visibility: hidden;
@@ -150,193 +156,212 @@
       visibility: visible;
     }
 
-    /* ===== HALAMAN DINAMIS ===== */
+    /* konten dinamis (page) */
     .page {
       display: none;
-      animation: fadeSlideUp 0.45s ease-out;
+      animation: fadeUp 0.5s ease forwards;
     }
     .page.active-page {
       display: block;
     }
 
-    @keyframes fadeSlideUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* BERANDA (Halaman utama) */
+    /* style beranda (seperti original) */
     .birthday-hero {
       display: flex;
       flex-wrap: wrap;
-      gap: 2.5rem;
+      gap: 3rem;
       align-items: center;
       justify-content: center;
-      margin: 1.5rem 0 2rem;
+      margin: 2rem 0 2rem;
     }
     .message-block {
       flex: 1.2;
-      min-width: 270px;
+      min-width: 280px;
     }
     .main-greeting {
-      font-size: 3.2rem;
+      font-size: 3.4rem;
       font-weight: 800;
       font-style: italic;
+      margin-bottom: 1rem;
       line-height: 1.2;
-      background: linear-gradient(120deg, #fff, #ffe3b0);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
+      letter-spacing: -0.02em;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
     .special-name {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       font-weight: 700;
       font-style: italic;
-      background: linear-gradient(125deg, #fff2df, #ffdaaa);
-      background-clip: text;
+      background: linear-gradient(120deg, #fff8e7, #ffe3b5);
       -webkit-background-clip: text;
+      background-clip: text;
       color: transparent;
-      margin: 0.5rem 0;
+      margin: 0.5rem 0 0.75rem 0;
+      display: inline-block;
+    }
+    .quote-white {
+      font-size: 1.25rem;
+      font-style: italic;
+      color: #fef9e6;
+      margin: 1rem 0 1.5rem 0;
+      line-height: 1.6;
+      border-left: 4px solid #ffcd94;
+      padding-left: 1.3rem;
+      background: rgba(255, 255, 245, 0.05);
+      border-radius: 0 16px 16px 0;
+    }
+    .ucapan-spesial {
+      font-size: 1.1rem;
+      color: #f7f3e8;
+      margin-top: 1.2rem;
+      font-style: italic;
     }
     .tanggal-indah {
-      font-size: 1.1rem;
       font-style: italic;
+      font-weight: 500;
       color: #ffdfb3;
+      font-size: 1.2rem;
+      margin: 0.8rem 0;
       display: flex;
       align-items: center;
       gap: 8px;
-      margin: 0.5rem 0;
-    }
-    .quote-white {
-      font-size: 1.2rem;
-      font-style: italic;
-      color: #fff3e4;
-      border-left: 4px solid #ffcd94;
-      padding-left: 1.2rem;
-      margin: 1rem 0;
-      background: rgba(255, 255, 245, 0.05);
-      border-radius: 0 20px 20px 0;
-    }
-    .ucapan-spesial {
-      font-style: italic;
-      background: rgba(255, 210, 128, 0.1);
-      padding: 0.7rem 1rem;
-      border-radius: 28px;
-      margin: 1rem 0;
     }
     .btn-rainbow {
-      background: rgba(255, 205, 148, 0.2);
-      border: 1px solid #ffcd94;
-      padding: 0.6rem 1.5rem;
+      background: rgba(255, 215, 150, 0.12);
+      border: 1px solid rgba(255, 215, 150, 0.6);
+      padding: 0.7rem 1.5rem;
       border-radius: 50px;
       font-weight: 600;
       font-style: italic;
-      color: #fff2e0;
+      color: #fff3df;
       cursor: pointer;
       transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
       backdrop-filter: blur(4px);
     }
     .btn-rainbow:hover {
-      background: #ffcd9466;
+      background: #ffcd9455;
       transform: translateY(-3px);
+      border-color: #ffda99;
     }
     .photo-frame-modern {
       flex: 0.9;
       display: flex;
       justify-content: center;
+      align-items: center;
+    }
+    .polaroid-card {
+      background: transparent;
+      text-align: center;
     }
     .potret-image {
       width: 100%;
-      max-width: 340px;
-      aspect-ratio: 1/1;
+      max-width: 360px;
+      height: auto;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
-      border-radius: 1.8rem;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-      transition: 0.2s;
-      border: 2px solid rgba(255, 215, 150, 0.4);
+      border-radius: 1.5rem;
+      display: block;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s;
+    }
+    .potret-image:hover {
+      transform: scale(1.02);
     }
 
-    /* UCAPAN & TENTANG (kartu stylish) */
+    /* halaman ucapan & tentang */
     .card-ucapan {
-      background: rgba(25, 25, 40, 0.65);
-      backdrop-filter: blur(12px);
+      background: rgba(30, 30, 40, 0.6);
+      backdrop-filter: blur(10px);
       border-radius: 2rem;
       padding: 2rem;
-      margin: 1.8rem 0;
-      border: 1px solid rgba(255, 205, 148, 0.4);
+      margin: 1.5rem 0;
+      border: 1px solid rgba(255, 215, 150, 0.3);
+      transition: all 0.2s;
     }
     .judul-section {
-      font-size: 1.9rem;
+      font-size: 2rem;
       font-weight: 700;
       font-style: italic;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #ffefcf;
       border-left: 5px solid #ffcd94;
       padding-left: 1rem;
-      color: #ffefcf;
     }
     .grid-cinta {
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: 1.5rem;
     }
     .kata-manis {
-      background: rgba(0, 0, 0, 0.45);
-      padding: 1rem 1.5rem;
-      border-radius: 1.5rem;
+      font-size: 1.2rem;
       font-style: italic;
-      font-size: 1.05rem;
-      border-left: 3px solid #ffcd94;
+      padding: 1rem 1.5rem;
+      background: rgba(0,0,0,0.3);
+      border-radius: 2rem;
+      line-height: 1.6;
+      border: 1px solid rgba(255,205,148,0.2);
+    }
+    .kata-manis i {
+      color: #ffcd94;
+      margin-right: 8px;
     }
     .profil-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
-      margin: 1.5rem 0;
+      gap: 1.2rem;
+      margin-top: 1rem;
     }
     .profil-item {
-      background: rgba(255, 235, 190, 0.08);
-      backdrop-filter: blur(4px);
-      padding: 1rem;
-      border-radius: 1.8rem;
-      flex: 1 1 180px;
+      background: rgba(255,245,220,0.07);
+      border-radius: 2rem;
+      padding: 1rem 1.5rem;
+      flex: 1 1 200px;
+      backdrop-filter: blur(8px);
       text-align: center;
       font-weight: 500;
+      font-style: italic;
     }
     .profil-item i {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
+      color: #ffcd94;
+      margin-right: 10px;
       display: block;
       margin-bottom: 8px;
-      color: #ffcd94;
     }
     .extra-wish {
       text-align: center;
-      margin: 2rem 0 1rem;
-      padding: 1rem;
-      background: rgba(255, 240, 210, 0.05);
-      border-radius: 40px;
+      margin: 3rem 0 1rem;
+      padding: 1.2rem;
+      background: rgba(255, 245, 220, 0.05);
+      border-radius: 48px;
+      backdrop-filter: blur(5px);
     }
     footer {
-      margin-top: 2rem;
+      margin-top: 2.5rem;
       text-align: center;
       font-size: 0.8rem;
-      border-top: 1px solid rgba(255, 215, 150, 0.25);
-      padding: 1.5rem 0.5rem;
-      color: #dbd1bd;
+      color: #cbcbcb;
+      border-top: 1px solid rgba(255, 245, 200, 0.2);
+      padding: 2rem 0.5rem 1rem;
+      font-style: italic;
+    }
+    footer a {
+      color: #ffdaaa;
+      text-decoration: none;
     }
 
-    /* BALON TERBANG */
+    /* balon terbang */
     .balloon {
       position: fixed;
       bottom: -80px;
       z-index: 10000;
       pointer-events: none;
       border-radius: 50%;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(0.5px);
       will-change: transform;
     }
     .balloon::before {
@@ -346,8 +371,10 @@
       left: 50%;
       width: 2px;
       height: 20px;
-      background: #b38b5a;
+      background: #aa8c64;
       transform: translateX(-50%);
+      border-radius: 1px;
+      opacity: 0.8;
     }
     .balloon::after {
       content: '🎀';
@@ -357,41 +384,57 @@
       left: 50%;
       transform: translateX(-50%);
       color: #ffcf9a;
-    }
-    @keyframes floatUp {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; bottom: -70px; }
-      100% { transform: translateY(-120vh) rotate(8deg); opacity: 0; bottom: 100%; }
+      text-shadow: 0 0 2px #a55d35;
     }
 
-    /* ===== RESPONSIVE + SIDEBAR YANG JELAS ===== */
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        bottom: -70px;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(8deg);
+        opacity: 0;
+        bottom: 100%;
+      }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* responsive + sidebar sliding */
     @media (max-width: 780px) {
       .app-wrapper {
         padding: 1rem 1.2rem;
       }
+      .header-bar {
+        flex-direction: row;
+        justify-content: space-between;
+      }
       .judul-happy {
-        font-size: 1.6rem;
+        font-size: 1.7rem;
       }
       .menu-icon {
         display: flex;
       }
-      /* Navbar berubah jadi SIDEBAR dari kanan */
       .navbar {
         position: fixed;
         top: 0;
-        right: -300px;
-        width: 280px;
-        max-width: 80%;
+        right: -320px;
+        width: min(280px, 75%);
         height: 100%;
-        background: rgba(10, 10, 20, 0.97);
-        backdrop-filter: blur(32px);
+        background: rgba(8, 8, 16, 0.97);
+        backdrop-filter: blur(28px);
         flex-direction: column;
         justify-content: flex-start;
-        gap: 0.75rem;
-        padding: 5rem 1.5rem 2rem;
-        border-radius: 1.5rem 0 0 1.5rem;
-        border-left: 2px solid rgba(255, 205, 148, 0.8);
-        box-shadow: -8px 0 32px rgba(0, 0, 0, 0.6);
-        transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        gap: 0.5rem;
+        padding: 6rem 1.5rem 2rem 1.5rem;
+        border-radius: 0;
+        border-left: 1px solid rgba(255, 215, 150, 0.5);
+        box-shadow: -8px 0 30px rgba(0, 0, 0, 0.7);
+        transition: right 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         z-index: 10010;
         display: flex !important;
       }
@@ -401,108 +444,95 @@
       .nav-link {
         justify-content: flex-start;
         padding: 0.9rem 1.2rem;
-        font-size: 1.08rem;
-        background: rgba(255, 235, 190, 0.05);
-        border-radius: 60px;
-        width: 100%;
         white-space: normal;
+        font-size: 1.05rem;
+        width: 100%;
+        border-radius: 60px;
+        background: rgba(255, 255, 255, 0.03);
       }
       .nav-link i {
         width: 28px;
       }
-      .nav-link.active {
-        background: #ffe1b9;
-        color: #0a0a0a;
+      .birthday-hero {
+        flex-direction: column-reverse;
+        gap: 2rem;
       }
       .main-greeting {
-        font-size: 2.2rem;
+        font-size: 2.4rem;
       }
       .special-name {
         font-size: 2rem;
-      }
-      .birthday-hero {
-        flex-direction: column-reverse;
-      }
-      .quote-white {
-        font-size: 1rem;
       }
       .judul-section {
         font-size: 1.6rem;
       }
     }
-
     @media (max-width: 480px) {
-      .navbar {
-        width: 260px;
-      }
-      .main-greeting {
-        font-size: 1.8rem;
-      }
-      .menu-icon {
-        width: 44px;
-        height: 44px;
-      }
+      .main-greeting { font-size: 1.9rem; }
+      .special-name { font-size: 1.7rem; }
+      .menu-icon { width: 42px; height: 42px; font-size: 1.5rem; }
     }
   </style>
 </head>
 <body>
 <div class="app-wrapper">
   <div class="header-bar">
-    <div class="judul-happy">✨ Happy Birthday, Dewi ✨</div>
-    <div class="menu-icon" id="burgerBtn">
+    <div class="judul-happy">Happy Birthday, Sinta ✨</div>
+    <div class="menu-icon" id="menuToggle">
       <i class="fas fa-bars"></i>
     </div>
-    <div class="navbar" id="sidebarNav">
+    <div class="navbar" id="navbarLinks">
       <a class="nav-link" data-page="beranda"><i class="fas fa-home"></i> Beranda</a>
       <a class="nav-link" data-page="ucapan"><i class="fas fa-comment-dots"></i> Ucapan</a>
       <a class="nav-link" data-page="tentang"><i class="fas fa-user-astronaut"></i> Tentang Dirinya</a>
     </div>
   </div>
 
-  <!-- HALAMAN DINAMIS -->
+  <!-- KONTEN DINAMIS: 3 PAGE -->
   <main>
     <!-- Beranda -->
     <div id="page-beranda" class="page active-page">
       <div class="birthday-hero">
         <div class="message-block">
           <div class="main-greeting">Selamat Ulang Tahun</div>
-          <div class="tanggal-indah"><i class="fas fa-calendar-alt"></i> 16 Juli — penuh cinta</div>
+          <div class="tanggal-indah"><i class="fas fa-calendar-alt"></i> 16 Juli — cahaya istimewa</div>
           <div class="special-name">Dewi Sinta</div>
           <div class="quote-white">
-            <i class="fas fa-quote-left" style="margin-right: 6px;"></i> 
-            Di hari yang berkilau ini, semesta ikut tersenyum untukmu. Setiap tawa yang kau tabur kembali sebagai kebahagiaan. Jadilah bintang terang, Dewi Sinta.
+            <i class="fas fa-quote-left" style="margin-right: 8px; opacity: 0.8"></i>
+            Di hari yang berkilau ini, semesta ikut tersenyum untukmu. Setiap tawa dan harapan yang kau tabur, kembali padamu sebagai kebahagiaan tiada batas. Jadilah selalu bintang yang terang, Dewi Sinta.
           </div>
           <div class="ucapan-spesial">
-            <i class="fas fa-heart" style="color: #ffb347;"></i> 
-            “Semoga usiamu penuh anugerah, tawa, dan mimpi indah. Selamat merayakan dirimu yang luar biasa.”
+            <i class="fas fa-heart" style="color: #ffb347"></i>
+            <span>“Semoga usiamu semerbak anugerah, penuh cinta dan tawa abadi. Selamat merayakan dirimu yang istimewa.”</span>
           </div>
-          <button id="kejutanBtn" class="btn-rainbow"><i class="fas fa-sparkles"></i> Tebar Kejutan Ceria 🎈🎉</button>
-          <div style="margin-top: 1rem; font-size: 0.75rem;"><i class="fas fa-music"></i> Tekan tombol, balon & konfeti membanjiri kebahagiaan</div>
+          <button id="superSurpriseBtn" class="btn-rainbow"><i class="fas fa-sparkles"></i> Tebar Kejutan Ceria 🎈🎉</button>
+          <div style="margin-top: 1rem; font-size: 0.75rem; font-style: italic; color: #ddd"><i class="fas fa-music"></i> Doa terbaik mengiringi langkahmu · sentuh tombol, balon & bahagia!</div>
         </div>
         <div class="photo-frame-modern">
-          <img class="potret-image" src="https://placehold.co/400x400/2a2a3a/ffdfb3?text=Dewi+Sinta&font=playfair" alt="Dewi Sinta potret" 
-               onerror="this.src='https://randomuser.me/api/portraits/women/45.jpg'">
+          <div class="polaroid-card">
+            <img class="potret-image" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Dewi Sinta - potret bahagia" title="Dewi Sinta, semangat yang menerangi" onerror="this.onerror=null;this.src='https://i.pravatar.cc/400?img=29';">
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Ucapan -->
+    <!-- Halaman Ucapan -->
     <div id="page-ucapan" class="page">
       <div class="card-ucapan">
         <div class="judul-section"><i class="fas fa-feather-alt"></i> Untaian Doa & Ucapan</div>
         <div class="grid-cinta">
-          <div class="kata-manis"><i class="fas fa-star"></i> “Semoga setiap langkahmu dipenuhi kebahagiaan, mimpi-mimpi indah menjadi nyata. Kamu sungguh luar biasa, Dewi Sinta!”</div>
-          <div class="kata-manis"><i class="fas fa-crown"></i> “Kamu adalah mahakarya yang bersinar. Teruslah jadi versi terbaik. Selamat ulang tahun, ratu lembut hati 🌹”</div>
-          <div class="kata-manis"><i class="fas fa-cake-candles"></i> “Hari ini milikmu. Tertawalah lebar, dunia lebih indah dengan senyumanmu. Selamat bertambah usia, tetap ceria!”</div>
-          <div class="kata-manis"><i class="fas fa-heart"></i> “Terima kasih telah menjadi sumber kebahagiaan. Doa terbaik untukmu, Sinta. Love you 💖”</div>
+          <div class="kata-manis"><i class="fas fa-star"></i> “Semoga setiap langkahmu dipenuhi kebahagiaan, dan setiap mimpi yang kau genggam menjadi nyata. Kamu luar biasa, Dewi Sinta!”</div>
+          <div class="kata-manis"><i class="fas fa-crown"></i> “Kamu adalah mahakarya yang bersinar. Teruslah jadi versi terbaik dari dirimu. Selamat ulang tahun untuk ratu kecil kita 🌹”</div>
+          <div class="kata-manis"><i class="fas fa-cake-candles"></i> “Hari ini milikmu. Tertawalah lebar, karena dunia lebih indah dengan senyumanmu. Selamat bertambah usia, tetap ceria dan berkilau!”</div>
+          <div class="kata-manis"><i class="fas fa-heart"></i> “Terima kasih telah menjadi sumber kebahagiaan bagi sekitar. Doa terbaik menyertai setiap hembusan napasmu. Love you, Sinta 💖”</div>
         </div>
-        <div class="extra-wish">
-          <i class="fas fa-balloon"></i> 16 Juli · surgawi dan penuh cinta <i class="fas fa-gift"></i>
+        <div class="extra-wish" style="margin-top: 1.2rem;">
+          <i class="fas fa-balloon"></i> 16 Juli, surgawi dan penuh harum cinta <i class="fas fa-gift"></i>
         </div>
       </div>
     </div>
 
-    <!-- Tentang Dirinya -->
+    <!-- Halaman Tentang Dirinya -->
     <div id="page-tentang" class="page">
       <div class="card-ucapan">
         <div class="judul-section"><i class="fas fa-user-astronaut"></i> Tentang Dewi Sinta</div>
@@ -510,79 +540,92 @@
           <div class="profil-item"><i class="fas fa-smile-wink"></i> Pribadi ceria & penuh empati</div>
           <div class="profil-item"><i class="fas fa-palette"></i> Suka senja & melukis harapan</div>
           <div class="profil-item"><i class="fas fa-book-open"></i> Penikmat puisi dan bintang</div>
-          <div class="profil-item"><i class="fas fa-music"></i> Musik jazz & nada lembut</div>
+          <div class="profil-item"><i class="fas fa-music"></i> Musik jazz & nada-nada lembut</div>
         </div>
-        <div class="kata-manis" style="margin-top: 1rem;">
-          <i class="fas fa-quote-right"></i> Ia adalah sosok yang menenangkan badai dengan senyumnya. Hatinya seluas samudra, ketulusannya seperti embun pagi. Dewi Sinta, bunga terindah di taman kehidupan.
+        <div class="kata-manis" style="margin-top: 1.5rem;">
+          <i class="fas fa-quote-right"></i> Ia adalah sosok yang mampu menenangkan badai dengan senyumnya. Hatinya seluas samudra, dan ketulusannya seperti embun pagi. Dewi Sinta, bunga terindah di taman kehidupan.
         </div>
-        <div class="kata-manis" style="background: rgba(255,205,148,0.12);">
-          <i class="fas fa-cake"></i> 16 Juli — hari di mana bintang jatuh berbisik: hadirlah malaikat kecil berkisah nyata.
+        <div class="kata-manis" style="background: rgba(255,205,148,0.1);">
+          <i class="fas fa-cake"></i> 16 Juli — hari di mana bintang jatuh berbisik: hadirlah seorang malaikat kecil berkisah nyata.
         </div>
       </div>
     </div>
   </main>
 
   <div class="extra-wish">
-    <p><i class="fas fa-feather-alt"></i> semoga tahun ini membawa ribuan mimpi indah yang nyata. <strong style="color:#ffe3b5">#BirthdayOfDewiSinta</strong> <i class="fas fa-feather-alt"></i></p>
+    <p>
+      <i class="fas fa-feather-alt"></i>
+      semoga tahun ini membawa ribuan mimpi indah yang nyata.
+      <strong style="font-style: italic; color: #ffe3b5">#BirthdayOfDewiSinta</strong>
+      <i class="fas fa-feather-alt"></i>
+    </p>
     <div><i class="fas fa-balloon"></i> <i class="fas fa-gift"></i> <i class="fas fa-cake-candles"></i></div>
   </div>
   <footer>
-    <i class="fas fa-birthday-cake"></i> 16 Juli 2025/2026 — untuk cahaya bernama Dewi Sinta <i class="fas fa-star-of-life"></i><br>
-    <span>✨ navigasi menu (Beranda, Ucapan, Tentang) bekerja lancar di semua perangkat ✨</span>
+    <i class="fas fa-birthday-cake"></i> 16 Juli 2025/2026 — untuk cahaya bernama Dewi Sinta <i class="fas fa-star-of-life"></i><br />
+    <span>✨ selami ucapan & kisahnya melalui menu di atas ✨</span>
+    <div style="margin-top: 0.5rem; font-size: 0.7rem">💬 setiap baris penuh cinta | foto menyatu dengan pesona langit malam</div>
   </footer>
 </div>
-<div id="overlaySidebar" class="sidebar-overlay"></div>
+<div id="sidebarOverlay" class="sidebar-overlay"></div>
 
 <script>
   (function() {
-    // ========== BALON & KONFETI ==========
-    function createBalloon() {
+    // ----- BALON & KONFETI (same interactive) -----
+    function createFloatingBalloon() {
       const balloon = document.createElement('div');
-      balloon.className = 'balloon';
-      const colors = ['#FFB7B2', '#FFB347', '#FADADD', '#C9E4DE', '#FFD966', '#B5EAD7', '#FBC8B5', '#E0BBE4', '#FFC8A2', '#A0E7E5'];
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      balloon.classList.add('balloon');
+      const colorPalette = ['#FFB7B2', '#FFB347', '#FADADD', '#C9E4DE', '#FFD966', '#B5EAD7', '#FBC8B5', '#E0BBE4', '#FFC8A2', '#A0E7E5', '#F3B0C2', '#C7CEE6', '#FEE5B6', '#FFABAB', '#B4F0C0'];
+      const randomColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
       balloon.style.background = `radial-gradient(circle at 30% 35%, ${randomColor}, ${randomColor}cc)`;
       const size = 38 + Math.random() * 34;
       balloon.style.width = `${size}px`;
       balloon.style.height = `${size * 1.2}px`;
       balloon.style.borderRadius = '50%';
-      let leftPos = Math.random() * (window.innerWidth - size - 20);
-      leftPos = Math.min(Math.max(leftPos, 15), window.innerWidth - size - 15);
+      let leftPos = Math.random() * (window.innerWidth - size - 10);
+      leftPos = Math.min(Math.max(leftPos, 8), window.innerWidth - size - 8);
       balloon.style.left = `${leftPos}px`;
-      const duration = 3.5 + Math.random() * 3;
-      balloon.style.animation = `floatUp ${duration}s linear forwards`;
+      const duration = 3.5 + Math.random() * 3.5;
+      balloon.style.animation = `floatUp ${duration}s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`;
+      balloon.style.animationDelay = `${Math.random() * 0.5}s`;
       document.body.appendChild(balloon);
       balloon.addEventListener('animationend', () => balloon.remove());
-      setTimeout(() => balloon.remove(), duration * 1000);
+      setTimeout(() => balloon.remove(), duration * 1000 + 1000);
     }
 
-    function launchBalloons(count = 18) {
+    function launchBalloonSwarm(count = 18) {
       for (let i = 0; i < count; i++) {
-        setTimeout(() => createBalloon(), i * 65);
+        setTimeout(() => createFloatingBalloon(), i * 70);
       }
     }
 
-    function burstConfetti() {
-      canvasConfetti({ particleCount: 220, spread: 95, origin: { y: 0.6 }, startVelocity: 20, colors: ['#FFD966', '#FFB347', '#FFE5B4', '#FFFFFF', '#FADADD'] });
-      canvasConfetti({ particleCount: 120, spread: 125, origin: { y: 0.4, x: 0.2 }, startVelocity: 22 });
-      canvasConfetti({ particleCount: 120, spread: 125, origin: { y: 0.4, x: 0.8 }, startVelocity: 22 });
-      setTimeout(() => canvasConfetti({ particleCount: 280, spread: 70, origin: { y: 0.7 }, startVelocity: 12, colors: ['#FFE0A3', '#FFCF9A'] }), 120);
+    function burstConfettiJoy() {
+      canvasConfetti({ particleCount: 220, spread: 100, origin: { y: 0.6 }, startVelocity: 22, colors: ['#FFD966', '#FFB347', '#FFE5B4', '#FFFFFF', '#FADADD'], decay: 0.9 });
+      canvasConfetti({ particleCount: 130, spread: 130, origin: { y: 0.4, x: 0.2 }, startVelocity: 24, colors: ['#FCE5A8', '#fff5cc', '#FFD59E'] });
+      canvasConfetti({ particleCount: 130, spread: 130, origin: { y: 0.4, x: 0.8 }, startVelocity: 24 });
+      setTimeout(() => canvasConfetti({ particleCount: 300, spread: 65, origin: { y: 0.7 }, startVelocity: 12, colors: ['#FFE0A3', '#FFCF9A', '#FFFFFF'] }), 120);
     }
 
-    const surpriseBtn = document.getElementById('kejutanBtn');
+    const surpriseBtn = document.getElementById('superSurpriseBtn');
     if (surpriseBtn) {
-      surpriseBtn.addEventListener('click', () => {
-        launchBalloons(26);
-        burstConfetti();
-        const original = surpriseBtn.innerHTML;
-        surpriseBtn.innerHTML = '<i class="fas fa-balloon"></i> Balon & Bahagia Melayang! 🎈🎉';
-        setTimeout(() => { surpriseBtn.innerHTML = original; }, 1800);
-        if (navigator.vibrate) navigator.vibrate(70);
+      surpriseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        launchBalloonSwarm(24);
+        burstConfettiJoy();
+        const originalHTML = surpriseBtn.innerHTML;
+        surpriseBtn.innerHTML = '<i class="fas fa-balloon"></i> Balon & Bahagia Melayang! 🎈✨';
+        surpriseBtn.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+          surpriseBtn.innerHTML = originalHTML;
+          surpriseBtn.style.transform = '';
+        }, 1800);
+        if (navigator.vibrate) navigator.vibrate(80);
+        setTimeout(() => { for (let i=0;i<8;i++) setTimeout(() => createFloatingBalloon(), i*55); }, 400);
       });
     }
-    setTimeout(() => { for (let i=0;i<4;i++) setTimeout(createBalloon, i*200); }, 600);
+    setTimeout(() => { for (let i=0;i<3;i++) setTimeout(() => createFloatingBalloon(), i*200); }, 600);
 
-    // ========== SPA NAVIGASI + BURGER MENU YANG JELAS & FUNGSIONAL ==========
+    // ----- NAVIGASI SPA (aktifkan page, update active class, tutup sidebar mobile) -----
     const navLinks = document.querySelectorAll('.nav-link');
     const pages = {
       beranda: document.getElementById('page-beranda'),
@@ -590,13 +633,14 @@
       tentang: document.getElementById('page-tentang')
     };
 
-    function changePage(pageId) {
-      // hide all pages
-      Object.values(pages).forEach(p => p?.classList.remove('active-page'));
-      const activePg = pages[pageId];
-      if (activePg) activePg.classList.add('active-page');
-      
-      // update active class on nav items
+    function switchPage(pageId) {
+      // sembunyikan semua page
+      Object.values(pages).forEach(page => {
+        if (page) page.classList.remove('active-page');
+      });
+      const activePage = pages[pageId];
+      if (activePage) activePage.classList.add('active-page');
+      // update active class pada nav-link
       navLinks.forEach(link => {
         const linkPage = link.getAttribute('data-page');
         if (linkPage === pageId) {
@@ -605,101 +649,113 @@
           link.classList.remove('active');
         }
       });
-      localStorage.setItem('lastPage', pageId);
+      // simpan state ke localStorage opsional
+      localStorage.setItem('currentPage', pageId);
     }
 
-    // Tambahkan event listener ke setiap link navigasi
+    // event click untuk setiap navigasi
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        const targetPage = link.getAttribute('data-page');
-        if (targetPage && pages[targetPage]) {
-          changePage(targetPage);
-          // TUTUP SIDEBAR jika dalam mode mobile (sidebar terbuka)
-          if (window.innerWidth <= 780 && sidebarOpen) {
-            closeSidebar();
+        const pageId = link.getAttribute('data-page');
+        if (pageId && pages[pageId]) {
+          switchPage(pageId);
+          // jika sidebar mobile terbuka, tutup segera setelah navigasi
+          if (window.innerWidth <= 780 && isSidebarOpenLocal) {
+            closeSidebarLocal();
           }
         }
       });
     });
 
-    // ========== BURGER MENU + OVERLAY (Responsif & jelas) ==========
-    const burger = document.getElementById('burgerBtn');
-    const sidebar = document.getElementById('sidebarNav');
-    const overlay = document.getElementById('overlaySidebar');
-    let sidebarOpen = false;
+    // ----- BURGER MENU + OVERLAY (modern, tanpa konflik) -----
+    const menuToggle = document.getElementById('menuToggle');
+    const navbar = document.getElementById('navbarLinks');
+    const overlay = document.getElementById('sidebarOverlay');
+    let isSidebarOpenLocal = false;
 
-    function openSidebar() {
-      if (!sidebar) return;
-      sidebar.classList.add('open');
-      overlay.classList.add('active');
-      sidebarOpen = true;
-      // ubah ikon burger jadi close (X)
-      const icon = burger?.querySelector('i');
-      if (icon) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-      }
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeSidebar() {
-      if (!sidebar) return;
-      sidebar.classList.remove('open');
-      overlay.classList.remove('active');
-      sidebarOpen = false;
-      const icon = burger?.querySelector('i');
-      if (icon) {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
+    function closeSidebarLocal() {
+      if (!navbar) return;
+      navbar.classList.remove('open');
+      if (overlay) overlay.classList.remove('active');
+      isSidebarOpenLocal = false;
+      if (menuToggle) {
+        const icon = menuToggle.querySelector('i');
+        if (icon) {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
       }
       document.body.style.overflow = '';
     }
 
-    if (burger) {
-      burger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (sidebarOpen) {
-          closeSidebar();
-        } else {
-          openSidebar();
+    function openSidebarLocal() {
+      if (!navbar) return;
+      navbar.classList.add('open');
+      if (overlay) overlay.classList.add('active');
+      isSidebarOpenLocal = true;
+      if (menuToggle) {
+        const icon = menuToggle.querySelector('i');
+        if (icon) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
         }
+      }
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (menuToggle && navbar) {
+      menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (isSidebarOpenLocal) closeSidebarLocal();
+        else openSidebarLocal();
       });
     }
 
     if (overlay) {
       overlay.addEventListener('click', () => {
-        if (sidebarOpen) closeSidebar();
+        if (isSidebarOpenLocal) closeSidebarLocal();
       });
     }
 
-    // Saat ukuran layar berubah menjadi desktop, pastikan sidebar tertutup dan reset style
+    // saat resize >780, tutup paksa sidebar dan reset ikon
     window.addEventListener('resize', () => {
       if (window.innerWidth > 780) {
-        if (sidebar && sidebar.classList.contains('open')) {
-          closeSidebar();
+        if (navbar && navbar.classList.contains('open')) {
+          navbar.classList.remove('open');
+          if (overlay) overlay.classList.remove('active');
+          if (menuToggle) {
+            const icon = menuToggle.querySelector('i');
+            if (icon) {
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+            }
+          }
+          isSidebarOpenLocal = false;
+          document.body.style.overflow = '';
         }
       } else {
-        // jika resize di mobile namun sidebar terbuka, biarkan tidak berubah
+        // jika sudah terbuka dan resize, biarkan saja
       }
     });
 
-    // Muat halaman terakhir yang disimpan (default beranda)
-    const saved = localStorage.getItem('lastPage');
-    if (saved && pages[saved]) {
-      changePage(saved);
+    // inisialisasi: baca page yang tersimpan atau default beranda
+    const savedPage = localStorage.getItem('currentPage');
+    if (savedPage && pages[savedPage]) {
+      switchPage(savedPage);
     } else {
-      changePage('beranda');
+      switchPage('beranda');
     }
 
-    // Pastikan sidebar tertutup di awal load
-    closeSidebar();
+    // Pastikan sidebar tertutup awal
+    closeSidebarLocal();
+    document.body.style.overflow = '';
 
-    // Tambahkan efek hover pada judul
+    // small effect
     const judul = document.querySelector('.judul-happy');
     if (judul) {
-      judul.addEventListener('mouseenter', () => judul.style.textShadow = '0 0 10px #ffd58c');
-      judul.addEventListener('mouseleave', () => judul.style.textShadow = 'none');
+      judul.addEventListener('mouseenter', () => judul.style.textShadow = '0 0 12px rgba(255,235,170,0.8)');
+      judul.addEventListener('mouseleave', () => judul.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.2)');
     }
   })();
 </script>
