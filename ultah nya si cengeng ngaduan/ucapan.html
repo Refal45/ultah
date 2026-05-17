@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Ucapan Istimewa · Dewi Sinta (Bebas Tulis Pengirim)</title>
+  <title>Ucapan · Dewi Sinta | Buku Tamu Istimewa</title>
   <!-- Google Fonts & Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -14,6 +14,7 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background: radial-gradient(circle at 10% 30%, #0b0b0b, #000000);
@@ -22,6 +23,7 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
+
     .app-wrapper {
       max-width: 1400px;
       margin: 0 auto;
@@ -29,7 +31,8 @@
       position: relative;
       z-index: 2;
     }
-    /* Header */
+
+    /* ========= HEADER ========= */
     .header-bar {
       display: flex;
       justify-content: space-between;
@@ -41,6 +44,7 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.15);
       position: relative;
     }
+
     .judul-happy {
       font-size: 2.2rem;
       font-weight: 700;
@@ -49,34 +53,17 @@
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      transition: transform 0.2s;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease;
     }
+
     .judul-happy:hover {
       transform: scale(1.01);
       text-shadow: 0 0 8px rgba(255, 235, 180, 0.6);
     }
-    .menu-icon {
-      display: none;
-      font-size: 1.8rem;
-      cursor: pointer;
-      background: rgba(20, 20, 30, 0.7);
-      backdrop-filter: blur(12px);
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      align-items: center;
-      justify-content: center;
-      transition: 0.2s;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    .menu-icon i {
-      color: #ffefcf;
-    }
-    .menu-icon:hover {
-      background: rgba(255, 215, 150, 0.3);
-      transform: scale(1.02);
-    }
-    .navbar {
+
+    /* DESKTOP NAVIGATION (horizontal) */
+    .desktop-nav {
       display: flex;
       gap: 0.75rem;
       background: rgba(20, 20, 30, 0.55);
@@ -85,6 +72,7 @@
       border-radius: 60px;
       border: 0.5px solid rgba(255, 255, 255, 0.2);
     }
+
     .nav-link {
       text-decoration: none;
       font-size: 1rem;
@@ -98,23 +86,179 @@
       gap: 8px;
       white-space: nowrap;
     }
+
+    .nav-link i {
+      font-size: 0.9rem;
+    }
+
     .nav-link.active {
       background: #ffffff;
       color: #0a0a0a;
+      box-shadow: 0 6px 12px -8px rgba(0, 0, 0, 0.3);
       font-weight: 700;
     }
+
     .nav-link.active i {
       color: #0a0a0a;
     }
+
     .nav-link:not(.active):hover {
       background: rgba(255, 255, 255, 0.2);
       color: #fff2cf;
       transform: translateY(-2px);
     }
-    /* Konten utama */
+
+    /* BURGER ICON (mobile only) */
+    .menu-icon {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      background: rgba(20, 20, 30, 0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      z-index: 2100;
+    }
+
+    .menu-icon i {
+      color: #ffefcf;
+    }
+
+    .menu-icon:hover {
+      background: rgba(255, 215, 150, 0.3);
+      transform: scale(1.02);
+    }
+
+    /* GOOGLE-STYLE SIDEBAR (OFF-CANVAS DRAWER) */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(5px);
+      z-index: 2200;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0.3s;
+    }
+
+    .sidebar-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: min(300px, 85%);
+      background: rgba(18, 18, 26, 0.98);
+      backdrop-filter: blur(20px);
+      z-index: 2300;
+      transform: translateX(-100%);
+      transition: transform 0.28s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+      box-shadow: 4px 0 30px rgba(0, 0, 0, 0.6);
+      border-right: 1px solid rgba(255, 215, 150, 0.25);
+      display: flex;
+      flex-direction: column;
+      padding: 1.8rem 1.5rem;
+      gap: 2rem;
+    }
+
+    .mobile-sidebar.open {
+      transform: translateX(0);
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 220, 150, 0.3);
+      padding-bottom: 1rem;
+    }
+
+    .sidebar-welcome span:first-child {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #ffd9a5;
+    }
+
+    .sidebar-welcome strong {
+      font-size: 1.25rem;
+      font-style: italic;
+      background: linear-gradient(120deg, #ffe5bf, #ffcf8a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .close-sidebar {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffdfb3;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .close-sidebar:hover {
+      background: rgba(255, 180, 80, 0.4);
+      transform: rotate(90deg);
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .sidebar-nav .nav-link {
+      justify-content: flex-start;
+      padding: 0.9rem 1.2rem;
+      font-size: 1.1rem;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.03);
+      width: 100%;
+    }
+
+    .sidebar-nav .nav-link.active {
+      background: rgba(255, 210, 128, 0.18);
+      border-left: 3px solid #ffcd94;
+      color: #fff4e2;
+    }
+
+    .sidebar-nav .nav-link:not(.active):hover {
+      background: rgba(255, 215, 150, 0.25);
+      transform: translateX(6px);
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      font-size: 0.7rem;
+      text-align: center;
+      color: #bba88a;
+      border-top: 1px solid rgba(255, 200, 140, 0.2);
+      padding-top: 1.2rem;
+    }
+
+    /* ========= KONTEN UCAPAN ========= */
     .ucapan-hero {
       margin: 1rem 0 2rem;
-      animation: fadeUp 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      animation: fadeUp 0.7s ease;
     }
     .judul-ucapan {
       font-size: 2.4rem;
@@ -127,6 +271,9 @@
       color: transparent;
       margin-bottom: 0.5rem;
     }
+    .sub-wrap {
+      text-align: center;
+    }
     .sub-ucapan {
       text-align: center;
       font-style: italic;
@@ -134,12 +281,16 @@
       margin-bottom: 2rem;
       border-bottom: 1px dashed rgba(255, 210, 140, 0.4);
       display: inline-block;
-      width: auto;
       padding-bottom: 0.5rem;
     }
-    .sub-wrap {
-      text-align: center;
+    .sub-ucapan small {
+      font-size: 0.75rem;
+      opacity: 0.8;
+      display: block;
+      margin-top: 8px;
     }
+
+    /* Wishes Grid */
     .wishes-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -175,8 +326,6 @@
     .wish-author {
       font-size: 0.85rem;
       text-align: right;
-      font-style: normal;
-      color: #ffdbb5;
       border-top: 1px dashed rgba(255, 200, 130, 0.3);
       padding-top: 0.7rem;
       margin-top: 0.5rem;
@@ -190,7 +339,6 @@
       background: none;
       border: none;
       color: #ffbc7a;
-      margin-left: auto;
       cursor: pointer;
       font-size: 0.8rem;
       opacity: 0.6;
@@ -200,7 +348,8 @@
       opacity: 1;
       transform: scale(1.05);
     }
-    /* Form kirim ucapan dengan input nama & pesan */
+
+    /* Form kirim ucapan */
     .send-wish-area {
       background: rgba(255, 240, 210, 0.05);
       border-radius: 48px;
@@ -224,8 +373,7 @@
       margin-bottom: 0.3rem;
       color: #ffe2bb;
     }
-    .input-wish,
-    .input-from {
+    .input-wish, .input-from {
       width: 100%;
       background: rgba(20, 20, 30, 0.7);
       border: 1px solid rgba(255, 215, 150, 0.5);
@@ -238,14 +386,12 @@
       outline: none;
       transition: 0.2s;
     }
-    .input-wish:focus,
-    .input-from:focus {
+    .input-wish:focus, .input-from:focus {
       border-color: #ffcd94;
       box-shadow: 0 0 8px rgba(255, 205, 120, 0.4);
       background: rgba(10, 10, 15, 0.85);
     }
-    .btn-send-wish,
-    .btn-rainbow {
+    .btn-send-wish, .btn-rainbow {
       background: rgba(255, 215, 150, 0.2);
       border: 1px solid rgba(255, 215, 150, 0.7);
       padding: 0.7rem 1.5rem;
@@ -260,8 +406,7 @@
       gap: 8px;
       font-size: 0.9rem;
     }
-    .btn-send-wish:hover,
-    .btn-rainbow:hover {
+    .btn-send-wish:hover, .btn-rainbow:hover {
       background: #ffcd9455;
       transform: translateY(-3px);
       border-color: #ffda99;
@@ -315,14 +460,15 @@
       color: #ffdaaa;
       text-decoration: none;
     }
-    /* Balon terbang */
+
+    /* BALON TERBANG */
     .balloon {
       position: fixed;
       bottom: -80px;
       z-index: 10000;
       pointer-events: none;
       border-radius: 50%;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), inset -2px -2px 0px rgba(0, 0, 0, 0.05);
       will-change: transform;
     }
     .balloon::before {
@@ -334,6 +480,7 @@
       height: 20px;
       background: #aa8c64;
       transform: translateX(-50%);
+      border-radius: 1px;
     }
     .balloon::after {
       content: '🎀';
@@ -345,158 +492,133 @@
       color: #ffcf9a;
     }
     @keyframes floatUp {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-        bottom: -70px;
-      }
-      100% {
-        transform: translateY(-120vh) rotate(8deg);
-        opacity: 0;
-        bottom: 100%;
-      }
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; bottom: -70px; }
+      100% { transform: translateY(-120vh) rotate(8deg); opacity: 0; bottom: 100%; }
     }
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    /* Responsive */
+
+    /* RESPONSIVE */
     @media (max-width: 780px) {
-      .app-wrapper {
-        padding: 1rem 1.2rem;
-      }
-      .judul-happy {
-        font-size: 1.7rem;
-      }
-      .navbar {
-        display: none;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background: rgba(10, 10, 15, 0.96);
-        backdrop-filter: blur(16px);
-        flex-direction: column;
-        width: 220px;
-        border-radius: 28px;
-        padding: 1rem;
-        gap: 0.6rem;
-        z-index: 1000;
-      }
-      .navbar.open {
-        display: flex;
-      }
-      .menu-icon {
-        display: flex;
-      }
-      .judul-ucapan {
-        font-size: 1.8rem;
-      }
-      .send-wish-area {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .btn-send-wish,
-      .btn-rainbow {
-        justify-content: center;
-      }
+      .app-wrapper { padding: 1rem 1.2rem; }
+      .judul-happy { font-size: 1.7rem; }
+      .desktop-nav { display: none; }
+      .menu-icon { display: flex; }
+      .judul-ucapan { font-size: 1.8rem; }
+      .send-wish-area { flex-direction: column; align-items: stretch; }
+      .btn-send-wish, .btn-rainbow { justify-content: center; }
+    }
+    @media (min-width: 781px) {
+      .mobile-sidebar, .sidebar-overlay { display: none !important; }
     }
     @media (max-width: 480px) {
-      .judul-ucapan {
-        font-size: 1.5rem;
-      }
+      .judul-ucapan { font-size: 1.5rem; }
+      .wishes-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 <div class="app-wrapper">
+  <!-- HEADER dengan desktop-nav & burger -->
   <div class="header-bar">
     <div class="judul-happy">✨ Happy Birthday ✨</div>
-    <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
-    <div class="navbar" id="navbarLinks">
+    <div class="desktop-nav">
       <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Beranda</a>
       <a href="ucapan.html" class="nav-link active"><i class="fas fa-comment-dots"></i> Ucapan</a>
       <a href="tentang.html" class="nav-link"><i class="fas fa-user-astronaut"></i> Tentang Dirinya</a>
     </div>
-  </div>
-
- <div class="ucapan-hero">
-  <div class="judul-ucapan">
-    <i class="fas fa-heart" style="color: #ffb46e"></i> 
-    Untaian Doa & Cinta 
-    <i class="fas fa-heart" style="color: #ffb46e"></i>
-  </div>
-
-  <div class="sub-wrap">
-    <div class="sub-ucapan">
-      Silakan tulis ucapan beserta nama atau panggilanmu secara bebas. 
-      Pesan yang kamu kirim akan langsung ditampilkan.
-      <br><br>
-      <small>
-        Catatan: Pesan hanya tersimpan sementara di perangkat ini. 
-        Tanpa database, ucapan tidak dapat dilihat di perangkat lain 
-        dan akan tidak hilang saat halaman dimuat ulang.
-      </small>
+    <div class="menu-icon" id="burgerMenuBtn">
+      <i class="fas fa-bars"></i>
     </div>
   </div>
-</div>
 
-    <!-- Default inspirasi (ucapan tetap) -->
-    <div class="wishes-grid" id="defaultWishesGrid">
-      <div class="wish-card">
-        <div class="wish-icon"><i class="fas fa-star-of-life"></i></div>
-        <div class="wish-text">“Dewi Sinta, di hari istimewa ini, semoga setiap detik dipenuhi kebahagiaan yang meluap. Kamu adalah alasan senyum banyak orang.”</div>
-        <div class="wish-author"><i class="fas fa-feather-alt"></i> Keluarga & Sahabat</div>
+  <!-- SIDEBAR & OVERLAY (Google style) -->
+  <div id="sidebarOverlay" class="sidebar-overlay"></div>
+  <aside id="mobileSidebar" class="mobile-sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-welcome">
+        <span><i class="fas fa-star-of-life"></i> Untukmu,</span>
+        <strong>Dewi Sinta ✨</strong>
       </div>
-      <div class="wish-card">
-        <div class="wish-icon"><i class="fas fa-crown"></i></div>
-        <div class="wish-text">“Untuk sang Dewi hati: semoga usiamu yang baru membawa keberkahan, cinta yang tulus, dan mimpi-mimpi indah yang nyata.”</div>
-        <div class="wish-author"><i class="fas fa-heart"></i> Orang yang menyayangimu</div>
-      </div>
-      <div class="wish-card">
-        <div class="wish-icon"><i class="fas fa-feather"></i></div>
-        <div class="wish-text">“Tak ada hadiah yang lebih indah selain melihatmu bahagia. Setiap tawamu adalah doa yang menguatkan. Jadilah berkilau, Dewi Sinta.”</div>
-        <div class="wish-author"><i class="fas fa-cloud-moon"></i> Teman dekat menjadi musuh</div>
+      <button id="closeSidebarBtn" class="close-sidebar"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Beranda</a>
+      <a href="ucapan.html" class="nav-link active"><i class="fas fa-comment-dots"></i> Ucapan Spesial</a>
+      <a href="tentang.html" class="nav-link"><i class="fas fa-user-astronaut"></i> Tentang Dirinya</a>
+    </nav>
+    <div class="sidebar-footer">
+      <i class="fas fa-cake-candles"></i> 16 Juli · kebahagiaanmu
+    </div>
+  </aside>
+
+  <!-- ===== KONTEN UTAMA UCAPAN ===== -->
+  <div class="ucapan-hero">
+    <div class="judul-ucapan">
+      <i class="fas fa-heart" style="color: #ffb46e"></i> 
+      Untaian Doa & Cinta 
+      <i class="fas fa-heart" style="color: #ffb46e"></i>
+    </div>
+    <div class="sub-wrap">
+      <div class="sub-ucapan">
+        Silakan tulis ucapan beserta nama atau panggilanmu secara bebas. 
+        Pesan yang kamu kirim akan langsung ditampilkan.
+        <small><i class="fas fa-database"></i> Catatan: Tersimpan hanya di peramban ini (localStorage). Antar perangkat tidak sinkron.</small>
       </div>
     </div>
+  </div>
 
-    <!-- Form kirim ucapan (FROM & PESAN BEBAS) -->
-    <div class="send-wish-area">
-      <div class="input-group">
-        <label><i class="fas fa-user-pen"></i> Dari / From (bebas):</label>
-        <input type="text" id="fromNameInput" class="input-from" placeholder="Contoh: Sahabat, Mama, Keluarga, Kakak, Teman ..." maxlength="70" autocomplete="off" />
-      </div>
-      <div class="input-group" style="flex: 3">
-        <label><i class="fas fa-comment"></i> Ucapan manismu:</label>
-        <input type="text" id="instantWishInput" class="input-wish" placeholder="Tulis doa / ucapan untuk Dewi Sinta ..." maxlength="280" autocomplete="off" />
-      </div>
-      <button id="sendWishBtn" class="btn-send-wish"><i class="fas fa-paper-plane"></i> Kirim & Pajang</button>
-      <button id="surpriseWishesBtn" class="btn-rainbow"><i class="fas fa-sparkles"></i> Tebar Kejutan 🎈</button>
+  <!-- Ucapan default (inspirasi) -->
+  <div class="wishes-grid" id="defaultWishesGrid">
+    <div class="wish-card">
+      <div class="wish-icon"><i class="fas fa-star-of-life"></i></div>
+      <div class="wish-text">“Dewi Sinta, di hari istimewa ini, semoga setiap detik dipenuhi kebahagiaan yang meluap. Kamu adalah alasan senyum banyak orang.”</div>
+      <div class="wish-author"><i class="fas fa-feather-alt"></i> Keluarga & Sahabat</div>
     </div>
-    <div style="font-size: 0.7rem; text-align: center; margin-top: -1rem; margin-bottom: 1rem; opacity: 0.8"><i class="fas fa-info-circle"></i> Nama pengirim akan muncul di kartu ucapan — biarkan identitasmu bersinar!</div>
+    <div class="wish-card">
+      <div class="wish-icon"><i class="fas fa-crown"></i></div>
+      <div class="wish-text">“Untuk sang Dewi hati: semoga usiamu yang baru membawa keberkahan, cinta yang tulus, dan mimpi-mimpi indah yang nyata.”</div>
+      <div class="wish-author"><i class="fas fa-heart"></i> Orang yang menyayangimu</div>
+    </div>
+    <div class="wish-card">
+      <div class="wish-icon"><i class="fas fa-feather"></i></div>
+      <div class="wish-text">“Tak ada hadiah yang lebih indah selain melihatmu bahagia. Setiap tawamu adalah doa yang menguatkan. Jadilah berkilau, Dewi Sinta.”</div>
+      <div class="wish-author"><i class="fas fa-cloud-moon"></i> Sahabat terdekat</div>
+    </div>
+  </div>
 
-    <!-- Guestbook pesan dari teman-teman (penyimpanan lokal) -->
-    <div class="guestbook-section">
-      <div class="guestbook-title">
-        <i class="fas fa-comments"></i>
-        <span>Pesan Manis dari Teman-Teman</span>
-      </div>
-      <div class="local-storage-note">
-        <i class="fas fa-database"></i> 💾 Tersimpan hanya di peramban ini · Antar perangkat tidak sinkron (tanpa database)
-      </div>
-      <div id="userWishesContainer" class="wishes-grid"></div>
-      <div id="emptyUserWishes" class="empty-message" style="display: none"><i class="fas fa-heart"></i> Belum ada pesan. Jadilah yang pertama mengirim ucapan!</div>
+  <!-- Form kirim ucapan (bebas nama & pesan) -->
+  <div class="send-wish-area">
+    <div class="input-group">
+      <label><i class="fas fa-user-pen"></i> Dari / From (bebas):</label>
+      <input type="text" id="fromNameInput" class="input-from" placeholder="Contoh: Sahabat, Mama, Keluarga, Kakak ..." maxlength="70" autocomplete="off" />
     </div>
+    <div class="input-group" style="flex: 3">
+      <label><i class="fas fa-comment"></i> Ucapan manismu:</label>
+      <input type="text" id="instantWishInput" class="input-wish" placeholder="Tulis doa / ucapan untuk Dewi Sinta ..." maxlength="280" autocomplete="off" />
+    </div>
+    <button id="sendWishBtn" class="btn-send-wish"><i class="fas fa-paper-plane"></i> Kirim & Pajang</button>
+    <button id="surpriseWishesBtn" class="btn-rainbow"><i class="fas fa-sparkles"></i> Tebar Kejutan 🎈</button>
+  </div>
 
-    <div class="extra-wish">
-      <p><i class="fas fa-feather-alt"></i> Setiap ucapan yang ditulis dengan nama bebas akan menjadi kenangan indah untuk Dewi Sinta. <strong>#UntukDewiSinta</strong></p>
-      <div><i class="fas fa-balloon"></i> <i class="fas fa-gift"></i> <i class="fas fa-cake-candles"></i></div>
+  <!-- Guestbook: pesan dari teman-teman (tersimpan lokal) -->
+  <div class="guestbook-section">
+    <div class="guestbook-title">
+      <i class="fas fa-comments"></i>
+      <span>Pesan Manis dari Teman-Teman</span>
     </div>
+    <div class="local-storage-note">
+      <i class="fas fa-save"></i> 💾 Tersimpan di peramban ini · Kirim ucapan dengan nama unikmu!
+    </div>
+    <div id="userWishesContainer" class="wishes-grid"></div>
+    <div id="emptyUserWishes" class="empty-message" style="display: none;"><i class="fas fa-heart"></i> Belum ada pesan. Jadilah yang pertama mengirim ucapan!</div>
+  </div>
+
+  <div class="extra-wish">
+    <p><i class="fas fa-feather-alt"></i> Setiap ucapan yang ditulis dengan nama bebas akan menjadi kenangan indah untuk Dewi Sinta. <strong>#UntukDewiSinta</strong></p>
+    <div><i class="fas fa-balloon"></i> <i class="fas fa-gift"></i> <i class="fas fa-cake-candles"></i></div>
   </div>
 
   <footer>
@@ -508,15 +630,13 @@
 
 <script>
   (function() {
-    // ======================= PESAN DENGAN PENGGIRIM BEBAS (LOCALSTORAGE) =======================
+    // ======================= MANAJEMEN UCAPAN (LOCALSTORAGE) =======================
     const STORAGE_KEY = 'dewi_sinta_wishes_freefrom';
 
     function loadUserWishes() {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
-        try {
-          return JSON.parse(stored);
-        } catch(e) { return []; }
+        try { return JSON.parse(stored); } catch(e) { return []; }
       }
       return [];
     }
@@ -542,7 +662,7 @@
       return true;
     }
 
-    function deleteWish(id) {
+    function deleteWishById(id) {
       let wishes = loadUserWishes();
       wishes = wishes.filter(w => w.id !== id);
       saveUserWishes(wishes);
@@ -596,19 +716,19 @@
           e.stopPropagation();
           const id = Number(btn.getAttribute('data-id'));
           if (confirm('Hapus ucapan ini? Akan hilang dari daftar.')) {
-            deleteWish(id);
+            deleteWishById(id);
             canvasConfetti({ particleCount: 30, spread: 40, origin: { y: 0.7 }, colors: ['#FFD699'] });
           }
         });
       });
     }
 
-    // ======================= BALON & KONFETI =======================
+    // ======================= BALON TERBANG & KONFETI =======================
     function createFloatingBalloon() {
       const balloon = document.createElement('div');
       balloon.classList.add('balloon');
-      const colors = ['#FFB7B2', '#FFB347', '#FADADD', '#C9E4DE', '#FFD966', '#B5EAD7', '#FBC8B5', '#E0BBE4', '#FFC8A2', '#A0E7E5'];
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      const colorPalette = ['#FFB7B2', '#FFB347', '#FADADD', '#C9E4DE', '#FFD966', '#B5EAD7', '#FBC8B5', '#E0BBE4', '#FFC8A2', '#A0E7E5'];
+      const randomColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
       balloon.style.background = `radial-gradient(circle at 30% 35%, ${randomColor}, ${randomColor}cc)`;
       const size = 38 + Math.random() * 34;
       balloon.style.width = `${size}px`;
@@ -632,7 +752,11 @@
       setTimeout(() => canvasConfetti({ particleCount: 260, spread: 65, origin: { y: 0.7 }, startVelocity: 12 }), 120);
     }
 
-    // ======================= KIRIM UCAPAN =======================
+    function launchBalloonSwarm(count = 18) {
+      for (let i = 0; i < count; i++) setTimeout(() => createFloatingBalloon(), i * 70);
+    }
+
+    // ======================= EVENT KIRIM UCAPAN =======================
     const sendBtn = document.getElementById('sendWishBtn');
     const wishInput = document.getElementById('instantWishInput');
     const fromInput = document.getElementById('fromNameInput');
@@ -650,13 +774,13 @@
       }
       addNewWish(msg, fromVal);
       wishInput.value = '';
-      fromInput.value = ''; // kosongkan agar siap input berikutnya
-      // efek balon & konfeti
+      fromInput.value = '';
+      // efek balon kecil & konfeti
       for (let i = 0; i < 6; i++) setTimeout(() => createFloatingBalloon(), i * 60);
       canvasConfetti({ particleCount: 70, spread: 55, origin: { y: 0.6 }, colors: ['#FFDCA8', '#FFEFBF'] });
 
-      const notif = document.createElement('div');
       const displayName = fromVal.trim() === '' ? 'Sahabat Istimewa' : fromVal.trim();
+      const notif = document.createElement('div');
       notif.innerHTML = `<i class="fas fa-check-circle"></i> Ucapan dari "${escapeHtml(displayName)}" telah dipajang!`;
       notif.style.cssText = 'position:fixed; bottom:20px; right:20px; background:#222222cc; backdrop-filter:blur(12px); color:#ffefcf; padding:0.6rem 1.2rem; border-radius:40px; font-size:0.85rem; border:1px solid #ffcf8a; z-index:10001;';
       document.body.appendChild(notif);
@@ -664,25 +788,13 @@
     }
 
     if (sendBtn) sendBtn.addEventListener('click', handleSendWish);
-    if (wishInput) {
-      wishInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleSendWish();
-      });
-    }
-
-    // ======================= SINKRONISASI TAB (dalam peramban sama) =======================
-    window.addEventListener('storage', (event) => {
-      if (event.key === STORAGE_KEY) {
-        renderUserWishes();
-        if (Math.random() > 0.6) createFloatingBalloon();
-      }
-    });
+    if (wishInput) wishInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSendWish(); });
 
     // ======================= TOMBOL SURPRISE =======================
     const surpriseBtn = document.getElementById('surpriseWishesBtn');
     if (surpriseBtn) {
       surpriseBtn.addEventListener('click', () => {
-        for (let i = 0; i < 24; i++) setTimeout(() => createFloatingBalloon(), i * 70);
+        launchBalloonSwarm(24);
         burstConfettiJoy();
         const original = surpriseBtn.innerHTML;
         surpriseBtn.innerHTML = '<i class="fas fa-balloon"></i> Balon & Bahagia Melayang! ✨';
@@ -695,55 +807,67 @@
       });
     }
 
-    // ======================= INISIALISASI RENDER & BALON PEMBUKA =======================
-    renderUserWishes();
-    setTimeout(() => {
-      for (let i = 0; i < 3; i++) setTimeout(() => createFloatingBalloon(), i * 200);
-    }, 500);
+    // ======================= SIDEBAR LOGIC (Google drawer) =======================
+    const burgerBtn = document.getElementById('burgerMenuBtn');
+    const sidebar = document.getElementById('mobileSidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
 
-    // ======================= BURGER MENU (Responsive) =======================
-    const menuToggle = document.getElementById('menuToggle');
-    const navbarLinks = document.getElementById('navbarLinks');
-    if (menuToggle && navbarLinks) {
-      menuToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        navbarLinks.classList.toggle('open');
-        const icon = menuToggle.querySelector('i');
-        if (navbarLinks.classList.contains('open')) {
-          icon.classList.remove('fa-bars');
-          icon.classList.add('fa-times');
-        } else {
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
-        }
-      });
-      document.addEventListener('click', function (event) {
-        if (!navbarLinks.contains(event.target) && !menuToggle.contains(event.target) && navbarLinks.classList.contains('open')) {
-          navbarLinks.classList.remove('open');
-          const icon = menuToggle.querySelector('i');
-          if (icon) {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-          }
-        }
-      });
+    function openSidebar() {
+      if (sidebar && overlay) {
+        sidebar.classList.add('open');
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        const icon = burgerBtn?.querySelector('i');
+        if (icon && window.innerWidth <= 780) icon.classList.replace('fa-bars', 'fa-times');
+      }
     }
+    function closeSidebar() {
+      if (sidebar && overlay) {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+        const icon = burgerBtn?.querySelector('i');
+        if (icon && window.innerWidth <= 780) icon.classList.replace('fa-times', 'fa-bars');
+      }
+    }
+    if (burgerBtn) burgerBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (sidebar && sidebar.classList.contains('open')) closeSidebar();
+      else openSidebar();
+    });
+    if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeSidebar);
+    if (overlay) overlay.addEventListener('click', closeSidebar);
+    document.querySelectorAll('.sidebar-nav .nav-link').forEach(link => {
+      link.addEventListener('click', closeSidebar);
+    });
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 780 && navbarLinks?.classList.contains('open')) {
-        navbarLinks.classList.remove('open');
-        const icon = menuToggle?.querySelector('i');
-        if (icon) {
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
-        }
+      if (window.innerWidth > 780) {
+        if (sidebar && sidebar.classList.contains('open')) closeSidebar();
+        const icon = burgerBtn?.querySelector('i');
+        if (icon && icon.classList.contains('fa-times')) icon.classList.replace('fa-times', 'fa-bars');
       }
     });
 
-    // efek judul
+    // ======================= STORAGE SYNC (lintas tab) =======================
+    window.addEventListener('storage', (event) => {
+      if (event.key === STORAGE_KEY) {
+        renderUserWishes();
+        if (Math.random() > 0.6) createFloatingBalloon();
+      }
+    });
+
+    // ======================= INISIALISASI & BALON SAMBUTAN =======================
+    renderUserWishes();
+    setTimeout(() => {
+      for (let i = 0; i < 3; i++) setTimeout(() => createFloatingBalloon(), i * 220);
+    }, 600);
+
+    // Efek hover judul
     const judul = document.querySelector('.judul-happy');
     if (judul) {
-      judul.addEventListener('mouseenter', () => (judul.style.textShadow = '0 0 12px rgba(255,235,170,0.8)'));
-      judul.addEventListener('mouseleave', () => (judul.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.2)'));
+      judul.addEventListener('mouseenter', () => judul.style.textShadow = '0 0 12px rgba(255,235,170,0.8)');
+      judul.addEventListener('mouseleave', () => judul.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.2)');
     }
   })();
 </script>
